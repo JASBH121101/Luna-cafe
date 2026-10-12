@@ -7,6 +7,7 @@
     --color-terracotta: #b86f50;
     --color-olive: #737858;
     --color-muted: #766c64;
+
     --font-heading: Georgia, "Times New Roman", serif;
     --font-body: Arial, Helvetica, sans-serif;
     --container-width: 1120px;
@@ -157,7 +158,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Botones de idioma y tema */
+/* Botones */
 
 #language-toggle,
 #theme-toggle {
@@ -177,7 +178,7 @@ footer {
     color: var(--color-paper);
 }
 
-/* Tema oscuro */
+/* Colores del tema oscuro */
 
 html[data-theme="dark"] {
     --color-cream: #211b18;
@@ -215,7 +216,7 @@ html[data-theme="dark"] footer {
     color: #f7f2e9;
 }
 
-/* Adaptación a celulares */
+/* Diseño adaptable */
 
 @media (max-width: 650px) {
     header {
