@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
-    <title>Luna Café | Un momento para vos</title>
+    <h1 data-i18n="headline">Un momento para vos.</h1>
 </head>
 <body>
 
@@ -13,10 +14,13 @@
         <a href="#" aria-label="Luna Café, inicio">Luna Café</a>
 
         <nav aria-label="Navegación principal">
-            <a href="#inicio">Inicio</a>
+            </button>
+           <a href="#inicio" data-i18n="home">Inicio</a>
             <a href="#menu">Menú</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#contacto">Contacto</a>
+             <button id="language-toggle" type="button">
+            English
         </nav>
     </header>
 
