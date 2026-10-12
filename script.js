@@ -51,107 +51,120 @@ const translations = {
     }
 };
 
-let currentLanguage = "es";
+function initLunaCafe() {
+    const languageButton = document.getElementById("language-toggle");
+    const themeButton = document.getElementById("theme-toggle");
 
-const languageButton = document.getElementById("language-toggle");
-const themeButton = document.getElementById("theme-toggle");
-const root = document.documentElement;
-const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-function changeLanguage() {
-    currentLanguage = currentLanguage === "es" ? "en" : "es";
-
-    const texts = translations[currentLanguage];
-
-    root.lang = currentLanguage;
-    document.title = texts.pageTitle;
-
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-        const key = element.dataset.i18n;
-
-        if (texts[key] !== undefined) {
-            element.textContent = texts[key];
-        }
-    });
-
-    updateLanguageButton();
-    updateThemeButton();
-}
-
-function updateLanguageButton() {
-    languageButton.textContent = translations[currentLanguage].language;
-}
-
-function getCurrentTheme() {
-    return root.dataset.theme || "light";
-}
-
-function applyTheme(theme) {
-    root.dataset.theme = theme;
-    updateThemeButton();
-}
-
-function updateThemeButton() {
-    const texts = translations[currentLanguage];
-    const isDark = getCurrentTheme() === "dark";
-
-    themeButton.textContent = isDark
-        ? texts.themeLight
-        : texts.themeDark;
-
-    themeButton.setAttribute(
-        "aria-label",
-        themeButton.textContent
-    );
-}
-
-function toggleTheme() {
-    const newTheme = getCurrentTheme() === "dark"
-        ? "light"
-        : "dark";
-
-    try {
-        localStorage.setItem("luna-cafe-theme", newTheme);
-    } catch (error) {
-        console.warn("No se pudo guardar la preferencia del tema.");
-    }
-
-    applyTheme(newTheme);
-}
-
-function initializeTheme() {
-    let savedTheme = null;
-
-    try {
-        savedTheme = localStorage.getItem("luna-cafe-theme");
-    } catch (error) {
-        console.warn("No se pudo leer la preferencia del tema.");
-    }
-
-    const initialTheme = savedTheme === "light" || savedTheme === "dark"
-        ? savedTheme
-        : (systemTheme.matches ? "dark" : "light");
-
-    applyTheme(initialTheme);
-}
-
-languageButton.addEventListener("click", changeLanguage);
-themeButton.addEventListener("click", toggleTheme);
-
-systemTheme.addEventListener("change", (event) => {
-    let savedTheme = null;
-
-    try {
-        savedTheme = localStorage.getItem("luna-cafe-theme");
-    } catch (error) {
-        // Si el almacenamiento no está disponible, no se cambia automáticamente.
+    if (!languageButton || !themeButton) {
+        console.error("Luna Café: no se encontraron los botones de idioma y tema.");
         return;
     }
 
-    if (savedTheme !== "light" && savedTheme !== "dark") {
-        applyTheme(event.matches ? "dark" : "light");
-    }
-});
+    const root = document.documentElement;
+    const systemTheme = window.matchMedia
+        ? window.matchMedia("(prefers-color-scheme: dark)")
+        : null;
 
-initializeTheme();
-updateLanguageButton();
+    let currentLanguage = "es";
+
+    function getSavedTheme() {
+        try {
+            return localStorage.getItem("luna-cafe-theme");
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function saveTheme(theme) {
+        try {
+            localStorage.setItem("luna-cafe-theme", theme);
+        } catch (error) {
+            console.warn("No se pudo guardar la preferencia del tema.");
+        }
+    }
+
+    function updateLanguageButton() {
+        languageButton.textContent = translations[currentLanguage].language;
+    }
+
+    function updateThemeButton() {
+        const isDark = root.dataset.theme === "dark";
+        const texts = translations[currentLanguage];
+
+        themeButton.textContent = isDark
+            ? texts.themeLight
+            : texts.themeDark;
+
+        themeButton.setAttribute("aria-pressed", String(isDark));
+    }
+
+    function setLanguage(language) {
+        currentLanguage = language;
+        const texts = translations[currentLanguage];
+
+        root.lang = currentLanguage;
+        document.title = texts.pageTitle;
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+            const key = element.dataset.i18n;
+
+            if (Object.prototype.hasOwnProperty.call(texts, key)) {
+                element.textContent = texts[key];
+            }
+        });
+
+        updateLanguageButton();
+        updateThemeButton();
+    }
+
+    function setTheme(theme, remember = false) {
+        root.dataset.theme = theme;
+
+        if (remember) {
+            saveTheme(theme);
+        }
+
+        updateThemeButton();
+    }
+
+    function toggleLanguage() {
+        setLanguage(currentLanguage === "es" ? "en" : "es");
+    }
+
+    function toggleTheme() {
+        const newTheme = root.dataset.theme === "dark"
+            ? "light"
+            : "dark";
+
+        setTheme(newTheme, true);
+    }
+
+    languageButton.addEventListener("click", toggleLanguage);
+    themeButton.addEventListener("click", toggleTheme);
+
+    const savedTheme = getSavedTheme();
+
+    const initialTheme =
+        savedTheme === "dark" || savedTheme === "light"
+            ? savedTheme
+            : (systemTheme && systemTheme.matches ? "dark" : "light");
+
+    setTheme(initialTheme);
+    setLanguage("es");
+
+    if (systemTheme && systemTheme.addEventListener) {
+        systemTheme.addEventListener("change", (event) => {
+            const preference = getSavedTheme();
+
+            if (preference !== "dark" && preference !== "light") {
+                setTheme(event.matches ? "dark" : "light");
+            }
+        });
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLunaCafe);
+} else {
+    initLunaCafe();
+}
