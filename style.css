@@ -425,10 +425,24 @@ a:focus-visible {
     }
 }
 
+
 /* Centrar los controles de idioma y tema en el menú móvil */
 @media (max-width: 650px) {
     #site-navigation #language-toggle,
     #site-navigation #theme-toggle {
-        justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    #site-navigation #language-toggle .icon,
+    #site-navigation #theme-toggle .icon {
+        display: block;
+        flex: 0 0 20px;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        align-self: center;
     }
 }
