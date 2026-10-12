@@ -21,6 +21,8 @@ const translations = {
         contactTitle: "Visitanos",
         contactText: "Pronto compartiremos nuestra ubicación y horarios.",
         footer: "© 2026 Luna Café. Todos los derechos reservados."
+        themeDark: "Modo oscuro",
+        themeLight: "Modo claro",
     },
 
     en: {
@@ -43,7 +45,8 @@ const translations = {
         aboutText: "Luna Café is a place to slow down, share conversations, and enjoy something special.",
         contactTitle: "Visit us",
         contactText: "Our location and opening hours will be available soon.",
-        footer: "© 2026 Luna Café. All rights reserved."
+        footer: "© 2026 Luna Café. All rights reserved."themeDark: "Dark mode",
+        themeLight: "Light mode",
     }
 };
 
@@ -62,6 +65,7 @@ function changeLanguage() {
 
         if (currentTranslations[key] !== undefined) {
             element.textContent = currentTranslations[key];
+            updateThemeButton();
         }
     });
 
@@ -72,3 +76,51 @@ function changeLanguage() {
 document
     .getElementById("language-toggle")
     .addEventListener("click", changeLanguage);
+
+const themeButton = document.getElementById("theme-toggle");
+const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    updateThemeButton();
+}
+
+function updateThemeButton() {
+    if (!themeButton) return;
+
+    const labels = translations[currentLanguage];
+    const isDark = document.documentElement.dataset.theme === "dark";
+
+    themeButton.textContent = isDark
+        ? labels.themeLight
+        : labels.themeDark;
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.dataset.theme;
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+    localStorage.setItem("luna-cafe-theme", newTheme);
+    applyTheme(newTheme);
+}
+
+function initializeTheme() {
+    const savedTheme = localStorage.getItem("luna-cafe-theme");
+
+    const initialTheme = savedTheme ||
+        (systemTheme.matches ? "dark" : "light");
+
+    applyTheme(initialTheme);
+}
+
+themeButton.addEventListener("click", toggleTheme);
+
+systemTheme.addEventListener("change", (event) => {
+    const savedTheme = localStorage.getItem("luna-cafe-theme");
+
+    if (!savedTheme) {
+        applyTheme(event.matches ? "dark" : "light");
+    }
+});
+
+initializeTheme();
