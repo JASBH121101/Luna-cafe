@@ -12,8 +12,8 @@
     <title>Luna Café | Un momento para vos</title>
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-    <link rel="stylesheet" href="style.css?v=13">
-    <script src="script.js?v=10" defer></script>
+    <link rel="stylesheet" href="style.css?v=14">
+    <script src="script.js?v=11" defer></script>
 </head>
 
 <body>
@@ -535,215 +535,66 @@
         </div>
     </aside>
 
-    <div id="checkout-layer" class="checkout-layer" hidden>
+    <!-- Confirmación personalizada para vaciar el carrito -->
+    <div id="clear-cart-layer" class="clear-cart-layer" hidden>
         <button
-            id="checkout-backdrop"
-            class="checkout-backdrop"
+            id="clear-cart-backdrop"
+            class="clear-cart-backdrop"
             type="button"
-            aria-label="Cerrar ventana de pago"
-            data-i18n-aria-label="closeCheckout"
+            aria-label="Cerrar confirmación"
+            data-i18n-aria-label="cancelClearCart"
         ></button>
 
         <section
-            id="checkout-modal"
-            class="checkout-modal"
-            role="dialog"
+            id="clear-cart-dialog"
+            class="clear-cart-dialog"
+            role="alertdialog"
             aria-modal="true"
             aria-hidden="true"
-            aria-labelledby="checkout-title"
+            aria-labelledby="clear-cart-title"
+            aria-describedby="clear-cart-message"
             tabindex="-1"
         >
-            <div class="checkout-header">
-                <div>
-                    <p class="section-kicker" data-i18n="checkoutKicker">
-                        FINALIZAR PEDIDO
-                    </p>
-                    <h2 id="checkout-title" data-i18n="checkoutTitle">
-                        Pago de demostración
-                    </h2>
-                </div>
-
-                <button
-                    id="close-checkout"
-                    class="icon-button"
-                    type="button"
-                    aria-label="Cerrar pago"
-                    data-i18n-aria-label="closeCheckout"
-                >
-                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="m6 6 12 12M18 6 6 18"></path>
-                    </svg>
-                </button>
+            <div class="clear-cart-dialog-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M3 6h18"></path>
+                    <path d="M8 6V4h8v2"></path>
+                    <path d="m19 6-1 14H6L5 6"></path>
+                    <path d="M10 11v5m4-5v5"></path>
+                </svg>
             </div>
 
-            <div class="checkout-body">
-                <div id="checkout-form-view">
-                    <div class="demo-payment-warning" role="note">
-                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 3 22 21H2L12 3Z"></path>
-                            <path d="M12 9v5m0 3h.01"></path>
-                        </svg>
+            <h2 id="clear-cart-title" data-i18n="clearCartTitle">
+                ¿Vaciar carrito?
+            </h2>
 
-                        <p data-i18n="demoOnlyWarning">
-                            Simulación únicamente. No ingreses datos reales de tarjetas.
-                            La información no se enviará ni se guardará.
-                        </p>
-                    </div>
+            <p id="clear-cart-message" data-i18n="confirmClear">
+                ¿Querés vaciar el carrito?
+            </p>
 
-                    <div class="checkout-order-total">
-                        <span data-i18n="checkoutTotalLabel">Total de la compra</span>
-                        <strong id="checkout-total">$0.00</strong>
-                    </div>
+            <div class="clear-cart-dialog-actions">
+                <button
+                    id="cancel-clear-cart"
+                    class="button button-outline"
+                    type="button"
+                    data-i18n="cancelClearCart"
+                >
+                    Conservar pedido
+                </button>
 
-                    <form id="checkout-form" class="checkout-form" autocomplete="off">
-                        <div class="form-field">
-                            <label for="cardholder" data-i18n="cardholderLabel">
-                                Nombre ficticio del titular
-                            </label>
-
-                            <input
-                                id="cardholder"
-                                type="text"
-                                maxlength="80"
-                                autocomplete="off"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-field">
-                            <label for="card-number" data-i18n="cardNumberLabel">
-                                Número de tarjeta ficticio
-                            </label>
-
-                            <input
-                                id="card-number"
-                                type="text"
-                                inputmode="numeric"
-                                maxlength="23"
-                                placeholder="4242 4242 4242 4242"
-                                autocomplete="off"
-                                spellcheck="false"
-                                required
-                            >
-                        </div>
-
-                        <div class="checkout-card-row">
-                            <div class="form-field">
-                                <label for="card-expiry" data-i18n="expiryLabel">
-                                    Vencimiento (MM/AA)
-                                </label>
-
-                                <input
-                                    id="card-expiry"
-                                    type="text"
-                                    inputmode="numeric"
-                                    maxlength="5"
-                                    placeholder="MM/AA"
-                                    autocomplete="off"
-                                    required
-                                >
-                            </div>
-
-                            <div class="form-field">
-                                <label for="card-cvv" data-i18n="cvvLabel">
-                                    CVV ficticio
-                                </label>
-
-                                <input
-                                    id="card-cvv"
-                                    type="password"
-                                    inputmode="numeric"
-                                    maxlength="4"
-                                    placeholder="•••"
-                                    autocomplete="off"
-                                    required
-                                >
-                            </div>
-                        </div>
-
-                        <p class="checkout-security-note" data-i18n="noCardStorage">
-                            Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.
-                        </p>
-
-                        <div class="checkout-actions">
-                            <button
-                                id="cancel-checkout"
-                                class="button button-outline"
-                                type="button"
-                                data-i18n="cancelCheckout"
-                            >
-                                Volver al carrito
-                            </button>
-
-                            <button
-                                id="confirm-payment"
-                                class="button button-primary"
-                                type="submit"
-                            >
-                                <span data-i18n="confirmDemoPayment">
-                                    Simular compra
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="checkout-success" class="checkout-success" hidden>
-                    <div class="checkout-success-icon" aria-hidden="true">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="m5 12 4 4L19 6"></path>
-                        </svg>
-                    </div>
-
-                    <h3 data-i18n="demoSuccessTitle">
-                        ¡Compra simulada completada!
-                    </h3>
-
-                    <p data-i18n="demoSuccessMessage">
-                        Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.
-                    </p>
-
-                    <div class="demo-receipt">
-                        <p>
-                            <span data-i18n="demoOrderNumber">Referencia de demostración</span>
-                            <strong id="demo-order-number">LC-DEMO-000000</strong>
-                        </p>
-                        <p>
-                            <span data-i18n="demoOrderTotal">Total simulado</span>
-                            <strong id="demo-order-total">$0.00</strong>
-                        </p>
-                    </div>
-
-                    <button
-                        id="finish-checkout"
-                        class="button button-primary"
-                        type="button"
-                        data-i18n="finishCheckout"
-                    >
-                        Finalizar
-                    </button>
-                </div>
+                <button
+                    id="confirm-clear-cart"
+                    class="button button-primary"
+                    type="button"
+                    data-i18n="confirmClearAction"
+                >
+                    Sí, vaciar carrito
+                </button>
             </div>
         </section>
     </div>
 
-    <button
-        id="back-to-top"
-        class="back-to-top"
-        type="button"
-        aria-label="Volver arriba"
-        data-i18n-aria-label="backToTop"
-        aria-hidden="true"
-        tabindex="-1"
-        title="Volver arriba"
-    >
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 19V5"></path>
-            <path d="m5 12 7-7 7 7"></path>
-        </svg>
-        <span data-i18n="backToTop">Volver arriba</span>
-    </button>
-
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
-</body>
-</html>
+    <!-- Checkout de demostración -->
+    <div id="checkout-layer" class="checkout-layer" hidden>
+        <button
+            id="checkout-backdrop"
