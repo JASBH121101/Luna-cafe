@@ -83,7 +83,32 @@ const translations = {
         emptyCartMessage: "Agregá una bebida antes de preparar el pedido.",
         confirmClear: "¿Querés vaciar el carrito?",
         cartCleared: "Carrito vaciado.",
-        orderSummary: "Resumen del pedido"
+        orderSummary: "Resumen del pedido",
+
+        buyNow: "Comprar",
+        checkoutKicker: "FINALIZAR PEDIDO",
+        checkoutTitle: "Pago de demostración",
+        demoOnlyWarning: "Simulación únicamente. No ingreses datos reales de tarjetas. La información no se enviará ni se guardará.",
+        checkoutTotalLabel: "Total de la compra",
+        cardholderLabel: "Nombre ficticio del titular",
+        cardNumberLabel: "Número de tarjeta ficticio",
+        expiryLabel: "Vencimiento (MM/AA)",
+        cvvLabel: "CVV ficticio",
+        noCardStorage: "Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.",
+        cancelCheckout: "Volver al carrito",
+        confirmDemoPayment: "Simular compra",
+        closeCheckout: "Cerrar ventana de pago",
+        demoSuccessTitle: "¡Compra simulada completada!",
+        demoSuccessMessage: "Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.",
+        demoOrderNumber: "Referencia de demostración",
+        demoOrderTotal: "Total simulado",
+        finishCheckout: "Finalizar",
+        invalidCardNumber: "Usá un número ficticio de 13 a 19 dígitos.",
+        invalidExpiry: "Ingresá una fecha válida en formato MM/AA.",
+        expiredCard: "La fecha de vencimiento debe ser futura.",
+        invalidCvv: "Ingresá un CVV ficticio de 3 o 4 dígitos.",
+        invalidCardholder: "Ingresá un nombre ficticio del titular.",
+        backToTop: "Volver arriba"
     },
 
     en: {
@@ -170,34 +195,43 @@ const translations = {
         emptyCartMessage: "Add a drink before preparing your order.",
         confirmClear: "Would you like to empty the cart?",
         cartCleared: "Cart emptied.",
-        orderSummary: "Order summary"
+        orderSummary: "Order summary",
+
+        buyNow: "Buy",
+        checkoutKicker: "COMPLETE YOUR ORDER",
+        checkoutTitle: "Demo checkout",
+        demoOnlyWarning: "Demo only. Do not enter real card details. This information will not be sent or saved.",
+        checkoutTotalLabel: "Order total",
+        cardholderLabel: "Fictional cardholder name",
+        cardNumberLabel: "Fictional card number",
+        expiryLabel: "Expiration (MM/YY)",
+        cvvLabel: "Fictional CVV",
+        noCardStorage: "These fields only demonstrate the interface. No transaction takes place.",
+        cancelCheckout: "Back to cart",
+        confirmDemoPayment: "Simulate purchase",
+        closeCheckout: "Close checkout window",
+        demoSuccessTitle: "Demo purchase completed!",
+        demoSuccessMessage: "This is a demonstration. No charge was made and no banking information was sent.",
+        demoOrderNumber: "Demo reference",
+        demoOrderTotal: "Simulated total",
+        finishCheckout: "Done",
+        invalidCardNumber: "Enter a fictional number containing 13 to 19 digits.",
+        invalidExpiry: "Enter a valid expiration date in MM/YY format.",
+        expiredCard: "The expiration date must be in the future.",
+        invalidCvv: "Enter a fictional CVV with 3 or 4 digits.",
+        invalidCardholder: "Enter a fictional cardholder name.",
+        backToTop: "Back to top"
     }
 };
 
 const products = {
-    espresso: {
-        nameKey: "espressoName",
-        basePrice: 2.50,
-        hasMilkOptions: false
-    },
-    latte: {
-        nameKey: "latteName",
-        basePrice: 3.50,
-        hasMilkOptions: true
-    },
-    cappuccino: {
-        nameKey: "cappuccinoName",
-        basePrice: 3.25,
-        hasMilkOptions: true
-    }
+    espresso: { nameKey: "espressoName", basePrice: 2.50, hasMilkOptions: false },
+    latte: { nameKey: "latteName", basePrice: 3.50, hasMilkOptions: true },
+    cappuccino: { nameKey: "cappuccinoName", basePrice: 3.25, hasMilkOptions: true }
 };
 
 const prices = {
-    size: {
-        small: -0.50,
-        regular: 0,
-        large: 0.75
-    },
+    size: { small: -0.50, regular: 0, large: 0.75 },
     plantMilk: 0.50,
     extraShot: 0.75
 };
@@ -206,28 +240,52 @@ const CART_STORAGE_KEY = "luna-cafe-cart";
 const THEME_STORAGE_KEY = "luna-cafe-theme";
 
 function initLunaCafe() {
+    const $ = (selector, parent = document) => parent.querySelector(selector);
+    const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
     const root = document.documentElement;
-    const nav = document.getElementById("site-navigation");
-    const menuButton = document.getElementById("menu-toggle");
-    const menuButtonLabel = document.getElementById("menu-toggle-label");
-    const languageButton = document.getElementById("language-toggle");
-    const languageLabelShort = document.getElementById("language-label-short");
-    const languageLabelFull = document.getElementById("language-label-full");
-    const themeButton = document.getElementById("theme-toggle");
-    const themeLabel = document.getElementById("theme-label");
-    const cartToggle = document.getElementById("cart-toggle");
-    const mobileCartToggle = document.getElementById("mobile-cart-toggle");
-    const cartDrawer = document.getElementById("cart-drawer");
-    const cartOverlay = document.getElementById("cart-overlay");
-    const closeCartButton = document.getElementById("close-cart");
-    const browseMenuButton = document.getElementById("browse-menu");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const cartEmptyState = document.getElementById("cart-empty-state");
-    const subtotalElement = document.getElementById("cart-subtotal");
-    const copyOrderButton = document.getElementById("copy-order");
-    const clearCartButton = document.getElementById("clear-cart");
-    const toast = document.getElementById("toast");
-    const menuSection = document.getElementById("menu");
+
+    const nav = $("#site-navigation");
+    const menuButton = $("#menu-toggle");
+    const menuButtonLabel = $("#menu-toggle-label");
+    const languageButton = $("#language-toggle");
+    const languageLabelShort = $("#language-label-short");
+    const languageLabelFull = $("#language-label-full");
+    const themeButton = $("#theme-toggle");
+    const themeLabel = $("#theme-label");
+
+    const cartToggle = $("#cart-toggle");
+    const mobileCartToggle = $("#mobile-cart-toggle");
+    const cartDrawer = $("#cart-drawer");
+    const cartOverlay = $("#cart-overlay");
+    const closeCartButton = $("#close-cart");
+    const browseMenuButton = $("#browse-menu");
+    const cartItemsContainer = $("#cart-items");
+    const cartEmptyState = $("#cart-empty-state");
+    const subtotalElement = $("#cart-subtotal");
+    const copyOrderButton = $("#copy-order");
+    const buyNowButton = $("#buy-now");
+    const clearCartButton = $("#clear-cart");
+
+    const checkoutLayer = $("#checkout-layer");
+    const checkoutModal = $("#checkout-modal");
+    const checkoutBackdrop = $("#checkout-backdrop");
+    const closeCheckoutButton = $("#close-checkout");
+    const cancelCheckoutButton = $("#cancel-checkout");
+    const finishCheckoutButton = $("#finish-checkout");
+    const checkoutForm = $("#checkout-form");
+    const checkoutFormView = $("#checkout-form-view");
+    const checkoutSuccess = $("#checkout-success");
+    const checkoutTotal = $("#checkout-total");
+    const cardholderInput = $("#cardholder");
+    const cardNumberInput = $("#card-number");
+    const cardExpiryInput = $("#card-expiry");
+    const cardCvvInput = $("#card-cvv");
+    const demoOrderNumber = $("#demo-order-number");
+    const demoOrderTotal = $("#demo-order-total");
+
+    const backToTopButton = $("#back-to-top");
+    const toast = $("#toast");
+    const menuSection = $("#menu");
 
     const systemTheme = window.matchMedia
         ? window.matchMedia("(prefers-color-scheme: dark)")
@@ -237,14 +295,20 @@ function initLunaCafe() {
         ? window.matchMedia("(max-width: 760px)")
         : null;
 
-    if (
-        !nav || !menuButton || !menuButtonLabel || !languageButton ||
-        !languageLabelShort || !languageLabelFull || !themeButton || !themeLabel ||
-        !cartToggle || !mobileCartToggle || !cartDrawer || !cartOverlay ||
-        !closeCartButton || !browseMenuButton || !cartItemsContainer ||
-        !cartEmptyState || !subtotalElement || !copyOrderButton ||
-        !clearCartButton || !toast || !menuSection
-    ) {
+    const requiredElements = [
+        nav, menuButton, menuButtonLabel, languageButton,
+        languageLabelShort, languageLabelFull, themeButton, themeLabel,
+        cartToggle, mobileCartToggle, cartDrawer, cartOverlay,
+        closeCartButton, browseMenuButton, cartItemsContainer,
+        cartEmptyState, subtotalElement, copyOrderButton, buyNowButton,
+        clearCartButton, checkoutLayer, checkoutModal, checkoutBackdrop,
+        closeCheckoutButton, cancelCheckoutButton, finishCheckoutButton,
+        checkoutForm, checkoutFormView, checkoutSuccess, checkoutTotal,
+        cardholderInput, cardNumberInput, cardExpiryInput, cardCvvInput,
+        demoOrderNumber, demoOrderTotal, backToTopButton, toast, menuSection
+    ];
+
+    if (requiredElements.some((element) => !element)) {
         console.error("Luna Café: falta un elemento requerido en index.html.");
         return;
     }
@@ -254,7 +318,7 @@ function initLunaCafe() {
     let lastCartTrigger = null;
     let cart = loadCart();
 
-    function getTexts() {
+    function texts() {
         return translations[currentLanguage];
     }
 
@@ -262,7 +326,7 @@ function initLunaCafe() {
         return `$${Number(amount).toFixed(2)}`;
     }
 
-    function escapeHtml(value) {
+    function escapeHTML(value) {
         return String(value)
             .replaceAll("&", "&amp;")
             .replaceAll("<", "&lt;")
@@ -271,100 +335,169 @@ function initLunaCafe() {
             .replaceAll("'", "&#039;");
     }
 
-    function getSavedTheme() {
+    function lineKey(item) {
+        return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}`;
+    }
+
+    function getUnitPrice(item) {
+        const product = products[item.id];
+        if (!product) return 0;
+
+        let amount = product.basePrice + (prices.size[item.size] || 0);
+
+        if (product.hasMilkOptions && item.milk === "plant") {
+            amount += prices.plantMilk;
+        }
+
+        if (item.extraShot) {
+            amount += prices.extraShot;
+        }
+
+        return Math.max(0, Math.round(amount * 100) / 100);
+    }
+
+    function getSubtotal() {
+        return cart.reduce((sum, item) => sum + getUnitPrice(item) * item.qty, 0);
+    }
+
+    function saveCart() {
         try {
-            return localStorage.getItem(THEME_STORAGE_KEY);
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
         } catch (error) {
-            return null;
+            console.warn("No se pudo guardar el carrito en este navegador.");
         }
     }
 
-    function saveTheme(theme) {
+    function loadCart() {
         try {
-            localStorage.setItem(THEME_STORAGE_KEY, theme);
+            const stored = localStorage.getItem(CART_STORAGE_KEY);
+            if (!stored) return [];
+
+            const parsed = JSON.parse(stored);
+            if (!Array.isArray(parsed)) return [];
+
+            const validItems = [];
+
+            parsed.forEach((item) => {
+                if (!item || !products[item.id]) return;
+                if (!["small", "regular", "large"].includes(item.size)) return;
+
+                const normalized = {
+                    id: item.id,
+                    size: item.size,
+                    milk: products[item.id].hasMilkOptions && item.milk === "plant"
+                        ? "plant"
+                        : "whole",
+                    extraShot: Boolean(item.extraShot),
+                    qty: Math.max(1, Math.min(99, Math.floor(Number(item.qty) || 1)))
+                };
+
+                const existing = validItems.find(
+                    (entry) => lineKey(entry) === lineKey(normalized)
+                );
+
+                if (existing) {
+                    existing.qty = Math.min(99, existing.qty + normalized.qty);
+                } else {
+                    validItems.push(normalized);
+                }
+            });
+
+            return validItems;
         } catch (error) {
-            console.warn("No se pudo guardar el tema en este navegador.");
+            return [];
         }
+    }
+
+    function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        window.clearTimeout(toastTimeout);
+
+        toastTimeout = window.setTimeout(() => {
+            toast.classList.remove("is-visible");
+        }, 2600);
     }
 
     function updateThemeButton() {
-        const texts = getTexts();
         const isDark = root.dataset.theme === "dark";
-        const label = isDark ? texts.themeLight : texts.themeDark;
+        const label = isDark ? texts().themeLight : texts().themeDark;
 
         themeLabel.textContent = label;
         themeButton.setAttribute("aria-pressed", String(isDark));
         themeButton.setAttribute("aria-label", label);
-        themeButton.setAttribute("title", label);
+        themeButton.title = label;
     }
 
     function setTheme(theme, remember = false) {
         root.dataset.theme = theme;
 
         if (remember) {
-            saveTheme(theme);
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch (error) {
+                console.warn("No se pudo guardar el tema en este navegador.");
+            }
         }
 
         updateThemeButton();
     }
 
     function updateMenuButton() {
-        const texts = getTexts();
         const isOpen = nav.classList.contains("is-open");
-        const label = isOpen ? texts.closeMenu : texts.openMenu;
+        const label = isOpen ? texts().closeMenu : texts().openMenu;
 
         menuButton.setAttribute("aria-expanded", String(isOpen));
         menuButton.setAttribute("aria-label", label);
         menuButtonLabel.textContent = label;
     }
 
-    function updateLanguageButton() {
-        const texts = getTexts();
-
-        languageLabelShort.textContent = texts.languageShort;
-        languageLabelFull.textContent = texts.languageFull;
-
-        languageButton.setAttribute("aria-label", texts.languageLabel);
-        languageButton.setAttribute("title", texts.languageLabel);
-    }
-
     function updateCartButtonLabels() {
-        const texts = getTexts();
         const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const itemWord = count === 1 ? texts.oneItem : texts.manyItems;
-        const label = `${texts.openCart}: ${count} ${itemWord}`;
+        const word = count === 1 ? texts().oneItem : texts().manyItems;
+        const label = `${texts().openCart}: ${count} ${word}`;
+        const isOpen = document.body.classList.contains("cart-open");
 
         cartToggle.setAttribute("aria-label", label);
         mobileCartToggle.setAttribute("aria-label", label);
-        closeCartButton.setAttribute("aria-label", texts.closeCart);
-        closeCartButton.setAttribute("title", texts.closeCart);
-        cartOverlay.setAttribute("aria-label", texts.closeCart);
-
-        const isOpen = document.body.classList.contains("cart-open");
         cartToggle.setAttribute("aria-expanded", String(isOpen));
         mobileCartToggle.setAttribute("aria-expanded", String(isOpen));
+
+        closeCartButton.setAttribute("aria-label", texts().closeCart);
+        closeCartButton.title = texts().closeCart;
+        cartOverlay.setAttribute("aria-label", texts().closeCart);
+    }
+
+    function updateLanguageButton() {
+        languageLabelShort.textContent = texts().languageShort;
+        languageLabelFull.textContent = texts().languageFull;
+        languageButton.setAttribute("aria-label", texts().languageLabel);
+        languageButton.title = texts().languageLabel;
     }
 
     function setLanguage(language) {
         currentLanguage = language;
-        const texts = getTexts();
+        root.lang = language;
+        document.title = texts().pageTitle;
 
-        root.lang = currentLanguage;
-        document.title = texts.pageTitle;
-
-        document.querySelectorAll("[data-i18n]").forEach((element) => {
+        $$("[data-i18n]").forEach((element) => {
             const key = element.dataset.i18n;
-
-            if (Object.prototype.hasOwnProperty.call(texts, key)) {
-                element.textContent = texts[key];
+            if (Object.prototype.hasOwnProperty.call(texts(), key)) {
+                element.textContent = texts()[key];
             }
         });
 
-        document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+        $$("[data-i18n-alt]").forEach((element) => {
             const key = element.dataset.i18nAlt;
+            if (Object.prototype.hasOwnProperty.call(texts(), key)) {
+                element.alt = texts()[key];
+            }
+        });
 
-            if (Object.prototype.hasOwnProperty.call(texts, key)) {
-                element.alt = texts[key];
+        $$("[data-i18n-aria-label]").forEach((element) => {
+            const key = element.dataset.i18nAriaLabel;
+            if (Object.prototype.hasOwnProperty.call(texts(), key)) {
+                element.setAttribute("aria-label", texts()[key]);
             }
         });
 
@@ -386,111 +519,137 @@ function initLunaCafe() {
         updateMenuButton();
     }
 
-    function loadCart() {
-        let storedValue;
+    function updateBackToTop() {
+        const visible =
+            window.scrollY > 420 &&
+            !document.body.classList.contains("cart-open") &&
+            !document.body.classList.contains("checkout-open");
 
-        try {
-            storedValue = localStorage.getItem(CART_STORAGE_KEY);
-        } catch (error) {
-            return [];
-        }
-
-        if (!storedValue) {
-            return [];
-        }
-
-        try {
-            const parsed = JSON.parse(storedValue);
-
-            if (!Array.isArray(parsed)) {
-                return [];
-            }
-
-            const cleaned = [];
-
-            parsed.forEach((item) => {
-                if (!item || !products[item.id]) {
-                    return;
-                }
-
-                if (!["small", "regular", "large"].includes(item.size)) {
-                    return;
-                }
-
-                const milk = products[item.id].hasMilkOptions && item.milk === "plant"
-                    ? "plant"
-                    : "whole";
-
-                const qty = Math.max(
-                    1,
-                    Math.min(99, Math.floor(Number(item.qty) || 1))
-                );
-
-                const normalized = {
-                    id: item.id,
-                    size: item.size,
-                    milk,
-                    extraShot: Boolean(item.extraShot),
-                    qty
-                };
-
-                const existing = cleaned.find(
-                    (line) => lineKey(line) === lineKey(normalized)
-                );
-
-                if (existing) {
-                    existing.qty = Math.min(99, existing.qty + normalized.qty);
-                } else {
-                    cleaned.push(normalized);
-                }
-            });
-
-            return cleaned;
-        } catch (error) {
-            return [];
-        }
+        backToTopButton.classList.toggle("is-visible", visible);
+        backToTopButton.setAttribute("aria-hidden", String(!visible));
+        backToTopButton.tabIndex = visible ? 0 : -1;
     }
 
-    function saveCart() {
-        try {
-            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-        } catch (error) {
-            console.warn("No se pudo guardar el carrito en este navegador.");
-        }
-    }
+    function getOptionSummary(item) {
+        const sizeKey = item.size === "small"
+            ? "sizeSmall"
+            : item.size === "large"
+                ? "sizeLarge"
+                : "sizeRegular";
 
-    function lineKey(item) {
-        return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}`;
-    }
+        const parts = [texts()[sizeKey]];
 
-    function getUnitPrice(item) {
-        const product = products[item.id];
-
-        if (!product) {
-            return 0;
-        }
-
-        let amount = product.basePrice + (prices.size[item.size] || 0);
-
-        if (product.hasMilkOptions && item.milk === "plant") {
-            amount += prices.plantMilk;
+        if (products[item.id].hasMilkOptions) {
+            parts.push(item.milk === "plant" ? texts().milkPlantName : texts().milkWholeName);
         }
 
         if (item.extraShot) {
-            amount += prices.extraShot;
+            parts.push(texts().extraShotLabel.replace(/\s*\(.*\)$/, ""));
         }
 
-        return Math.max(0, Math.round(amount * 100) / 100);
+        return parts.join(" · ");
+    }
+
+    function renderCart() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        const subtotal = getSubtotal();
+
+        $("#cart-count").textContent = String(count);
+        $("#mobile-cart-count").textContent = String(count);
+        $("#cart-count").setAttribute(
+            "aria-label",
+            `${count} ${count === 1 ? texts().oneItem : texts().manyItems}`
+        );
+
+        subtotalElement.textContent = money(subtotal);
+        checkoutTotal.textContent = money(subtotal);
+
+        cartEmptyState.hidden = cart.length > 0;
+        cartItemsContainer.hidden = cart.length === 0;
+        copyOrderButton.disabled = cart.length === 0;
+        buyNowButton.disabled = cart.length === 0;
+        clearCartButton.disabled = cart.length === 0;
+
+        cartItemsContainer.innerHTML = cart.map((item) => {
+            const name = texts()[products[item.id].nameKey];
+            const key = escapeHTML(lineKey(item));
+            const details = escapeHTML(getOptionSummary(item));
+            const unitPrice = getUnitPrice(item);
+
+            return `
+                <article class="cart-item">
+                    <div class="cart-item-main">
+                        <h3>${escapeHTML(name)}</h3>
+                        <p class="cart-item-details">${details}</p>
+                        <p class="cart-item-unit-price">
+                            ${money(unitPrice)} × ${item.qty} = ${money(unitPrice * item.qty)}
+                        </p>
+                    </div>
+
+                    <div class="quantity-control" aria-label="${escapeHTML(name)}">
+                        <button
+                            type="button"
+                            data-cart-action="decrease"
+                            data-cart-key="${key}"
+                            aria-label="${escapeHTML(texts().decreaseQuantity)}"
+                        >−</button>
+
+                        <span class="quantity-value">${item.qty}</span>
+
+                        <button
+                            type="button"
+                            data-cart-action="increase"
+                            data-cart-key="${key}"
+                            aria-label="${escapeHTML(texts().increaseQuantity)}"
+                        >+</button>
+                    </div>
+
+                    <button
+                        class="remove-item"
+                        type="button"
+                        data-cart-action="remove"
+                        data-cart-key="${key}"
+                    >${escapeHTML(texts().removeItem)}</button>
+                </article>
+            `;
+        }).join("");
+
+        updateCartButtonLabels();
+    }
+
+    function openCart(trigger) {
+        lastCartTrigger = trigger || cartToggle;
+        closeMenu();
+
+        cartOverlay.hidden = false;
+        cartDrawer.setAttribute("aria-hidden", "false");
+        document.body.classList.add("cart-open");
+
+        updateCartButtonLabels();
+        updateBackToTop();
+        cartDrawer.focus();
+    }
+
+    function closeCart(restoreFocus = false) {
+        document.body.classList.remove("cart-open");
+        cartDrawer.setAttribute("aria-hidden", "true");
+        cartOverlay.hidden = true;
+
+        updateCartButtonLabels();
+        updateBackToTop();
+
+        if (restoreFocus && lastCartTrigger) {
+            lastCartTrigger.focus();
+        }
     }
 
     function getConfigurationFromCard(card) {
-        const id = card.dataset.productId;
         const sizeSelect = card.querySelector("[data-size-select]");
         const milkSelect = card.querySelector("[data-milk-select]");
         const shotCheckbox = card.querySelector("[data-extra-shot]");
 
         return {
-            id,
+            id: card.dataset.productId,
             size: sizeSelect ? sizeSelect.value : "regular",
             milk: milkSelect ? milkSelect.value : "whole",
             extraShot: Boolean(shotCheckbox && shotCheckbox.checked),
@@ -500,36 +659,18 @@ function initLunaCafe() {
 
     function updatePriceForCard(card) {
         const priceElement = card.querySelector("[data-current-price]");
+        if (!priceElement) return;
 
-        if (!priceElement) {
-            return;
-        }
-
-        priceElement.textContent = money(
-            getUnitPrice(getConfigurationFromCard(card))
-        );
+        const configuration = getConfigurationFromCard(card);
+        priceElement.textContent = money(getUnitPrice(configuration));
     }
 
     function updateProductPrices() {
-        document.querySelectorAll(".product-card").forEach(updatePriceForCard);
-    }
-
-    function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add("is-visible");
-
-        if (toastTimeout) {
-            window.clearTimeout(toastTimeout);
-        }
-
-        toastTimeout = window.setTimeout(() => {
-            toast.classList.remove("is-visible");
-        }, 2600);
+        $$(".product-card").forEach(updatePriceForCard);
     }
 
     function addToCart(item) {
-        const key = lineKey(item);
-        const existing = cart.find((line) => lineKey(line) === key);
+        const existing = cart.find((entry) => lineKey(entry) === lineKey(item));
 
         if (existing) {
             existing.qty = Math.min(99, existing.qty + 1);
@@ -540,158 +681,29 @@ function initLunaCafe() {
         saveCart();
         renderCart();
 
-        const productName = getTexts()[products[item.id].nameKey];
-        showToast(`${productName} ${getTexts().addedToCart}`);
-    }
-
-    function getOptionSummary(item) {
-        const texts = getTexts();
-
-        const sizeKey = item.size === "small"
-            ? "sizeSmall"
-            : item.size === "large"
-                ? "sizeLarge"
-                : "sizeRegular";
-
-        const parts = [texts[sizeKey]];
-
-        if (products[item.id].hasMilkOptions) {
-            parts.push(
-                item.milk === "plant"
-                    ? texts.milkPlantName
-                    : texts.milkWholeName
-            );
-        }
-
-        if (item.extraShot) {
-            parts.push(texts.extraShotLabel.replace(/\s*\(.*\)$/, ""));
-        }
-
-        return parts.join(" · ");
-    }
-
-    function getSubtotal() {
-        return cart.reduce(
-            (sum, item) => sum + getUnitPrice(item) * item.qty,
-            0
-        );
-    }
-
-    function renderCart() {
-        const texts = getTexts();
-        const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const subtotal = getSubtotal();
-
-        document.getElementById("cart-count").textContent = String(count);
-        document.getElementById("mobile-cart-count").textContent = String(count);
-
-        document.getElementById("cart-count").setAttribute(
-            "aria-label",
-            `${count} ${count === 1 ? texts.oneItem : texts.manyItems}`
-        );
-
-        subtotalElement.textContent = money(subtotal);
-
-        cartEmptyState.hidden = cart.length > 0;
-        cartItemsContainer.hidden = cart.length === 0;
-        copyOrderButton.disabled = cart.length === 0;
-        clearCartButton.disabled = cart.length === 0;
-
-        cartItemsContainer.innerHTML = cart.map((item) => {
-            const product = products[item.id];
-            const name = texts[product.nameKey];
-            const key = escapeHtml(lineKey(item));
-            const details = escapeHtml(getOptionSummary(item));
-            const unitPrice = getUnitPrice(item);
-            const lineTotal = unitPrice * item.qty;
-
-            return `
-                <article class="cart-item">
-                    <div class="cart-item-main">
-                        <h3>${escapeHtml(name)}</h3>
-                        <p class="cart-item-details">${details}</p>
-                        <p class="cart-item-unit-price">${money(unitPrice)} × ${item.qty} = ${money(lineTotal)}</p>
-                    </div>
-
-                    <div class="quantity-control" aria-label="${escapeHtml(name)}">
-                        <button
-                            type="button"
-                            data-cart-action="decrease"
-                            data-cart-key="${key}"
-                            aria-label="${escapeHtml(texts.decreaseQuantity)}"
-                        >−</button>
-
-                        <span class="quantity-value">${item.qty}</span>
-
-                        <button
-                            type="button"
-                            data-cart-action="increase"
-                            data-cart-key="${key}"
-                            aria-label="${escapeHtml(texts.increaseQuantity)}"
-                        >+</button>
-                    </div>
-
-                    <button
-                        class="remove-item"
-                        type="button"
-                        data-cart-action="remove"
-                        data-cart-key="${key}"
-                    >${escapeHtml(texts.removeItem)}</button>
-                </article>
-            `;
-        }).join("");
-
-        updateCartButtonLabels();
-    }
-
-    function openCart(trigger) {
-        lastCartTrigger = trigger || cartToggle;
-
-        closeMenu();
-        cartOverlay.hidden = false;
-        cartDrawer.setAttribute("aria-hidden", "false");
-        document.body.classList.add("cart-open");
-
-        updateCartButtonLabels();
-        cartDrawer.focus();
-    }
-
-    function closeCart(restoreFocus = false) {
-        document.body.classList.remove("cart-open");
-        cartDrawer.setAttribute("aria-hidden", "true");
-        cartOverlay.hidden = true;
-
-        updateCartButtonLabels();
-
-        if (restoreFocus && lastCartTrigger) {
-            lastCartTrigger.focus();
-        }
+        const name = texts()[products[item.id].nameKey];
+        showToast(`${name} ${texts().addedToCart}`);
     }
 
     function buildOrderSummary() {
-        const texts = getTexts();
-
         const lines = cart.map((item) => {
-            const product = products[item.id];
-            const name = texts[product.nameKey];
-            const details = getOptionSummary(item);
+            const name = texts()[products[item.id].nameKey];
 
-            return `${item.qty} × ${name} (${details}) — ${money(getUnitPrice(item) * item.qty)}`;
+            return `${item.qty} × ${name} (${getOptionSummary(item)}) — ${money(getUnitPrice(item) * item.qty)}`;
         });
 
         return [
-            `Luna Café — ${texts.orderSummary}`,
+            `Luna Café — ${texts().orderSummary}`,
             "",
             ...lines,
             "",
-            `${texts.subtotal}: ${money(getSubtotal())}`,
-            texts.checkoutNote
+            `${texts().subtotal}: ${money(getSubtotal())}`,
+            texts().checkoutNote
         ].join("\n");
     }
 
     function fallbackCopy(text) {
         const field = document.createElement("textarea");
-
         field.value = text;
         field.setAttribute("readonly", "");
         field.style.position = "fixed";
@@ -713,10 +725,8 @@ function initLunaCafe() {
     }
 
     async function copyOrder() {
-        const texts = getTexts();
-
         if (cart.length === 0) {
-            showToast(texts.emptyCartMessage);
+            showToast(texts().emptyCartMessage);
             return;
         }
 
@@ -729,17 +739,166 @@ function initLunaCafe() {
                 throw new Error("Clipboard API unavailable");
             }
 
-            showToast(texts.copiedOrder);
+            showToast(texts().copiedOrder);
         } catch (error) {
             if (fallbackCopy(summary)) {
-                showToast(texts.copiedOrder);
+                showToast(texts().copiedOrder);
             } else {
-                showToast(texts.copyFailed);
+                showToast(texts().copyFailed);
             }
         }
     }
 
-    /* Menú de navegación */
+    /* CHECKOUT SIMULADO */
+
+    function clearCheckoutValidation() {
+        [cardholderInput, cardNumberInput, cardExpiryInput, cardCvvInput]
+            .forEach((input) => input.setCustomValidity(""));
+    }
+
+    function openCheckout() {
+        if (cart.length === 0) {
+            showToast(texts().emptyCartMessage);
+            return;
+        }
+
+        closeCart(false);
+        checkoutForm.reset();
+        clearCheckoutValidation();
+
+        checkoutFormView.hidden = false;
+        checkoutSuccess.hidden = true;
+        checkoutTotal.textContent = money(getSubtotal());
+
+        checkoutLayer.hidden = false;
+        checkoutModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("checkout-open");
+        updateBackToTop();
+
+        window.setTimeout(() => cardholderInput.focus(), 0);
+    }
+
+    function closeCheckout(restoreFocus = true) {
+        checkoutLayer.hidden = true;
+        checkoutModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("checkout-open");
+
+        checkoutForm.reset();
+        clearCheckoutValidation();
+        checkoutFormView.hidden = false;
+        checkoutSuccess.hidden = true;
+
+        updateBackToTop();
+
+        if (restoreFocus) {
+            cartToggle.focus();
+        }
+    }
+
+    function returnToCart() {
+        closeCheckout(false);
+        openCart(mobileLayout && mobileLayout.matches ? mobileCartToggle : cartToggle);
+    }
+
+    function formatCardNumber() {
+        const digits = cardNumberInput.value.replace(/\D/g, "").slice(0, 19);
+        cardNumberInput.value = digits.replace(/(.{4})/g, "$1 ").trim();
+        cardNumberInput.setCustomValidity("");
+    }
+
+    function formatExpiry() {
+        const digits = cardExpiryInput.value.replace(/\D/g, "").slice(0, 4);
+
+        cardExpiryInput.value = digits.length > 2
+            ? digits.slice(0, 2) + "/" + digits.slice(2)
+            : digits;
+
+        cardExpiryInput.setCustomValidity("");
+    }
+
+    function formatCvv() {
+        cardCvvInput.value = cardCvvInput.value.replace(/\D/g, "").slice(0, 4);
+        cardCvvInput.setCustomValidity("");
+    }
+
+    function validateDemoCard() {
+        const cardholder = cardholderInput.value.trim();
+        const digits = cardNumberInput.value.replace(/\D/g, "");
+        const expiry = cardExpiryInput.value.trim();
+        const cvv = cardCvvInput.value.replace(/\D/g, "");
+
+        cardholderInput.setCustomValidity(
+            cardholder.length < 2 ? texts().invalidCardholder : ""
+        );
+
+        cardNumberInput.setCustomValidity(
+            digits.length < 13 || digits.length > 19
+                ? texts().invalidCardNumber
+                : ""
+        );
+
+        let expiryError = "";
+        const match = /^(0[1-9]|1[0-2])\/(\d{2})$/.exec(expiry);
+
+        if (!match) {
+            expiryError = texts().invalidExpiry;
+        } else {
+            const month = Number(match[1]);
+            const year = 2000 + Number(match[2]);
+            const now = new Date();
+            const currentMonth = now.getMonth() + 1;
+            const currentYear = now.getFullYear();
+
+            if (
+                year < currentYear ||
+                (year === currentYear && month < currentMonth)
+            ) {
+                expiryError = texts().expiredCard;
+            }
+        }
+
+        cardExpiryInput.setCustomValidity(expiryError);
+        cardCvvInput.setCustomValidity(
+            cvv.length < 3 || cvv.length > 4 ? texts().invalidCvv : ""
+        );
+
+        return checkoutForm.reportValidity();
+    }
+
+    function simulatePurchase(event) {
+        event.preventDefault();
+
+        if (cart.length === 0) {
+            showToast(texts().emptyCartMessage);
+            closeCheckout(false);
+            return;
+        }
+
+        if (!validateDemoCard()) return;
+
+        /*
+         * Solo se validan formatos ficticios.
+         * Los datos de tarjeta no se guardan ni se envían.
+         */
+        const simulatedTotal = getSubtotal();
+        const reference = "LC-DEMO-" + String(Date.now()).slice(-6);
+
+        demoOrderNumber.textContent = reference;
+        demoOrderTotal.textContent = money(simulatedTotal);
+
+        checkoutForm.reset();
+        clearCheckoutValidation();
+        checkoutFormView.hidden = true;
+        checkoutSuccess.hidden = false;
+
+        cart = [];
+        saveCart();
+        renderCart();
+
+        checkoutModal.focus();
+    }
+
+    /* NAVEGACIÓN Y EVENTOS */
 
     menuButton.addEventListener("click", toggleMenu);
 
@@ -757,87 +916,37 @@ function initLunaCafe() {
         }
     });
 
-    document.addEventListener("keydown", (event) => {
-        if (
-            document.body.classList.contains("cart-open") &&
-            event.key === "Tab"
-        ) {
-            const focusable = cartDrawer.querySelectorAll(
-                'button:not(:disabled), a[href], select:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])'
-            );
-
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            const active = document.activeElement;
-
-            if (
-                first &&
-                last &&
-                event.shiftKey &&
-                (active === first || active === cartDrawer)
-            ) {
-                event.preventDefault();
-                last.focus();
-            } else if (
-                first &&
-                last &&
-                !event.shiftKey &&
-                (active === last || active === cartDrawer)
-            ) {
-                event.preventDefault();
-                first.focus();
-            }
-
-            return;
-        }
-
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        if (document.body.classList.contains("cart-open")) {
-            closeCart(true);
-            return;
-        }
-
-        if (nav.classList.contains("is-open")) {
-            closeMenu();
-            menuButton.focus();
-        }
-    });
-
-    if (mobileLayout && mobileLayout.addEventListener) {
-        mobileLayout.addEventListener("change", (event) => {
-            if (!event.matches) {
-                closeMenu();
-            }
-        });
-    }
-
-    /* Idioma */
-
     languageButton.addEventListener("click", () => {
         setLanguage(currentLanguage === "es" ? "en" : "es");
     });
 
-    /* Tema claro y oscuro */
-
     themeButton.addEventListener("click", () => {
-        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-        setTheme(nextTheme, true);
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
+
+        try {
+            localStorage.setItem(THEME_STORAGE_KEY, next);
+        } catch (error) {
+            console.warn("No se pudo guardar el tema en este navegador.");
+        }
+
+        setTheme(next);
     });
 
     if (systemTheme && systemTheme.addEventListener) {
         systemTheme.addEventListener("change", (event) => {
-            const savedTheme = getSavedTheme();
+            let savedTheme = null;
+
+            try {
+                savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+            } catch (error) {
+                savedTheme = null;
+            }
 
             if (savedTheme !== "light" && savedTheme !== "dark") {
                 setTheme(event.matches ? "dark" : "light");
             }
         });
     }
-
-    /* Apertura y cierre del carrito */
 
     cartToggle.addEventListener("click", () => openCart(cartToggle));
     mobileCartToggle.addEventListener("click", () => openCart(mobileCartToggle));
@@ -846,10 +955,8 @@ function initLunaCafe() {
 
     browseMenuButton.addEventListener("click", () => {
         closeCart(false);
-        document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+        menuSection.scrollIntoView({ behavior: "smooth" });
     });
-
-    /* Opciones de los productos y precios dinámicos */
 
     menuSection.addEventListener("change", (event) => {
         if (
@@ -858,45 +965,30 @@ function initLunaCafe() {
             )
         ) {
             const card = event.target.closest(".product-card");
-
-            if (card) {
-                updatePriceForCard(card);
-            }
+            if (card) updatePriceForCard(card);
         }
     });
 
     menuSection.addEventListener("click", (event) => {
         const button = event.target.closest("[data-add-to-cart]");
-
-        if (!button) {
-            return;
-        }
+        if (!button) return;
 
         const card = button.closest(".product-card");
 
-        if (!card || !products[card.dataset.productId]) {
-            return;
+        if (card && products[card.dataset.productId]) {
+            addToCart(getConfigurationFromCard(card));
         }
-
-        addToCart(getConfigurationFromCard(card));
     });
-
-    /* Cantidades y eliminación de artículos */
 
     cartItemsContainer.addEventListener("click", (event) => {
         const button = event.target.closest("[data-cart-action]");
-
-        if (!button) {
-            return;
-        }
+        if (!button) return;
 
         const key = button.dataset.cartKey;
         const action = button.dataset.cartAction;
-        const item = cart.find((line) => lineKey(line) === key);
+        const item = cart.find((entry) => lineKey(entry) === key);
 
-        if (!item) {
-            return;
-        }
+        if (!item) return;
 
         if (action === "increase") {
             item.qty = Math.min(99, item.qty + 1);
@@ -904,10 +996,10 @@ function initLunaCafe() {
             item.qty -= 1;
 
             if (item.qty <= 0) {
-                cart = cart.filter((line) => lineKey(line) !== key);
+                cart = cart.filter((entry) => lineKey(entry) !== key);
             }
         } else if (action === "remove") {
-            cart = cart.filter((line) => lineKey(line) !== key);
+            cart = cart.filter((entry) => lineKey(entry) !== key);
         }
 
         saveCart();
@@ -915,27 +1007,131 @@ function initLunaCafe() {
     });
 
     clearCartButton.addEventListener("click", () => {
-        if (cart.length === 0) {
-            return;
-        }
-
-        if (!window.confirm(getTexts().confirmClear)) {
-            return;
-        }
+        if (cart.length === 0) return;
+        if (!window.confirm(texts().confirmClear)) return;
 
         cart = [];
         saveCart();
         renderCart();
-        showToast(getTexts().cartCleared);
+        showToast(texts().cartCleared);
     });
-
-    /* Copiar el resumen del pedido */
 
     copyOrderButton.addEventListener("click", copyOrder);
 
-    /* Estado inicial */
+    /* Pago de demostración */
 
-    const savedTheme = getSavedTheme();
+    buyNowButton.addEventListener("click", openCheckout);
+    closeCheckoutButton.addEventListener("click", returnToCart);
+    checkoutBackdrop.addEventListener("click", returnToCart);
+    cancelCheckoutButton.addEventListener("click", returnToCart);
+    finishCheckoutButton.addEventListener("click", () => closeCheckout(true));
+    checkoutForm.addEventListener("submit", simulatePurchase);
+
+    cardNumberInput.addEventListener("input", formatCardNumber);
+    cardExpiryInput.addEventListener("input", formatExpiry);
+    cardCvvInput.addEventListener("input", formatCvv);
+
+    cardholderInput.addEventListener("input", () => {
+        cardholderInput.setCustomValidity("");
+    });
+
+    checkoutModal.addEventListener("keydown", (event) => {
+        if (event.key !== "Tab") return;
+
+        const focusable = Array.from(checkoutModal.querySelectorAll(
+            'button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href], [tabindex]:not([tabindex="-1"])'
+        )).filter((element) => !element.closest("[hidden]"));
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (!first || !last) return;
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    });
+
+    /* Tecla Escape */
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            if (!checkoutLayer.hidden) {
+                if (checkoutSuccess.hidden) {
+                    returnToCart();
+                } else {
+                    closeCheckout(true);
+                }
+                return;
+            }
+
+            if (document.body.classList.contains("cart-open")) {
+                closeCart(true);
+                return;
+            }
+
+            if (nav.classList.contains("is-open")) {
+                closeMenu();
+                menuButton.focus();
+            }
+        }
+
+        if (event.key === "Tab" && document.body.classList.contains("cart-open")) {
+            const focusable = cartDrawer.querySelectorAll(
+                'button:not(:disabled), a[href], select:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])'
+            );
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (!first || !last) return;
+
+            if (event.shiftKey && (
+                document.activeElement === first ||
+                document.activeElement === cartDrawer
+            )) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+    });
+
+    /* Botón volver arriba */
+
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+
+    backToTopButton.addEventListener("click", () => {
+        const reduceMotion = window.matchMedia &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        window.scrollTo({
+            top: 0,
+            behavior: reduceMotion ? "auto" : "smooth"
+        });
+    });
+
+    if (mobileLayout && mobileLayout.addEventListener) {
+        mobileLayout.addEventListener("change", (event) => {
+            if (!event.matches) closeMenu();
+        });
+    }
+
+    /* ESTADO INICIAL */
+
+    let savedTheme = null;
+
+    try {
+        savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (error) {
+        savedTheme = null;
+    }
 
     const initialTheme =
         savedTheme === "light" || savedTheme === "dark"
@@ -946,6 +1142,7 @@ function initLunaCafe() {
     setLanguage("es");
     closeMenu();
     renderCart();
+    updateBackToTop();
 }
 
 if (document.readyState === "loading") {
