@@ -177,22 +177,20 @@ function initLunaCafe() {
             try {
                 localStorage.setItem("luna-cafe-theme", theme);
             } catch (error) {
-                console.warn(
-                    "No se pudo guardar el tema en este navegador."
-                );
+                console.warn("No se pudo guardar el tema en este navegador.");
             }
         }
 
         updateThemeButton();
     }
 
-    function toggleMenu() {
-        nav.classList.toggle("is-open");
+    function closeMenu() {
+        nav.classList.remove("is-open");
         updateMenuButton();
     }
 
-    function closeMenu() {
-        nav.classList.remove("is-open");
+    function toggleMenu() {
+        nav.classList.toggle("is-open");
         updateMenuButton();
     }
 
@@ -225,10 +223,7 @@ function initLunaCafe() {
     });
 
     themeButton.addEventListener("click", () => {
-        const nextTheme = root.dataset.theme === "dark"
-            ? "light"
-            : "dark";
-
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
         setTheme(nextTheme, true);
     });
 
