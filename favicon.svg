@@ -1,0 +1,37 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#38271f"/>
+
+    <!-- Taza -->
+    <path
+        d="M15 27h32v14a11 11 0 0 1-11 11h-10a11 11 0 0 1-11-11Z"
+        fill="#f7f2e9"
+    />
+
+    <!-- Asa -->
+    <path
+        d="M47 32h3a6 6 0 0 1 0 12h-5"
+        fill="none"
+        stroke="#f7f2e9"
+        stroke-width="4"
+        stroke-linecap="round"
+    />
+
+    <!-- Vapor -->
+    <path
+        d="M23 21c-5-5 5-7 0-12M32 21c-5-5 5-7 0-12M41 21c-5-5 5-7 0-12"
+        fill="none"
+        stroke="#d18a68"
+        stroke-width="3"
+        stroke-linecap="round"
+    />
+
+    <!-- Detalle de la taza -->
+    <path
+        d="M23 35h16"
+        fill="none"
+        stroke="#d18a68"
+        stroke-width="3"
+        stroke-linecap="round"
+    />
+</svg>
