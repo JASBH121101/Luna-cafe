@@ -54,7 +54,7 @@ let currentLanguage = "es";
 
 function changeLanguage() {
     currentLanguage = currentLanguage === "es" ? "en" : "es";
-  updateThemeButton();
+  
     const currentTranslations = translations[currentLanguage];
 
     document.documentElement.lang = currentLanguage;
@@ -65,7 +65,7 @@ function changeLanguage() {
 
         if (currentTranslations[key] !== undefined) {
             element.textContent = currentTranslations[key];
-          
+          themeButton.addEventListener("click", toggleTheme);
         }
     });
 
