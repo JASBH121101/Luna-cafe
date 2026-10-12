@@ -97,29 +97,32 @@ main section {
     padding: 80px 28px;
 }
 
-/* Portada con fotografía de fondo */
+/* PORTADA */
 
 #inicio {
     max-width: none;
-    min-height: 500px;
+    min-height: 470px;
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
 
-    padding: 100px max(8%, calc((100% - var(--container-width)) / 2));
+    padding: 90px max(8%, calc((100% - var(--container-width)) / 2));
 
     background-image:
         linear-gradient(
             90deg,
             rgba(43, 28, 24, 0.92) 0%,
             rgba(43, 28, 24, 0.78) 48%,
-            rgba(43, 28, 24, 0.30) 100%
+            rgba(43, 28, 24, 0.28) 100%
         ),
         url("./Img/pexels-alesia-talkachova-733353-7426475.webp");
 
     background-size: cover;
-    background-position: center;
+    background-position: center 58%;
+    background-repeat: no-repeat;
+
     color: #fffcf6;
 }
 
@@ -158,7 +161,7 @@ main section {
     transform: translateY(-2px);
 }
 
-/* Menú */
+/* MENÚ DE PRODUCTOS */
 
 #menu > p,
 #nosotros > p,
@@ -168,15 +171,18 @@ main section {
 
 #menu article {
     display: inline-block;
+    vertical-align: top;
+
     width: min(31%, 320px);
     margin: 24px 1% 0 0;
     padding: 20px;
-    vertical-align: top;
+
     overflow: hidden;
 
     background: var(--color-paper);
     border: 1px solid var(--color-border);
     border-radius: 10px;
+
     box-shadow: 0 5px 18px rgba(60, 38, 24, 0.06);
 
     transition: transform 0.2s, box-shadow 0.2s;
@@ -187,14 +193,21 @@ main section {
     box-shadow: 0 12px 24px rgba(60, 38, 24, 0.12);
 }
 
+/*
+   Las fotos de producto se muestran completas.
+   No usamos object-fit: cover porque puede cortar la bebida.
+*/
+
 .product-image {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    height: 190px;
+    object-fit: contain;
     object-position: center;
 
     margin: 0 0 18px;
+    padding: 4px;
+
     border-radius: 7px;
     background: var(--color-section);
 }
@@ -216,7 +229,7 @@ main section {
     font-weight: bold;
 }
 
-/* Sobre nosotros */
+/* SECCIÓN NOSOTROS */
 
 #nosotros {
     background: var(--color-section);
@@ -225,10 +238,10 @@ main section {
 .about-image {
     display: block;
     width: 100%;
-    max-height: 380px;
-    aspect-ratio: 16 / 9;
+    height: 300px;
+
     object-fit: cover;
-    object-position: center;
+    object-position: center 45%;
 
     margin: 0 0 24px;
     border-radius: 12px;
@@ -239,7 +252,7 @@ main section {
     max-width: 760px;
 }
 
-/* Pie de página */
+/* PIE DE PÁGINA */
 
 footer {
     padding: 28px 20px;
@@ -249,7 +262,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Botones de navegación */
+/* BOTONES DE NAVEGACIÓN */
 
 #language-toggle,
 #theme-toggle,
@@ -258,6 +271,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 9px;
+
     padding: 9px 12px;
 
     border: 1px solid var(--color-brown);
@@ -278,7 +292,7 @@ footer {
     color: var(--color-paper);
 }
 
-/* Íconos SVG */
+/* ÍCONOS SVG */
 
 .icon {
     display: block;
@@ -294,7 +308,7 @@ footer {
     stroke-linejoin: round;
 }
 
-/* Controles compactos en escritorio */
+/* CONTROLES COMPACTOS EN ESCRITORIO */
 
 .language-label-short {
     display: inline;
@@ -323,7 +337,7 @@ footer {
     display: none;
 }
 
-/* Mostrar únicamente el ícono correspondiente al tema */
+/* Tema claro: luna visible, sol oculto */
 
 #theme-icon-moon {
     display: block;
@@ -333,7 +347,7 @@ footer {
     display: none;
 }
 
-/* Tema oscuro */
+/* TEMA OSCURO */
 
 html[data-theme="dark"] {
     --color-cream: #1e1714;
@@ -358,7 +372,7 @@ html[data-theme="dark"] #inicio {
             90deg,
             rgba(20, 13, 11, 0.94) 0%,
             rgba(20, 13, 11, 0.82) 48%,
-            rgba(20, 13, 11, 0.48) 100%
+            rgba(20, 13, 11, 0.42) 100%
         ),
         url("./Img/pexels-alesia-talkachova-733353-7426475.webp");
 
@@ -373,11 +387,8 @@ html[data-theme="dark"] #inicio > p:not(:first-child) {
     color: #f0dfd0;
 }
 
-html[data-theme="dark"] #nosotros {
-    background: var(--color-section);
-}
-
 html[data-theme="dark"] #menu article {
+    background: var(--color-paper);
     border-color: var(--color-border);
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
 }
@@ -391,7 +402,7 @@ html[data-theme="dark"] footer {
     color: #fff4e6;
 }
 
-/* Ocultar luna y mostrar sol en tema oscuro */
+/* Tema oscuro: sol visible, luna oculta */
 
 html[data-theme="dark"] #theme-icon-moon {
     display: none;
@@ -401,7 +412,7 @@ html[data-theme="dark"] #theme-icon-sun {
     display: block;
 }
 
-/* Accesibilidad */
+/* ACCESIBILIDAD */
 
 .menu-toggle {
     display: none;
@@ -413,6 +424,7 @@ html[data-theme="dark"] #theme-icon-sun {
     height: 1px;
     padding: 0;
     margin: -1px;
+
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
@@ -425,7 +437,7 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
-/* Menú móvil: conservamos la estructura actual */
+/* MENÚ MÓVIL: MISMA ESTRUCTURA, IMÁGENES MÁS COMPACTAS */
 
 @media (max-width: 650px) {
     header {
@@ -445,9 +457,11 @@ a:focus-visible {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+
         width: 44px;
         height: 44px;
         padding: 10px;
+
         flex: 0 0 auto;
     }
 
@@ -479,9 +493,11 @@ a:focus-visible {
         display: flex;
         align-items: center;
         gap: 10px;
+
         width: 100%;
         min-height: 44px;
         padding: 10px 12px;
+
         text-align: left;
         border-radius: 6px;
     }
@@ -508,6 +524,7 @@ a:focus-visible {
         display: flex;
         align-items: center;
         justify-content: center;
+
         width: 100%;
         height: auto;
         min-height: 44px;
@@ -521,35 +538,67 @@ a:focus-visible {
     }
 
     main section {
-        padding: 56px 22px;
+        padding: 52px 20px;
     }
 
-    #inicio {
-        min-height: 440px;
-        padding: 72px 24px;
+    /*
+       En móvil se reduce la altura de la portada y se
+       mueve el encuadre hacia la derecha para mostrar mejor
+       la taza y la repostería sin agrandar la sección.
+    */
 
-        background-position: 58% center;
+    #inicio {
+        min-height: 390px;
+        padding: 64px 24px;
+
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(43, 28, 24, 0.72) 0%,
+                rgba(43, 28, 24, 0.77) 100%
+            ),
+            url("./Img/pexels-alesia-talkachova-733353-7426475.webp");
+
+        background-size: cover;
+        background-position: 72% center;
     }
 
     html[data-theme="dark"] #inicio {
-        background-position: 58% center;
+        background-image:
+            linear-gradient(
+                180deg,
+                rgba(20, 13, 11, 0.76) 0%,
+                rgba(20, 13, 11, 0.82) 100%
+            ),
+            url("./Img/pexels-alesia-talkachova-733353-7426475.webp");
+
+        background-position: 72% center;
     }
 
     #inicio h1 {
-        font-size: clamp(2.8rem, 12vw, 4rem);
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
     }
 
     #menu article {
         display: block;
         width: 100%;
-        margin: 24px 0 0;
+        margin: 22px 0 0;
+        padding: 16px;
     }
 
     .product-image {
-        aspect-ratio: 16 / 10;
+        width: 100%;
+        height: 155px;
+        object-fit: contain;
+        object-position: center;
+        margin-bottom: 14px;
     }
 
     .about-image {
-        aspect-ratio: 4 / 3;
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        object-position: center 45%;
+        margin-bottom: 20px;
     }
 }
