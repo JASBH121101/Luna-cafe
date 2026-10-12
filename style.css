@@ -40,9 +40,7 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-
     padding: 24px max(6%, calc((100% - var(--container-width)) / 2));
-
     background: var(--color-paper);
     border-bottom: 1px solid #e7ddd0;
 }
@@ -97,9 +95,7 @@ main section {
 
 #inicio {
     max-width: none;
-
     padding: 120px max(8%, calc((100% - var(--container-width)) / 2));
-
     background: var(--color-coffee);
     color: var(--color-paper);
 }
@@ -119,7 +115,6 @@ main section {
     display: inline-block;
     margin-top: 24px;
     padding: 13px 22px;
-
     background: var(--color-terracotta);
     color: white;
     border-radius: 4px;
@@ -137,7 +132,6 @@ main section {
     margin: 24px 1% 0 0;
     padding: 24px;
     vertical-align: top;
-
     background: var(--color-paper);
     border: 1px solid #e7ddd0;
     border-radius: 8px;
@@ -159,14 +153,13 @@ main section {
 
 footer {
     padding: 28px 20px;
-
     background: var(--color-coffee);
     color: var(--color-paper);
     text-align: center;
     font-size: 0.9rem;
 }
 
-/* Botones de navegación */
+/* Controles de navegación */
 
 #language-toggle,
 #theme-toggle,
@@ -175,22 +168,14 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 9px;
-
     padding: 9px 12px;
-
     border: 1px solid var(--color-brown);
     border-radius: 6px;
-
     background: transparent;
     color: var(--color-coffee);
     font: inherit;
-
     cursor: pointer;
-
-    transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 #language-toggle:hover,
@@ -207,12 +192,40 @@ footer {
     width: 20px;
     height: 20px;
     flex: 0 0 20px;
-
     fill: none;
     stroke: currentColor;
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+/* En escritorio: idioma abreviado y tema solo con ícono */
+
+.language-label-short {
+    display: inline;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.language-label-full {
+    display: none;
+}
+
+#language-toggle {
+    min-width: 76px;
+    gap: 8px;
+}
+
+#theme-toggle {
+    width: 42px;
+    height: 42px;
+    padding: 10px;
+    gap: 0;
+}
+
+#theme-label {
+    display: none;
 }
 
 #theme-icon-sun {
@@ -265,7 +278,7 @@ html[data-theme="dark"] #theme-icon-sun {
     display: inline-block;
 }
 
-/* Elementos accesibles */
+/* Accesibilidad */
 
 .menu-toggle {
     display: none;
@@ -289,17 +302,15 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
-/* Navegación compacta para celulares */
+/* Navegación móvil: conservamos el diseño que ya te gustó */
 
 @media (max-width: 650px) {
     header {
         position: relative;
-
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-
         padding: 16px 20px;
     }
 
@@ -311,33 +322,26 @@ a:focus-visible {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-
         width: 44px;
         height: 44px;
         padding: 10px;
-
         flex: 0 0 auto;
     }
 
     #site-navigation {
         display: none;
-
         position: absolute;
         top: calc(100% + 1px);
         left: 12px;
         right: 12px;
         z-index: 1000;
-
         flex-direction: column;
         align-items: stretch;
         gap: 4px;
-
         padding: 12px;
-
         background: var(--color-paper);
         border: 1px solid #e7ddd0;
         border-radius: 10px;
-
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
     }
 
@@ -350,17 +354,42 @@ a:focus-visible {
         display: flex;
         align-items: center;
         gap: 10px;
-
         width: 100%;
         min-height: 44px;
         padding: 10px 12px;
-
         text-align: left;
         border-radius: 6px;
     }
 
     #site-navigation a:hover {
         background: var(--color-cream);
+    }
+
+    /* En el desplegable móvil se mantienen los textos completos */
+
+    .language-label-short {
+        display: none;
+    }
+
+    .language-label-full {
+        display: inline;
+    }
+
+    #language-toggle {
+        min-width: 0;
+        gap: 10px;
+    }
+
+    #theme-toggle {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+
+    #theme-label {
+        display: inline;
     }
 
     main section {
