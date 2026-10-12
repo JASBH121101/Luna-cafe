@@ -1,7 +1,8 @@
 
 const translations = {
     es: {
-        language: "English",
+        languageShort: "EN",
+        languageFull: "English",
         languageLabel: "Cambiar idioma",
         themeDark: "Modo oscuro",
         themeLight: "Modo claro",
@@ -37,7 +38,8 @@ const translations = {
     },
 
     en: {
-        language: "Español",
+        languageShort: "ES",
+        languageFull: "Español",
         languageLabel: "Change language",
         themeDark: "Dark mode",
         themeLight: "Light mode",
@@ -81,7 +83,8 @@ function initLunaCafe() {
     const menuButtonLabel = document.getElementById("menu-toggle-label");
 
     const languageButton = document.getElementById("language-toggle");
-    const languageLabel = document.getElementById("language-label");
+    const languageLabelShort = document.getElementById("language-label-short");
+    const languageLabelFull = document.getElementById("language-label-full");
 
     const themeButton = document.getElementById("theme-toggle");
     const themeLabel = document.getElementById("theme-label");
@@ -95,7 +98,8 @@ function initLunaCafe() {
         !menuButton ||
         !menuButtonLabel ||
         !languageButton ||
-        !languageLabel ||
+        !languageLabelShort ||
+        !languageLabelFull ||
         !themeButton ||
         !themeLabel
     ) {
@@ -110,7 +114,6 @@ function initLunaCafe() {
     function updateMenuButton() {
         const texts = translations[currentLanguage];
         const isOpen = nav.classList.contains("is-open");
-
         const label = isOpen ? texts.closeMenu : texts.openMenu;
 
         menuButton.setAttribute("aria-expanded", String(isOpen));
@@ -121,29 +124,26 @@ function initLunaCafe() {
     function updateLanguageButton() {
         const texts = translations[currentLanguage];
 
-        languageLabel.textContent = texts.language;
+        languageLabelShort.textContent = texts.languageShort;
+        languageLabelFull.textContent = texts.languageFull;
 
-        languageButton.setAttribute(
-            "aria-label",
-            texts.languageLabel
-        );
+        languageButton.setAttribute("aria-label", texts.languageLabel);
+        languageButton.setAttribute("title", texts.languageLabel);
     }
 
     function updateThemeButton() {
         const texts = translations[currentLanguage];
         const isDark = root.dataset.theme === "dark";
+        const label = isDark ? texts.themeLight : texts.themeDark;
 
-        themeLabel.textContent = isDark
-            ? texts.themeLight
-            : texts.themeDark;
-
+        themeLabel.textContent = label;
         themeButton.setAttribute("aria-pressed", String(isDark));
-        themeButton.setAttribute("aria-label", themeLabel.textContent);
+        themeButton.setAttribute("aria-label", label);
+        themeButton.setAttribute("title", label);
     }
 
     function setLanguage(language) {
         currentLanguage = language;
-
         const texts = translations[currentLanguage];
 
         root.lang = currentLanguage;
