@@ -1,6 +1,8 @@
+
 const translations = {
     es: {
         language: "English",
+        pageTitle: "Luna Café | Un momento para vos",
         home: "Inicio",
         menu: "Menú",
         about: "Nosotros",
@@ -20,8 +22,10 @@ const translations = {
         contactText: "Pronto compartiremos nuestra ubicación y horarios.",
         footer: "© 2026 Luna Café. Todos los derechos reservados."
     },
+
     en: {
         language: "Español",
+        pageTitle: "Luna Café | A moment just for you",
         home: "Home",
         menu: "Menu",
         about: "About us",
@@ -45,19 +49,24 @@ const translations = {
 
 let currentLanguage = "es";
 
-
 function changeLanguage() {
     currentLanguage = currentLanguage === "es" ? "en" : "es";
 
+    const currentTranslations = translations[currentLanguage];
+
     document.documentElement.lang = currentLanguage;
+    document.title = currentTranslations.pageTitle;
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.dataset.i18n;
-        element.textContent = translations[currentLanguage][key];
+
+        if (currentTranslations[key] !== undefined) {
+            element.textContent = currentTranslations[key];
+        }
     });
 
     document.getElementById("language-toggle").textContent =
-        translations[currentLanguage].language;
+        currentTranslations.language;
 }
 
 document
