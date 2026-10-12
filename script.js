@@ -1,4 +1,3 @@
-
 const translations = {
     es: {
         language: "English",
@@ -56,7 +55,6 @@ function changeLanguage() {
         element.textContent = translations[currentLanguage][key];
     });
 }
-
 document
     .getElementById("language-toggle")
     .addEventListener("click", changeLanguage);
