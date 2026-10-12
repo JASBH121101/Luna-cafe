@@ -1,81 +1,102 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
-    <h1 data-i18n="headline">Un momento para vos.</h1>
-</head>
-<body>
 
+    <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
+
+    <title>Luna Café | Un momento para vos</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
     <header>
         <a href="#" aria-label="Luna Café, inicio">Luna Café</a>
 
         <nav aria-label="Navegación principal">
+            <a href="#inicio" data-i18n="home">Inicio</a>
+            <a href="#menu" data-i18n="menu">Menú</a>
+            <a href="#nosotros" data-i18n="about">Nosotros</a>
+            <a href="#contacto" data-i18n="contact">Contacto</a>
+
+            <button id="language-toggle" type="button">
+                English
             </button>
-           <a href="#inicio" data-i18n="home">Inicio</a>
-            <a href="#menu"data-i18n="Menu">Menú</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#contacto">Contacto</a>
-             <button id="language-toggle" type="button">
-            English
         </nav>
     </header>
 
     <main>
         <section id="inicio">
-            <p>CAFÉ DE ESPECIALIDAD</p>
-            <h1>Un momento para vos.</h1>
-            <p>
-                Café artesanal, sabores auténticos y un espacio
-                para disfrutar cada pequeño momento.
+            <p data-i18n="eyebrow">CAFÉ DE ESPECIALIDAD</p>
+
+            <h1 data-i18n="headline">Un momento para vos.</h1>
+
+            <p data-i18n="intro">
+                Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.
             </p>
-            <a href="#menu">Descubrir el menú</a>
+
+            <a href="#menu" data-i18n="discover">
+                Descubrir el menú
+            </a>
         </section>
 
         <section id="menu">
-            <h2>Nuestro menú</h2>
-            <p>Buenos momentos, servidos en una taza.</p>
+            <h2 data-i18n="menuTitle">Nuestro menú</h2>
+
+            <p data-i18n="menuSubtitle">
+                Buenos momentos, servidos en una taza.
+            </p>
 
             <article>
                 <h3>Espresso</h3>
-                <p>Intenso, aromático y lleno de carácter.</p>
+                <p data-i18n="espressoDesc">
+                    Intenso, aromático y lleno de carácter.
+                </p>
                 <p>$2.50</p>
             </article>
 
             <article>
                 <h3>Latte</h3>
-                <p>Espresso suave con leche cremosa.</p>
+                <p data-i18n="latteDesc">
+                    Espresso suave con leche cremosa.
+                </p>
                 <p>$3.50</p>
             </article>
 
             <article>
                 <h3>Capuchino</h3>
-                <p>Equilibrio perfecto entre café y espuma.</p>
+                <p data-i18n="cappuccinoDesc">
+                    Equilibrio perfecto entre café y espuma.
+                </p>
                 <p>$3.25</p>
             </article>
         </section>
 
         <section id="nosotros">
-            <h2>Más que café</h2>
-            <p>
-                Luna Café es un lugar para bajar el ritmo,
-                compartir conversaciones y disfrutar algo especial.
+            <h2 data-i18n="aboutTitle">Más que café</h2>
+
+            <p data-i18n="aboutText">
+                Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.
             </p>
         </section>
 
         <section id="contacto">
-            <h2>Visitanos</h2>
-            <p>Pronto compartiremos nuestra ubicación y horarios.</p>
+            <h2 data-i18n="contactTitle">Visitanos</h2>
+
+            <p data-i18n="contactText">
+                Pronto compartiremos nuestra ubicación y horarios.
+            </p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Luna Café. Todos los derechos reservados.</p>
+        <p data-i18n="footer">
+            &copy; 2026 Luna Café. Todos los derechos reservados.
+        </p>
     </footer>
-
 </body>
 </html>
-```
