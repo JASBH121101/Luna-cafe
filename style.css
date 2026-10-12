@@ -424,3 +424,11 @@ a:focus-visible {
         margin-right: 0;
     }
 }
+
+/* Centrar los controles de idioma y tema en el menú móvil */
+@media (max-width: 650px) {
+    #site-navigation #language-toggle,
+    #site-navigation #theme-toggle {
+        justify-content: center;
+    }
+}
