@@ -1,600 +1,318 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta
-        name="description"
-        content="Luna Café: café de especialidad, bebidas artesanales y repostería."
-    >
-
-    <title>Luna Café | Un momento para vos</title>
-
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-    <link rel="stylesheet" href="style.css?v=14">
-    <script src="script.js?v=11" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
+  <title>Luna Café | Un momento para vos</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
+  <link rel="stylesheet" href="style.css?v=15">
+  <script src="script.js?v=12" defer></script>
 </head>
-
 <body>
-    <header class="site-header">
-        <a class="brand" href="#inicio" aria-label="Luna Café, inicio">
-            Luna Café
-        </a>
-
-        <button
-            id="menu-toggle"
-            class="menu-toggle"
-            type="button"
-            aria-controls="site-navigation"
-            aria-expanded="false"
-            aria-label="Abrir menú"
-        >
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <span class="sr-only" id="menu-toggle-label">Abrir menú</span>
-        </button>
-
-        <nav id="site-navigation" aria-label="Navegación principal">
-            <a href="#inicio" data-i18n="home">Inicio</a>
-            <a href="#menu" data-i18n="menu">Menú</a>
-            <a href="#nosotros" data-i18n="about">Nosotros</a>
-            <a href="#contacto" data-i18n="contact">Contacto</a>
-
-            <button
-                id="cart-toggle"
-                class="nav-action cart-toggle"
-                type="button"
-                aria-controls="cart-drawer"
-                aria-expanded="false"
-                aria-label="Abrir carrito"
-            >
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
-                    <circle cx="10" cy="20" r="1.2"></circle>
-                    <circle cx="18" cy="20" r="1.2"></circle>
-                </svg>
-                <span data-i18n="cartLabel">Carrito</span>
-                <span id="cart-count" class="cart-count" aria-label="0 artículos">0</span>
-            </button>
-
-            <button
-                id="language-toggle"
-                class="nav-action language-toggle"
-                type="button"
-                aria-label="Cambiar idioma"
-                title="Cambiar idioma"
-            >
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9"></circle>
-                    <path d="M3 12h18"></path>
-                    <path d="M12 3a15 15 0 0 1 0 18"></path>
-                    <path d="M12 3a15 15 0 0 0 0 18"></path>
-                </svg>
-                <span id="language-label-short" class="language-label-short">EN</span>
-                <span id="language-label-full" class="language-label-full">English</span>
-            </button>
-
-            <button
-                id="theme-toggle"
-                class="nav-action theme-toggle"
-                type="button"
-                aria-label="Modo oscuro"
-                aria-pressed="false"
-                title="Modo oscuro"
-            >
-                <svg id="theme-icon-moon" class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.5 6.5 0 0 0 8.268 8.268c.344-.215.825-.003.803.401"></path>
-                </svg>
-                <svg id="theme-icon-sun" class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42 1.42m11.3-11.3 1.42-1.42"></path>
-                </svg>
-                <span id="theme-label">Modo oscuro</span>
-            </button>
-        </nav>
-    </header>
-
-    <main>
-        <section id="inicio" aria-labelledby="hero-title">
-            <p class="eyebrow" data-i18n="eyebrow">CAFÉ DE ESPECIALIDAD</p>
-
-            <h1 id="hero-title" data-i18n="headline">
-                Un momento para vos.
-            </h1>
-
-            <p class="hero-intro" data-i18n="intro">
-                Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.
-            </p>
-
-            <a
-                class="button button-primary hero-button"
-                href="#menu"
-                data-i18n="discover"
-            >
-                Descubrir el menú
-            </a>
-        </section>
-
-        <section id="menu" aria-labelledby="menu-title">
-            <div class="section-heading">
-                <p class="section-kicker" data-i18n="menuKicker">
-                    HECHO PARA DISFRUTAR
-                </p>
-                <h2 id="menu-title" data-i18n="menuTitle">Nuestro menú</h2>
-                <p data-i18n="menuSubtitle">
-                    Buenos momentos, servidos en una taza.
-                </p>
-            </div>
-
-            <div class="product-grid">
-                <article class="product-card" data-product-id="espresso">
-                    <img
-                        class="product-image product-image-espresso"
-                        src="./Img/pexels-daniel-dan-47825192-7542874.webp"
-                        alt="Taza de espresso recién preparado"
-                        data-i18n-alt="espressoAlt"
-                        width="900"
-                        height="675"
-                        loading="lazy"
-                        decoding="async"
-                    >
-
-                    <div class="product-card-content">
-                        <h3 data-i18n="espressoName">Espresso</h3>
-
-                        <p class="product-description" data-i18n="espressoDesc">
-                            Intenso, aromático y lleno de carácter.
-                        </p>
-
-                        <div class="product-options">
-                            <div class="product-option">
-                                <label for="espresso-size" data-i18n="sizeLabel">
-                                    Tamaño
-                                </label>
-
-                                <select id="espresso-size" data-size-select>
-                                    <option value="small" data-i18n="sizeSmallOption">
-                                        Pequeño (-$0.50)
-                                    </option>
-                                    <option value="regular" data-i18n="sizeRegularOption" selected>
-                                        Regular
-                                    </option>
-                                    <option value="large" data-i18n="sizeLargeOption">
-                                        Grande (+$0.75)
-                                    </option>
-                                </select>
-                            </div>
-
-                            <label class="checkbox-option" for="espresso-shot">
-                                <input id="espresso-shot" type="checkbox" data-extra-shot>
-                                <span data-i18n="extraShotLabel">
-                                    Shot extra (+$0.75)
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="product-purchase-row">
-                            <p class="product-price">
-                                <span data-i18n="priceLabel">Precio</span>
-                                <strong data-current-price>$2.50</strong>
-                            </p>
-
-                            <button
-                                class="button button-primary add-to-cart"
-                                type="button"
-                                data-add-to-cart
-                            >
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 5v14M5 12h14"></path>
-                                </svg>
-                                <span data-i18n="addToCart">Agregar</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-product-id="latte">
-                    <img
-                        class="product-image product-image-latte"
-                        src="./Img/pexels-prudvi-raj-1202091-15221973.webp"
-                        alt="Latte con arte de espuma"
-                        data-i18n-alt="latteAlt"
-                        width="900"
-                        height="675"
-                        loading="lazy"
-                        decoding="async"
-                    >
-
-                    <div class="product-card-content">
-                        <h3 data-i18n="latteName">Latte</h3>
-
-                        <p class="product-description" data-i18n="latteDesc">
-                            Espresso suave con leche cremosa.
-                        </p>
-
-                        <div class="product-options">
-                            <div class="product-option">
-                                <label for="latte-size" data-i18n="sizeLabel">
-                                    Tamaño
-                                </label>
-
-                                <select id="latte-size" data-size-select>
-                                    <option value="small" data-i18n="sizeSmallOption">
-                                        Pequeño (-$0.50)
-                                    </option>
-                                    <option value="regular" data-i18n="sizeRegularOption" selected>
-                                        Regular
-                                    </option>
-                                    <option value="large" data-i18n="sizeLargeOption">
-                                        Grande (+$0.75)
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="product-option">
-                                <label for="latte-milk" data-i18n="milkLabel">
-                                    Tipo de leche
-                                </label>
-
-                                <select id="latte-milk" data-milk-select>
-                                    <option value="whole" data-i18n="milkWhole" selected>
-                                        Leche entera
-                                    </option>
-                                    <option value="plant" data-i18n="milkPlant">
-                                        Leche vegetal (+$0.50)
-                                    </option>
-                                </select>
-                            </div>
-
-                            <label class="checkbox-option" for="latte-shot">
-                                <input id="latte-shot" type="checkbox" data-extra-shot>
-                                <span data-i18n="extraShotLabel">
-                                    Shot extra (+$0.75)
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="product-purchase-row">
-                            <p class="product-price">
-                                <span data-i18n="priceLabel">Precio</span>
-                                <strong data-current-price>$3.50</strong>
-                            </p>
-
-                            <button
-                                class="button button-primary add-to-cart"
-                                type="button"
-                                data-add-to-cart
-                            >
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 5v14M5 12h14"></path>
-                                </svg>
-                                <span data-i18n="addToCart">Agregar</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-product-id="cappuccino">
-                    <img
-                        class="product-image product-image-cappuccino"
-                        src="./Img/pexels-layanne-aguiar-500650789-22873741.webp"
-                        alt="Capuchino servido en una taza"
-                        data-i18n-alt="cappuccinoAlt"
-                        width="900"
-                        height="675"
-                        loading="lazy"
-                        decoding="async"
-                    >
-
-                    <div class="product-card-content">
-                        <h3 data-i18n="cappuccinoName">Capuchino</h3>
-
-                        <p class="product-description" data-i18n="cappuccinoDesc">
-                            Equilibrio perfecto entre café y espuma.
-                        </p>
-
-                        <div class="product-options">
-                            <div class="product-option">
-                                <label for="cappuccino-size" data-i18n="sizeLabel">
-                                    Tamaño
-                                </label>
-
-                                <select id="cappuccino-size" data-size-select>
-                                    <option value="small" data-i18n="sizeSmallOption">
-                                        Pequeño (-$0.50)
-                                    </option>
-                                    <option value="regular" data-i18n="sizeRegularOption" selected>
-                                        Regular
-                                    </option>
-                                    <option value="large" data-i18n="sizeLargeOption">
-                                        Grande (+$0.75)
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="product-option">
-                                <label for="cappuccino-milk" data-i18n="milkLabel">
-                                    Tipo de leche
-                                </label>
-
-                                <select id="cappuccino-milk" data-milk-select>
-                                    <option value="whole" data-i18n="milkWhole" selected>
-                                        Leche entera
-                                    </option>
-                                    <option value="plant" data-i18n="milkPlant">
-                                        Leche vegetal (+$0.50)
-                                    </option>
-                                </select>
-                            </div>
-
-                            <label class="checkbox-option" for="cappuccino-shot">
-                                <input id="cappuccino-shot" type="checkbox" data-extra-shot>
-                                <span data-i18n="extraShotLabel">
-                                    Shot extra (+$0.75)
-                                </span>
-                            </label>
-                        </div>
-
-                        <div class="product-purchase-row">
-                            <p class="product-price">
-                                <span data-i18n="priceLabel">Precio</span>
-                                <strong data-current-price>$3.25</strong>
-                            </p>
-
-                            <button
-                                class="button button-primary add-to-cart"
-                                type="button"
-                                data-add-to-cart
-                            >
-                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 5v14M5 12h14"></path>
-                                </svg>
-                                <span data-i18n="addToCart">Agregar</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-
-            <p class="menu-footnote" data-i18n="optionsNote">
-                Personalizá el tamaño y algunos extras antes de agregar tu bebida.
-            </p>
-        </section>
-
-        <section id="nosotros" aria-labelledby="about-title">
-            <div class="section-heading">
-                <p class="section-kicker" data-i18n="aboutKicker">NUESTRA ESENCIA</p>
-                <h2 id="about-title" data-i18n="aboutTitle">Más que café</h2>
-            </div>
-
-            <img
-                class="about-image"
-                src="./Img/pexels-tertia-ackerman-2149313785-34769561.webp"
-                alt="Interior cálido y acogedor de una cafetería"
-                data-i18n-alt="interiorAlt"
-                width="1400"
-                height="900"
-                loading="lazy"
-                decoding="async"
-            >
-
-            <p class="about-text" data-i18n="aboutText">
-                Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.
-            </p>
-        </section>
-
-        <section id="contacto" aria-labelledby="contact-title">
-            <div class="contact-content">
-                <p class="section-kicker" data-i18n="contactKicker">HACÉ UNA PAUSA</p>
-                <h2 id="contact-title" data-i18n="contactTitle">Visitanos</h2>
-
-                <p data-i18n="contactText">
-                    Pronto compartiremos nuestra ubicación y horarios.
-                </p>
-
-                <a class="button button-outline" href="#menu" data-i18n="contactCta">
-                    Elegir una bebida
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <p data-i18n="footer">
-            © 2026 Luna Café. Todos los derechos reservados.
-        </p>
-    </footer>
-
-    <button
-        id="mobile-cart-toggle"
-        class="mobile-cart-toggle"
-        type="button"
-        aria-controls="cart-drawer"
-        aria-expanded="false"
-        aria-label="Abrir carrito"
-    >
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
-            <circle cx="10" cy="20" r="1.2"></circle>
-            <circle cx="18" cy="20" r="1.2"></circle>
-        </svg>
-
-        <span data-i18n="viewCart">Ver carrito</span>
-        <span id="mobile-cart-count" class="cart-count">0</span>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Luna Café, inicio">Luna Café</a>
+    <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Abrir menú">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <span class="sr-only" id="menu-toggle-label">Abrir menú</span>
     </button>
+    <nav id="site-navigation" aria-label="Navegación principal">
+      <a href="#inicio" data-i18n="home">Inicio</a>
+      <a href="#menu" data-i18n="menu">Menú</a>
+      <a href="#nosotros" data-i18n="about">Nosotros</a>
+      <a href="#contacto" data-i18n="contact">Contacto</a>
+      <button id="cart-toggle" class="nav-action cart-toggle" type="button" aria-controls="cart-drawer" aria-expanded="false" aria-label="Abrir carrito">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
+        <span data-i18n="cartLabel">Carrito</span><span id="cart-count" class="cart-count" aria-label="0 artículos">0</span>
+      </button>
+      <button id="language-toggle" class="nav-action language-toggle" type="button" aria-label="Cambiar idioma" title="Cambiar idioma">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg>
+        <span id="language-label-short" class="language-label-short">EN</span><span id="language-label-full" class="language-label-full">English</span>
+      </button>
+      <button id="theme-toggle" class="nav-action theme-toggle" type="button" aria-label="Modo oscuro" aria-pressed="false" title="Modo oscuro">
+        <svg id="theme-icon-moon" class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.5 6.5 0 0 0 8.268 8.268c.344-.215.825-.003.803.401"></path></svg>
+        <svg id="theme-icon-sun" class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42 1.42m11.3-11.3 1.42-1.42"></path></svg>
+        <span id="theme-label">Modo oscuro</span>
+      </button>
+    </nav>
+  </header>
 
-    <button
-        id="cart-overlay"
-        class="cart-overlay"
-        type="button"
-        aria-label="Cerrar carrito"
-        hidden
-    ></button>
+  <main>
+    <section id="inicio" aria-labelledby="hero-title">
+      <p class="eyebrow" data-i18n="eyebrow">CAFÉ DE ESPECIALIDAD</p>
+      <h1 id="hero-title" data-i18n="headline">Un momento para vos.</h1>
+      <p class="hero-intro" data-i18n="intro">Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.</p>
+      <a class="button button-primary hero-button" href="#menu" data-i18n="discover">Descubrir el menú</a>
+    </section>
 
-    <aside
-        id="cart-drawer"
-        class="cart-drawer"
-        role="dialog"
-        aria-modal="true"
-        aria-hidden="true"
-        aria-labelledby="cart-title"
-        tabindex="-1"
-    >
-        <div class="cart-drawer-header">
-            <div>
-                <p class="section-kicker" data-i18n="orderKicker">TU SELECCIÓN</p>
-                <h2 id="cart-title" data-i18n="cartTitle">Tu pedido</h2>
+    <section id="menu" aria-labelledby="menu-title">
+      <div class="section-heading">
+        <p class="section-kicker" data-i18n="menuKicker">HECHO PARA DISFRUTAR</p>
+        <h2 id="menu-title" data-i18n="menuTitle">Nuestro menú</h2>
+        <p data-i18n="menuSubtitle">Buenos momentos, servidos en una taza.</p>
+      </div>
+
+      <div class="product-grid">
+        <article class="product-card" data-product-id="espresso">
+          <img class="product-image product-image-espresso" src="./Img/pexels-daniel-dan-47825192-7542874.webp" alt="Taza de espresso recién preparado" data-i18n-alt="espressoAlt" width="900" height="675" loading="lazy" decoding="async">
+          <div class="product-card-content">
+            <h3 data-i18n="espressoName">Espresso</h3>
+            <p class="product-description" data-i18n="espressoDesc">Intenso, aromático y lleno de carácter.</p>
+            <div class="product-options">
+              <div class="product-option">
+                <label for="espresso-size" data-i18n="sizeLabel">Tamaño</label>
+                <select id="espresso-size" data-size-select>
+                  <option value="small" data-i18n="sizeSmallOption">Pequeño (-$0.50)</option>
+                  <option value="regular" data-i18n="sizeRegularOption" selected>Regular</option>
+                  <option value="large" data-i18n="sizeLargeOption">Grande (+$0.75)</option>
+                </select>
+              </div>
+              <label class="checkbox-option" for="espresso-shot">
+                <input id="espresso-shot" type="checkbox" data-extra-shot>
+                <span data-i18n="extraShotLabel">Shot extra (+$0.75)</span>
+              </label>
             </div>
-
-            <button
-                id="close-cart"
-                class="icon-button"
-                type="button"
-                aria-label="Cerrar carrito"
-                title="Cerrar carrito"
-            >
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m6 6 12 12M18 6 6 18"></path>
-                </svg>
-            </button>
-        </div>
-
-        <div class="cart-drawer-body">
-            <div id="cart-empty-state" class="cart-empty-state">
-                <div class="empty-cart-icon" aria-hidden="true">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
-                        <circle cx="10" cy="20" r="1.2"></circle>
-                        <circle cx="18" cy="20" r="1.2"></circle>
-                    </svg>
-                </div>
-
-                <h3 data-i18n="cartEmpty">Tu carrito está vacío.</h3>
-                <p data-i18n="cartEmptyHint">Elegí una bebida para empezar.</p>
-
-                <button
-                    id="browse-menu"
-                    class="button button-outline"
-                    type="button"
-                    data-i18n="viewMenu"
-                >
-                    Ver menú
-                </button>
+            <div class="product-purchase-row">
+              <p class="product-price"><span data-i18n="priceLabel">Precio</span><strong data-current-price>$2.50</strong></p>
+              <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                <span data-i18n="addToCart">Agregar</span>
+              </button>
             </div>
+          </div>
+        </article>
 
-            <div id="cart-items" class="cart-items" aria-live="polite"></div>
-        </div>
-
-        <div class="cart-drawer-footer">
-            <div class="cart-subtotal-row">
-                <span data-i18n="subtotal">Subtotal</span>
-                <strong id="cart-subtotal">$0.00</strong>
+        <article class="product-card" data-product-id="latte">
+          <img class="product-image product-image-latte" src="./Img/pexels-prudvi-raj-1202091-15221973.webp" alt="Latte con arte de espuma" data-i18n-alt="latteAlt" width="900" height="675" loading="lazy" decoding="async">
+          <div class="product-card-content">
+            <h3 data-i18n="latteName">Latte</h3>
+            <p class="product-description" data-i18n="latteDesc">Espresso suave con leche cremosa.</p>
+            <div class="product-options">
+              <div class="product-option">
+                <label for="latte-size" data-i18n="sizeLabel">Tamaño</label>
+                <select id="latte-size" data-size-select>
+                  <option value="small" data-i18n="sizeSmallOption">Pequeño (-$0.50)</option>
+                  <option value="regular" data-i18n="sizeRegularOption" selected>Regular</option>
+                  <option value="large" data-i18n="sizeLargeOption">Grande (+$0.75)</option>
+                </select>
+              </div>
+              <div class="product-option">
+                <label for="latte-milk" data-i18n="milkLabel">Tipo de leche</label>
+                <select id="latte-milk" data-milk-select>
+                  <option value="whole" data-i18n="milkWhole" selected>Leche entera</option>
+                  <option value="plant" data-i18n="milkPlant">Leche vegetal (+$0.50)</option>
+                </select>
+              </div>
+              <label class="checkbox-option" for="latte-shot">
+                <input id="latte-shot" type="checkbox" data-extra-shot>
+                <span data-i18n="extraShotLabel">Shot extra (+$0.75)</span>
+              </label>
             </div>
-
-            <p class="cart-disclaimer" data-i18n="checkoutNote">
-                Pedido de demostración: no se procesa ningún pago.
-            </p>
-
-            <button
-                id="buy-now"
-                class="button button-primary cart-checkout"
-                type="button"
-                disabled
-            >
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-                    <path d="M2 10h20"></path>
-                </svg>
-                <span data-i18n="buyNow">Comprar</span>
-            </button>
-
-            <button
-                id="copy-order"
-                class="button button-outline cart-checkout"
-                type="button"
-                disabled
-            >
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="8" y="8" width="12" height="12" rx="2"></rect>
-                    <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
-                </svg>
-                <span data-i18n="copyOrder">Copiar pedido</span>
-            </button>
-
-            <button
-                id="clear-cart"
-                class="button button-text cart-clear"
-                type="button"
-                disabled
-                data-i18n="clearCart"
-            >
-                Vaciar carrito
-            </button>
-        </div>
-    </aside>
-
-    <!-- Confirmación personalizada para vaciar el carrito -->
-    <div id="clear-cart-layer" class="clear-cart-layer" hidden>
-        <button
-            id="clear-cart-backdrop"
-            class="clear-cart-backdrop"
-            type="button"
-            aria-label="Cerrar confirmación"
-            data-i18n-aria-label="cancelClearCart"
-        ></button>
-
-        <section
-            id="clear-cart-dialog"
-            class="clear-cart-dialog"
-            role="alertdialog"
-            aria-modal="true"
-            aria-hidden="true"
-            aria-labelledby="clear-cart-title"
-            aria-describedby="clear-cart-message"
-            tabindex="-1"
-        >
-            <div class="clear-cart-dialog-icon" aria-hidden="true">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M3 6h18"></path>
-                    <path d="M8 6V4h8v2"></path>
-                    <path d="m19 6-1 14H6L5 6"></path>
-                    <path d="M10 11v5m4-5v5"></path>
-                </svg>
+            <div class="product-purchase-row">
+              <p class="product-price"><span data-i18n="priceLabel">Precio</span><strong data-current-price>$3.50</strong></p>
+              <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                <span data-i18n="addToCart">Agregar</span>
+              </button>
             </div>
+          </div>
+        </article>
 
-            <h2 id="clear-cart-title" data-i18n="clearCartTitle">
-                ¿Vaciar carrito?
-            </h2>
-
-            <p id="clear-cart-message" data-i18n="confirmClear">
-                ¿Querés vaciar el carrito?
-            </p>
-
-            <div class="clear-cart-dialog-actions">
-                <button
-                    id="cancel-clear-cart"
-                    class="button button-outline"
-                    type="button"
-                    data-i18n="cancelClearCart"
-                >
-                    Conservar pedido
-                </button>
-
-                <button
-                    id="confirm-clear-cart"
-                    class="button button-primary"
-                    type="button"
-                    data-i18n="confirmClearAction"
-                >
-                    Sí, vaciar carrito
-                </button>
+        <article class="product-card" data-product-id="cappuccino">
+          <img class="product-image product-image-cappuccino" src="./Img/pexels-layanne-aguiar-500650789-22873741.webp" alt="Capuchino servido en una taza" data-i18n-alt="cappuccinoAlt" width="900" height="675" loading="lazy" decoding="async">
+          <div class="product-card-content">
+            <h3 data-i18n="cappuccinoName">Capuchino</h3>
+            <p class="product-description" data-i18n="cappuccinoDesc">Equilibrio perfecto entre café y espuma.</p>
+            <div class="product-options">
+              <div class="product-option">
+                <label for="cappuccino-size" data-i18n="sizeLabel">Tamaño</label>
+                <select id="cappuccino-size" data-size-select>
+                  <option value="small" data-i18n="sizeSmallOption">Pequeño (-$0.50)</option>
+                  <option value="regular" data-i18n="sizeRegularOption" selected>Regular</option>
+                  <option value="large" data-i18n="sizeLargeOption">Grande (+$0.75)</option>
+                </select>
+              </div>
+              <div class="product-option">
+                <label for="cappuccino-milk" data-i18n="milkLabel">Tipo de leche</label>
+                <select id="cappuccino-milk" data-milk-select>
+                  <option value="whole" data-i18n="milkWhole" selected>Leche entera</option>
+                  <option value="plant" data-i18n="milkPlant">Leche vegetal (+$0.50)</option>
+                </select>
+              </div>
+              <label class="checkbox-option" for="cappuccino-shot">
+                <input id="cappuccino-shot" type="checkbox" data-extra-shot>
+                <span data-i18n="extraShotLabel">Shot extra (+$0.75)</span>
+              </label>
             </div>
-        </section>
+            <div class="product-purchase-row">
+              <p class="product-price"><span data-i18n="priceLabel">Precio</span><strong data-current-price>$3.25</strong></p>
+              <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                <span data-i18n="addToCart">Agregar</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="menu-footnote" data-i18n="optionsNote">Personalizá el tamaño y algunos extras antes de agregar tu bebida.</p>
+    </section>
+
+    <section id="nosotros" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="section-kicker" data-i18n="aboutKicker">NUESTRA ESENCIA</p>
+        <h2 id="about-title" data-i18n="aboutTitle">Más que café</h2>
+      </div>
+      <img class="about-image" src="./Img/pexels-tertia-ackerman-2149313785-34769561.webp" alt="Interior cálido y acogedor de una cafetería" data-i18n-alt="interiorAlt" width="1400" height="900" loading="lazy" decoding="async">
+      <p class="about-text" data-i18n="aboutText">Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.</p>
+    </section>
+
+    <section id="contacto" aria-labelledby="contact-title">
+      <div class="contact-content">
+        <p class="section-kicker" data-i18n="contactKicker">HACÉ UNA PAUSA</p>
+        <h2 id="contact-title" data-i18n="contactTitle">Visitanos</h2>
+        <p data-i18n="contactText">Pronto compartiremos nuestra ubicación y horarios.</p>
+        <a class="button button-outline" href="#menu" data-i18n="contactCta">Elegir una bebida</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footer">© 2026 Luna Café. Todos los derechos reservados.</p>
+  </footer>
+
+  <button id="mobile-cart-toggle" class="mobile-cart-toggle" type="button" aria-controls="cart-drawer" aria-expanded="false" aria-label="Abrir carrito">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
+    <span data-i18n="viewCart">Ver carrito</span><span id="mobile-cart-count" class="cart-count">0</span>
+  </button>
+
+  <button id="cart-overlay" class="cart-overlay" type="button" aria-label="Cerrar carrito" hidden></button>
+
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1">
+    <div class="cart-drawer-header">
+      <div>
+        <p class="section-kicker" data-i18n="orderKicker">TU SELECCIÓN</p>
+        <h2 id="cart-title" data-i18n="cartTitle">Tu pedido</h2>
+      </div>
+      <button id="close-cart" class="icon-button" type="button" aria-label="Cerrar carrito" title="Cerrar carrito">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+      </button>
     </div>
 
-    <!-- Checkout de demostración -->
-    <div id="checkout-layer" class="checkout-layer" hidden>
-        <button
-            id="checkout-backdrop"
+    <div class="cart-drawer-body">
+      <div id="cart-empty-state" class="cart-empty-state">
+        <div class="empty-cart-icon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
+        </div>
+        <h3 data-i18n="cartEmpty">Tu carrito está vacío.</h3>
+        <p data-i18n="cartEmptyHint">Elegí una bebida para empezar.</p>
+        <button id="browse-menu" class="button button-outline" type="button" data-i18n="viewMenu">Ver menú</button>
+      </div>
+      <div id="cart-items" class="cart-items" aria-live="polite"></div>
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal-row"><span data-i18n="subtotal">Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+      <p class="cart-disclaimer" data-i18n="checkoutNote">Pedido de demostración: no se procesa ningún pago.</p>
+
+      <button id="buy-now" class="button button-primary cart-checkout" type="button" disabled>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+        <span data-i18n="buyNow">Comprar</span>
+      </button>
+
+      <button id="copy-order" class="button button-outline cart-checkout" type="button" disabled>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg>
+        <span data-i18n="copyOrder">Copiar pedido</span>
+      </button>
+
+      <button id="clear-cart" class="button button-text cart-clear" type="button" disabled data-i18n="clearCart">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- Confirmación personalizada para vaciar el carrito -->
+  <div id="clear-cart-layer" class="clear-cart-layer" hidden>
+    <button id="clear-cart-backdrop" class="clear-cart-backdrop" type="button" aria-label="Cerrar confirmación" data-i18n-aria-label="cancelClearCart"></button>
+    <section id="clear-cart-dialog" class="clear-cart-dialog" role="alertdialog" aria-modal="true" aria-hidden="true" aria-labelledby="clear-cart-title" aria-describedby="clear-cart-message" tabindex="-1">
+      <div class="clear-cart-dialog-icon" aria-hidden="true">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6M10 11v5m4-5v5"></path></svg>
+      </div>
+      <h2 id="clear-cart-title" data-i18n="clearCartTitle">¿Vaciar carrito?</h2>
+      <p id="clear-cart-message" data-i18n="confirmClear">¿Querés vaciar el carrito?</p>
+      <div class="clear-cart-dialog-actions">
+        <button id="cancel-clear-cart" class="button button-outline" type="button" data-i18n="cancelClearCart">Conservar pedido</button>
+        <button id="confirm-clear-cart" class="button button-primary" type="button" data-i18n="confirmClearAction">Sí, vaciar carrito</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Checkout de demostración -->
+  <div id="checkout-layer" class="checkout-layer" hidden>
+    <button id="checkout-backdrop" class="checkout-backdrop" type="button" aria-label="Cerrar ventana de pago" data-i18n-aria-label="closeCheckout"></button>
+    <section id="checkout-modal" class="checkout-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="checkout-title" tabindex="-1">
+      <div class="checkout-header">
+        <div>
+          <p class="section-kicker" data-i18n="checkoutKicker">FINALIZAR PEDIDO</p>
+          <h2 id="checkout-title" data-i18n="checkoutTitle">Pago de demostración</h2>
+        </div>
+        <button id="close-checkout" class="icon-button" type="button" aria-label="Cerrar pago" data-i18n-aria-label="closeCheckout">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+
+      <div class="checkout-body">
+        <div id="checkout-form-view">
+          <div class="demo-payment-warning" role="note">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 22 21H2L12 3Z"></path><path d="M12 9v5m0 3h.01"></path></svg>
+            <p data-i18n="demoOnlyWarning">Simulación únicamente. No ingreses datos reales de tarjetas. La información no se enviará ni se guardará.</p>
+          </div>
+
+          <div class="checkout-order-total"><span data-i18n="checkoutTotalLabel">Total de la compra</span><strong id="checkout-total">$0.00</strong></div>
+
+          <form id="checkout-form" class="checkout-form" autocomplete="off">
+            <div class="form-field">
+              <label for="cardholder" data-i18n="cardholderLabel">Nombre ficticio del titular</label>
+              <input id="cardholder" type="text" maxlength="80" autocomplete="off" required>
+            </div>
+            <div class="form-field">
+              <label for="card-number" data-i18n="cardNumberLabel">Número de tarjeta ficticio</label>
+              <input id="card-number" type="text" inputmode="numeric" maxlength="23" placeholder="4242 4242 4242 4242" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="checkout-card-row">
+              <div class="form-field">
+                <label for="card-expiry" data-i18n="expiryLabel">Vencimiento (MM/AA)</label>
+                <input id="card-expiry" type="text" inputmode="numeric" maxlength="5" placeholder="MM/AA" autocomplete="off" required>
+              </div>
+              <div class="form-field">
+                <label for="card-cvv" data-i18n="cvvLabel">CVV ficticio</label>
+                <input id="card-cvv" type="password" inputmode="numeric" maxlength="4" placeholder="•••" autocomplete="off" required>
+              </div>
+            </div>
+            <p class="checkout-security-note" data-i18n="noCardStorage">Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.</p>
+            <div class="checkout-actions">
+              <button id="cancel-checkout" class="button button-outline" type="button" data-i18n="cancelCheckout">Volver al carrito</button>
+              <button id="confirm-payment" class="button button-primary" type="submit"><span data-i18n="confirmDemoPayment">Simular compra</span></button>
+            </div>
+          </form>
+        </div>
+
+        <div id="checkout-success" class="checkout-success" hidden>
+          <div class="checkout-success-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></div>
+          <h3 data-i18n="demoSuccessTitle">¡Compra simulada completada!</h3>
+          <p data-i18n="demoSuccessMessage">Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.</p>
+          <div class="demo-receipt">
+            <p><span data-i18n="demoOrderNumber">Referencia de demostración</span><strong id="demo-order-number">LC-DEMO-000000</strong></p>
+            <p><span data-i18n="demoOrderTotal">Total simulado</span><strong id="demo-order-total">$0.00</strong></p>
+          </div>
+          <button id="finish-checkout" class="button button-primary" type="button" data-i18n="finishCheckout">Finalizar</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Volver arriba" data-i18n-aria-label="backToTop" aria-hidden="true" tabindex="-1" title="Volver arriba">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7"></path></svg>
+    <span data-i18n="backToTop">Volver arriba</span>
+  </button>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
