@@ -7,7 +7,6 @@
     --color-terracotta: #b86f50;
     --color-olive: #737858;
     --color-muted: #766c64;
-
     --font-heading: Georgia, "Times New Roman", serif;
     --font-body: Arial, Helvetica, sans-serif;
     --container-width: 1120px;
@@ -185,7 +184,8 @@ footer {
     color: var(--color-paper);
 }
 
-/* Íconos SVG */
+/* Íconos */
+
 .icon {
     display: block;
     width: 20px;
@@ -228,7 +228,12 @@ footer {
     display: none;
 }
 
-/* Por defecto, el sol está oculto */
+/* Tema claro por defecto: luna visible, sol oculto */
+
+#theme-icon-moon {
+    display: block;
+}
+
 #theme-icon-sun {
     display: none;
 }
@@ -271,15 +276,6 @@ html[data-theme="dark"] footer {
     color: #f7f2e9;
 }
 
-/* En oscuro: ocultar luna y mostrar sol */
-html[data-theme="dark"] #theme-icon-moon {
-    display: none;
-}
-
-html[data-theme="dark"] #theme-icon-sun {
-    display: block;
-}
-
 /* Accesibilidad */
 
 .menu-toggle {
@@ -304,7 +300,7 @@ a:focus-visible {
     outline-offset: 3px;
 }
 
-/* Menú móvil: conservamos el diseño actual */
+/* Menú móvil: mantenemos el diseño actual */
 
 @media (max-width: 650px) {
     header {
@@ -367,8 +363,6 @@ a:focus-visible {
         background: var(--color-cream);
     }
 
-    /* Texto completo en el menú móvil */
-
     .language-label-short {
         display: none;
     }
@@ -385,22 +379,13 @@ a:focus-visible {
     #site-navigation #theme-toggle {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         width: 100%;
         height: auto;
         min-height: 44px;
         gap: 10px;
         padding: 10px 12px;
         line-height: 1.4;
-    }
-
-    /* Mantener tamaño y centrado sin forzar display de ambos iconos */
-    #site-navigation #theme-toggle .icon {
-        flex: 0 0 20px;
-        width: 20px;
-        height: 20px;
-        margin: 0;
-        align-self: center;
     }
 
     #site-navigation #theme-label {
@@ -421,25 +406,32 @@ a:focus-visible {
         width: 100%;
         margin-right: 0;
     }
+
+    /* Centrar los dos controles en el menú móvil */
+
+    #site-navigation #language-toggle {
+        justify-content: center;
+    }
 }
 
-/* Centrar idioma y tema en el menú móvil */
+/*
+   CORRECCIÓN DEFINITIVA DE LOS ÍCONOS:
+   estas reglas van al final para que prevalezcan sobre las reglas
+   generales y móviles. Solamente un ícono permanece visible.
+*/
 
-@media (max-width: 650px) {
-    #site-navigation #language-toggle,
-    #site-navigation #theme-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center !important;
-        width: 100%;
-    }
+#site-navigation #theme-toggle #theme-icon-moon {
+    display: block !important;
+}
 
-    #site-navigation #language-toggle .icon,
-    #site-navigation #theme-toggle .icon {
-        flex: 0 0 20px;
-        width: 20px;
-        height: 20px;
-        margin: 0;
-        align-self: center;
-    }
+#site-navigation #theme-toggle #theme-icon-sun {
+    display: none !important;
+}
+
+html[data-theme="dark"] #site-navigation #theme-toggle #theme-icon-moon {
+    display: none !important;
+}
+
+html[data-theme="dark"] #site-navigation #theme-toggle #theme-icon-sun {
+    display: block !important;
 }
