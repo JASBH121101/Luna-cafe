@@ -12,8 +12,8 @@
     <title>Luna Café | Un momento para vos</title>
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-    <link rel="stylesheet" href="style.css?v=12">
-    <script src="script.js?v=9" defer></script>
+    <link rel="stylesheet" href="style.css?v=13">
+    <script src="script.js?v=10" defer></script>
 </head>
 
 <body>
@@ -108,7 +108,11 @@
                 Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.
             </p>
 
-            <a class="button button-primary hero-button" href="#menu" data-i18n="discover">
+            <a
+                class="button button-primary hero-button"
+                href="#menu"
+                data-i18n="discover"
+            >
                 Descubrir el menú
             </a>
         </section>
@@ -139,6 +143,7 @@
 
                     <div class="product-card-content">
                         <h3 data-i18n="espressoName">Espresso</h3>
+
                         <p class="product-description" data-i18n="espressoDesc">
                             Intenso, aromático y lleno de carácter.
                         </p>
@@ -148,6 +153,7 @@
                                 <label for="espresso-size" data-i18n="sizeLabel">
                                     Tamaño
                                 </label>
+
                                 <select id="espresso-size" data-size-select>
                                     <option value="small" data-i18n="sizeSmallOption">
                                         Pequeño (-$0.50)
@@ -175,7 +181,11 @@
                                 <strong data-current-price>$2.50</strong>
                             </p>
 
-                            <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                            <button
+                                class="button button-primary add-to-cart"
+                                type="button"
+                                data-add-to-cart
+                            >
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 5v14M5 12h14"></path>
                                 </svg>
@@ -199,6 +209,7 @@
 
                     <div class="product-card-content">
                         <h3 data-i18n="latteName">Latte</h3>
+
                         <p class="product-description" data-i18n="latteDesc">
                             Espresso suave con leche cremosa.
                         </p>
@@ -208,6 +219,7 @@
                                 <label for="latte-size" data-i18n="sizeLabel">
                                     Tamaño
                                 </label>
+
                                 <select id="latte-size" data-size-select>
                                     <option value="small" data-i18n="sizeSmallOption">
                                         Pequeño (-$0.50)
@@ -225,6 +237,7 @@
                                 <label for="latte-milk" data-i18n="milkLabel">
                                     Tipo de leche
                                 </label>
+
                                 <select id="latte-milk" data-milk-select>
                                     <option value="whole" data-i18n="milkWhole" selected>
                                         Leche entera
@@ -249,7 +262,11 @@
                                 <strong data-current-price>$3.50</strong>
                             </p>
 
-                            <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                            <button
+                                class="button button-primary add-to-cart"
+                                type="button"
+                                data-add-to-cart
+                            >
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 5v14M5 12h14"></path>
                                 </svg>
@@ -273,6 +290,7 @@
 
                     <div class="product-card-content">
                         <h3 data-i18n="cappuccinoName">Capuchino</h3>
+
                         <p class="product-description" data-i18n="cappuccinoDesc">
                             Equilibrio perfecto entre café y espuma.
                         </p>
@@ -282,6 +300,7 @@
                                 <label for="cappuccino-size" data-i18n="sizeLabel">
                                     Tamaño
                                 </label>
+
                                 <select id="cappuccino-size" data-size-select>
                                     <option value="small" data-i18n="sizeSmallOption">
                                         Pequeño (-$0.50)
@@ -299,6 +318,7 @@
                                 <label for="cappuccino-milk" data-i18n="milkLabel">
                                     Tipo de leche
                                 </label>
+
                                 <select id="cappuccino-milk" data-milk-select>
                                     <option value="whole" data-i18n="milkWhole" selected>
                                         Leche entera
@@ -323,7 +343,11 @@
                                 <strong data-current-price>$3.25</strong>
                             </p>
 
-                            <button class="button button-primary add-to-cart" type="button" data-add-to-cart>
+                            <button
+                                class="button button-primary add-to-cart"
+                                type="button"
+                                data-add-to-cart
+                            >
                                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M12 5v14M5 12h14"></path>
                                 </svg>
@@ -365,9 +389,11 @@
             <div class="contact-content">
                 <p class="section-kicker" data-i18n="contactKicker">HACÉ UNA PAUSA</p>
                 <h2 id="contact-title" data-i18n="contactTitle">Visitanos</h2>
+
                 <p data-i18n="contactText">
                     Pronto compartiremos nuestra ubicación y horarios.
                 </p>
+
                 <a class="button button-outline" href="#menu" data-i18n="contactCta">
                     Elegir una bebida
                 </a>
@@ -394,6 +420,7 @@
             <circle cx="10" cy="20" r="1.2"></circle>
             <circle cx="18" cy="20" r="1.2"></circle>
         </svg>
+
         <span data-i18n="viewCart">Ver carrito</span>
         <span id="mobile-cart-count" class="cart-count">0</span>
     </button>
@@ -443,8 +470,10 @@
                         <circle cx="18" cy="20" r="1.2"></circle>
                     </svg>
                 </div>
+
                 <h3 data-i18n="cartEmpty">Tu carrito está vacío.</h3>
                 <p data-i18n="cartEmptyHint">Elegí una bebida para empezar.</p>
+
                 <button
                     id="browse-menu"
                     class="button button-outline"
@@ -468,7 +497,25 @@
                 Pedido de demostración: no se procesa ningún pago.
             </p>
 
-            <button id="copy-order" class="button button-primary cart-checkout" type="button" disabled>
+            <button
+                id="buy-now"
+                class="button button-primary cart-checkout"
+                type="button"
+                disabled
+            >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                    <path d="M2 10h20"></path>
+                </svg>
+                <span data-i18n="buyNow">Comprar</span>
+            </button>
+
+            <button
+                id="copy-order"
+                class="button button-outline cart-checkout"
+                type="button"
+                disabled
+            >
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="8" y="8" width="12" height="12" rx="2"></rect>
                     <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
@@ -487,6 +534,215 @@
             </button>
         </div>
     </aside>
+
+    <div id="checkout-layer" class="checkout-layer" hidden>
+        <button
+            id="checkout-backdrop"
+            class="checkout-backdrop"
+            type="button"
+            aria-label="Cerrar ventana de pago"
+            data-i18n-aria-label="closeCheckout"
+        ></button>
+
+        <section
+            id="checkout-modal"
+            class="checkout-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-hidden="true"
+            aria-labelledby="checkout-title"
+            tabindex="-1"
+        >
+            <div class="checkout-header">
+                <div>
+                    <p class="section-kicker" data-i18n="checkoutKicker">
+                        FINALIZAR PEDIDO
+                    </p>
+                    <h2 id="checkout-title" data-i18n="checkoutTitle">
+                        Pago de demostración
+                    </h2>
+                </div>
+
+                <button
+                    id="close-checkout"
+                    class="icon-button"
+                    type="button"
+                    aria-label="Cerrar pago"
+                    data-i18n-aria-label="closeCheckout"
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6 6 12 12M18 6 6 18"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="checkout-body">
+                <div id="checkout-form-view">
+                    <div class="demo-payment-warning" role="note">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3 22 21H2L12 3Z"></path>
+                            <path d="M12 9v5m0 3h.01"></path>
+                        </svg>
+
+                        <p data-i18n="demoOnlyWarning">
+                            Simulación únicamente. No ingreses datos reales de tarjetas.
+                            La información no se enviará ni se guardará.
+                        </p>
+                    </div>
+
+                    <div class="checkout-order-total">
+                        <span data-i18n="checkoutTotalLabel">Total de la compra</span>
+                        <strong id="checkout-total">$0.00</strong>
+                    </div>
+
+                    <form id="checkout-form" class="checkout-form" autocomplete="off">
+                        <div class="form-field">
+                            <label for="cardholder" data-i18n="cardholderLabel">
+                                Nombre ficticio del titular
+                            </label>
+
+                            <input
+                                id="cardholder"
+                                type="text"
+                                maxlength="80"
+                                autocomplete="off"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="card-number" data-i18n="cardNumberLabel">
+                                Número de tarjeta ficticio
+                            </label>
+
+                            <input
+                                id="card-number"
+                                type="text"
+                                inputmode="numeric"
+                                maxlength="23"
+                                placeholder="4242 4242 4242 4242"
+                                autocomplete="off"
+                                spellcheck="false"
+                                required
+                            >
+                        </div>
+
+                        <div class="checkout-card-row">
+                            <div class="form-field">
+                                <label for="card-expiry" data-i18n="expiryLabel">
+                                    Vencimiento (MM/AA)
+                                </label>
+
+                                <input
+                                    id="card-expiry"
+                                    type="text"
+                                    inputmode="numeric"
+                                    maxlength="5"
+                                    placeholder="MM/AA"
+                                    autocomplete="off"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-field">
+                                <label for="card-cvv" data-i18n="cvvLabel">
+                                    CVV ficticio
+                                </label>
+
+                                <input
+                                    id="card-cvv"
+                                    type="password"
+                                    inputmode="numeric"
+                                    maxlength="4"
+                                    placeholder="•••"
+                                    autocomplete="off"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <p class="checkout-security-note" data-i18n="noCardStorage">
+                            Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.
+                        </p>
+
+                        <div class="checkout-actions">
+                            <button
+                                id="cancel-checkout"
+                                class="button button-outline"
+                                type="button"
+                                data-i18n="cancelCheckout"
+                            >
+                                Volver al carrito
+                            </button>
+
+                            <button
+                                id="confirm-payment"
+                                class="button button-primary"
+                                type="submit"
+                            >
+                                <span data-i18n="confirmDemoPayment">
+                                    Simular compra
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="checkout-success" class="checkout-success" hidden>
+                    <div class="checkout-success-icon" aria-hidden="true">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="m5 12 4 4L19 6"></path>
+                        </svg>
+                    </div>
+
+                    <h3 data-i18n="demoSuccessTitle">
+                        ¡Compra simulada completada!
+                    </h3>
+
+                    <p data-i18n="demoSuccessMessage">
+                        Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.
+                    </p>
+
+                    <div class="demo-receipt">
+                        <p>
+                            <span data-i18n="demoOrderNumber">Referencia de demostración</span>
+                            <strong id="demo-order-number">LC-DEMO-000000</strong>
+                        </p>
+                        <p>
+                            <span data-i18n="demoOrderTotal">Total simulado</span>
+                            <strong id="demo-order-total">$0.00</strong>
+                        </p>
+                    </div>
+
+                    <button
+                        id="finish-checkout"
+                        class="button button-primary"
+                        type="button"
+                        data-i18n="finishCheckout"
+                    >
+                        Finalizar
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <button
+        id="back-to-top"
+        class="back-to-top"
+        type="button"
+        aria-label="Volver arriba"
+        data-i18n-aria-label="backToTop"
+        aria-hidden="true"
+        tabindex="-1"
+        title="Volver arriba"
+    >
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 19V5"></path>
+            <path d="m5 12 7-7 7 7"></path>
+        </svg>
+        <span data-i18n="backToTop">Volver arriba</span>
+    </button>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
