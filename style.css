@@ -186,7 +186,6 @@ footer {
 }
 
 /* Íconos SVG */
-
 .icon {
     display: block;
     width: 20px;
@@ -229,6 +228,7 @@ footer {
     display: none;
 }
 
+/* Por defecto, el sol está oculto */
 #theme-icon-sun {
     display: none;
 }
@@ -271,6 +271,7 @@ html[data-theme="dark"] footer {
     color: #f7f2e9;
 }
 
+/* En oscuro: ocultar luna y mostrar sol */
 html[data-theme="dark"] #theme-icon-moon {
     display: none;
 }
@@ -366,7 +367,7 @@ a:focus-visible {
         background: var(--color-cream);
     }
 
-    /* Idioma completo dentro del menú móvil */
+    /* Texto completo en el menú móvil */
 
     .language-label-short {
         display: none;
@@ -378,11 +379,8 @@ a:focus-visible {
 
     #site-navigation #language-toggle {
         min-width: 0;
-        justify-content: flex-start;
         gap: 10px;
     }
-
-    /* Corrección de alineación del botón de tema */
 
     #site-navigation #theme-toggle {
         display: flex;
@@ -396,8 +394,8 @@ a:focus-visible {
         line-height: 1.4;
     }
 
+    /* Mantener tamaño y centrado sin forzar display de ambos iconos */
     #site-navigation #theme-toggle .icon {
-        display: block;
         flex: 0 0 20px;
         width: 20px;
         height: 20px;
@@ -425,8 +423,8 @@ a:focus-visible {
     }
 }
 
+/* Centrar idioma y tema en el menú móvil */
 
-/* Centrar los controles de idioma y tema en el menú móvil */
 @media (max-width: 650px) {
     #site-navigation #language-toggle,
     #site-navigation #theme-toggle {
@@ -438,7 +436,6 @@ a:focus-visible {
 
     #site-navigation #language-toggle .icon,
     #site-navigation #theme-toggle .icon {
-        display: block;
         flex: 0 0 20px;
         width: 20px;
         height: 20px;
