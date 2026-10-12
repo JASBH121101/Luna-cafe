@@ -24,9 +24,18 @@ const translations = {
         menuTitle: "Nuestro menú",
         menuSubtitle: "Buenos momentos, servidos en una taza.",
 
+        espressoName: "Espresso",
+        latteName: "Latte",
+        cappuccinoName: "Capuchino",
+
         espressoDesc: "Intenso, aromático y lleno de carácter.",
         latteDesc: "Espresso suave con leche cremosa.",
         cappuccinoDesc: "Equilibrio perfecto entre café y espuma.",
+
+        espressoAlt: "Taza de espresso recién preparado",
+        latteAlt: "Latte con arte de espuma",
+        cappuccinoAlt: "Capuchino servido en una taza",
+        interiorAlt: "Interior cálido y acogedor de una cafetería",
 
         aboutTitle: "Más que café",
         aboutText: "Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.",
@@ -61,9 +70,18 @@ const translations = {
         menuTitle: "Our menu",
         menuSubtitle: "Good moments, served in a cup.",
 
+        espressoName: "Espresso",
+        latteName: "Latte",
+        cappuccinoName: "Cappuccino",
+
         espressoDesc: "Bold, aromatic, and full of character.",
         latteDesc: "Smooth espresso with creamy milk.",
         cappuccinoDesc: "The perfect balance of coffee and foam.",
+
+        espressoAlt: "A freshly prepared espresso",
+        latteAlt: "Latte with milk foam art",
+        cappuccinoAlt: "Cappuccino served in a cup",
+        interiorAlt: "Warm and welcoming coffee shop interior",
 
         aboutTitle: "More than coffee",
         aboutText: "Luna Café is a place to slow down, share conversations, and enjoy something special.",
@@ -157,6 +175,14 @@ function initLunaCafe() {
             }
         });
 
+        document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+            const key = element.dataset.i18nAlt;
+
+            if (Object.prototype.hasOwnProperty.call(texts, key)) {
+                element.alt = texts[key];
+            }
+        });
+
         updateLanguageButton();
         updateThemeButton();
         updateMenuButton();
@@ -177,7 +203,9 @@ function initLunaCafe() {
             try {
                 localStorage.setItem("luna-cafe-theme", theme);
             } catch (error) {
-                console.warn("No se pudo guardar el tema en este navegador.");
+                console.warn(
+                    "No se pudo guardar el tema en este navegador."
+                );
             }
         }
 
