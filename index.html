@@ -4,65 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
 
     <title>Luna Café | Un momento para vos</title>
 
-    <link rel="stylesheet" href="style.css?v=3">
-    <script src="script.js?v=3" defer></script>
+    <link rel="stylesheet" href="style.css?v=5">
+    <script src="script.js?v=5" defer></script>
 </head>
+
 <body>
     <header>
-        <a href="#inicio" aria-label="Luna Café, inicio">Luna Café</a>
+        <a class="brand" href="#inicio" aria-label="Luna Café, inicio">
+            Luna Café
+        </a>
 
-        <nav aria-label="Navegación principal">
+        <button
+            id="menu-toggle"
+            class="menu-toggle"
+            type="button"
+            aria-controls="site-navigation"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+        >
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <span class="sr-only" id="menu-toggle-label">Abrir menú</span>
+        </button>
+
+        <nav id="site-navigation" aria-label="Navegación principal">
             <a href="#inicio" data-i18n="home">Inicio</a>
             <a href="#menu" data-i18n="menu">Menú</a>
             <a href="#nosotros" data-i18n="about">Nosotros</a>
             <a href="#contacto" data-i18n="contact">Contacto</a>
 
-            <button id="language-toggle" type="button">English</button>
-            <button id="theme-toggle" type="button">Modo oscuro</button>
+            <button
+                id="language-toggle"
+                class="nav-action"
+                type="button"
+                aria-label="Cambiar idioma"
+            >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M3 12h18"></path>
+                    <path d="M12 3a15 15 0 0 1 0 18"></path>
+                    <path d="M12 3a15 15 0 0 0 0 18"></path>
+                </svg>
+                <span id="language-label">English</span>
+            </button>
+
+            <button
+                id="theme-toggle"
+                class="nav-action"
+                type="button"
+                aria-label="Cambiar tema"
+                aria-pressed="false"
+            >
+                <svg
+                    id="theme-icon-moon"
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5a8.5 8.5 0 1 0 12 12Z"></path>
+                </svg>
+
+                <svg
+                    id="theme-icon-sun"
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                </svg>
+
+                <span id="theme-label">Modo oscuro</span>
+            </button>
         </nav>
     </header>
 
     <main>
         <section id="inicio">
             <p data-i18n="eyebrow">CAFÉ DE ESPECIALIDAD</p>
+
             <h1 data-i18n="headline">Un momento para vos.</h1>
 
             <p data-i18n="intro">
                 Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.
             </p>
 
-            <a href="#menu" data-i18n="discover">Descubrir el menú</a>
+            <a href="#menu" data-i18n="discover">
+                Descubrir el menú
+            </a>
         </section>
 
         <section id="menu">
             <h2 data-i18n="menuTitle">Nuestro menú</h2>
-            <p data-i18n="menuSubtitle">Buenos momentos, servidos en una taza.</p>
+
+            <p data-i18n="menuSubtitle">
+                Buenos momentos, servidos en una taza.
+            </p>
 
             <article>
                 <h3>Espresso</h3>
-                <p data-i18n="espressoDesc">Intenso, aromático y lleno de carácter.</p>
+
+                <p data-i18n="espressoDesc">
+                    Intenso, aromático y lleno de carácter.
+                </p>
+
                 <p>$2.50</p>
             </article>
 
             <article>
                 <h3>Latte</h3>
-                <p data-i18n="latteDesc">Espresso suave con leche cremosa.</p>
+
+                <p data-i18n="latteDesc">
+                    Espresso suave con leche cremosa.
+                </p>
+
                 <p>$3.50</p>
             </article>
 
             <article>
                 <h3>Capuchino</h3>
-                <p data-i18n="cappuccinoDesc">Equilibrio perfecto entre café y espuma.</p>
+
+                <p data-i18n="cappuccinoDesc">
+                    Equilibrio perfecto entre café y espuma.
+                </p>
+
                 <p>$3.25</p>
             </article>
         </section>
 
         <section id="nosotros">
             <h2 data-i18n="aboutTitle">Más que café</h2>
+
             <p data-i18n="aboutText">
                 Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.
             </p>
@@ -70,6 +148,7 @@
 
         <section id="contacto">
             <h2 data-i18n="contactTitle">Visitanos</h2>
+
             <p data-i18n="contactText">
                 Pronto compartiremos nuestra ubicación y horarios.
             </p>
@@ -77,7 +156,9 @@
     </main>
 
     <footer>
-        <p data-i18n="footer">© 2026 Luna Café. Todos los derechos reservados.</p>
+        <p data-i18n="footer">
+            © 2026 Luna Café. Todos los derechos reservados.
+        </p>
     </footer>
 </body>
 </html>
