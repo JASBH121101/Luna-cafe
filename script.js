@@ -45,6 +45,7 @@ const translations = {
 
 let currentLanguage = "es";
 
+
 function changeLanguage() {
     currentLanguage = currentLanguage === "es" ? "en" : "es";
 
@@ -54,7 +55,11 @@ function changeLanguage() {
         const key = element.dataset.i18n;
         element.textContent = translations[currentLanguage][key];
     });
+
+    document.getElementById("language-toggle").textContent =
+        translations[currentLanguage].language;
 }
+
 document
     .getElementById("language-toggle")
     .addEventListener("click", changeLanguage);
