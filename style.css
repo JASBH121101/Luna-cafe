@@ -7,10 +7,8 @@
     --color-terracotta: #b86f50;
     --color-olive: #737858;
     --color-muted: #766c64;
-
     --font-heading: Georgia, "Times New Roman", serif;
     --font-body: Arial, Helvetica, sans-serif;
-
     --container-width: 1120px;
 }
 
@@ -28,6 +26,7 @@ body {
     color: var(--color-coffee);
     font-family: var(--font-body);
     line-height: 1.7;
+    transition: background-color 0.25s, color 0.25s;
 }
 
 a {
@@ -54,7 +53,8 @@ header > a {
 nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    align-items: center;
+    gap: 12px 24px;
 }
 
 nav a {
@@ -64,6 +64,25 @@ nav a {
 
 nav a:hover {
     color: var(--color-terracotta);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+h1 {
+    max-width: 700px;
+    margin: 16px 0;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+}
+
+h2 {
+    margin-top: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
 }
 
 main section {
@@ -86,20 +105,6 @@ main section {
     letter-spacing: 0.2em;
 }
 
-h1,
-h2,
-h3 {
-    font-family: var(--font-heading);
-    font-weight: normal;
-    line-height: 1.2;
-}
-
-h1 {
-    max-width: 700px;
-    margin: 16px 0;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-}
-
 #inicio > p:not(:first-child) {
     max-width: 560px;
 }
@@ -111,11 +116,6 @@ h1 {
     background: var(--color-terracotta);
     color: white;
     border-radius: 4px;
-}
-
-h2 {
-    margin-top: 0;
-    font-size: clamp(2rem, 4vw, 3rem);
 }
 
 #menu > p,
@@ -157,6 +157,66 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Botones de idioma y tema */
+
+#language-toggle,
+#theme-toggle {
+    padding: 9px 14px;
+    border: 1px solid var(--color-brown);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--color-coffee);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#language-toggle:hover,
+#theme-toggle:hover {
+    background: var(--color-coffee);
+    color: var(--color-paper);
+}
+
+/* Tema oscuro */
+
+html[data-theme="dark"] {
+    --color-cream: #211b18;
+    --color-paper: #302722;
+    --color-coffee: #f7f2e9;
+    --color-brown: #d6b49b;
+    --color-terracotta: #d18a68;
+    --color-olive: #b6bd91;
+    --color-muted: #c8bcb2;
+}
+
+html[data-theme="dark"] header {
+    border-bottom-color: #514139;
+}
+
+html[data-theme="dark"] #inicio {
+    background: #171311;
+    color: #f7f2e9;
+}
+
+html[data-theme="dark"] #inicio > p:first-child {
+    color: #d6b49b;
+}
+
+html[data-theme="dark"] #nosotros {
+    background: #29221e;
+}
+
+html[data-theme="dark"] #menu article {
+    border-color: #514139;
+}
+
+html[data-theme="dark"] footer {
+    background: #171311;
+    color: #f7f2e9;
+}
+
+/* Adaptación a celulares */
+
 @media (max-width: 650px) {
     header {
         align-items: flex-start;
@@ -182,58 +242,3 @@ footer {
         padding: 56px 22px;
     }
 }
-
-/* Botones de idioma y tema */
-#language-toggle,
-#theme-toggle {
-    padding: 9px 14px;
-    border: 1px solid var(--color-brown);
-    border-radius: 5px;
-    background: transparent;
-    color: var(--color-coffee);
-    font: inherit;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-#language-toggle:hover,
-#theme-toggle:hover {
-    background: var(--color-coffee);
-    color: var(--color-paper);
-}
-
-/* Tema oscuro */
-html[data-theme="dark"] {
-    --color-cream: #211b18;
-    --color-paper: #302722;
-    --color-coffee: #f7f2e9;
-    --color-brown: #d6b49b;
-    --color-terracotta: #d18a68;
-    --color-olive: #b6bd91;
-    --color-muted: #c8bcb2;
-}
-
-html[data-theme="dark"] #nosotros {
-    background: #29221e;
-}
-
-html[data-theme="dark"] #menu article {
-    border-color: #514139;
-}
-
-html[data-theme="dark"] header {
-    border-bottom-color: #514139;
-}
-
-html[data-theme="dark"] #language-toggle,
-html[data-theme="dark"] #theme-toggle {
-    color: var(--color-coffee);
-    border-color: var(--color-brown);
-}
-
-html[data-theme="dark"] #language-toggle:hover,
-html[data-theme="dark"] #theme-toggle:hover {
-    background: var(--color-coffee);
-    color: var(--color-paper);
-}
-
