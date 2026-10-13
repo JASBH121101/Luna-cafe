@@ -1,3 +1,4 @@
+
 const translations = {
   es: {
     languageShort: "EN", languageFull: "English", languageLabel: "Cambiar idioma",
@@ -189,7 +190,11 @@ function initLunaCafe() {
   const t = () => translations[language];
   const money = (value) => `$${Number(value).toFixed(2)}`;
   const escapeHTML = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
-  const keyFor = (item) => `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
+
+  // Función declarada para que exista al ejecutar readCart() al inicio.
+  function keyFor(item) {
+    return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
+  }
 
   function readStorage(key, fallback = null) {
     try { return localStorage.getItem(key) ?? fallback; }
