@@ -8,13 +8,32 @@ const translations = {
     intro: "Café artesanal, sabores auténticos y un espacio para disfrutar cada pequeño momento.", discover: "Descubrir el menú",
     menuKicker: "HECHO PARA DISFRUTAR", menuTitle: "Nuestro menú", menuSubtitle: "Buenos momentos, servidos en una taza.",
     espressoName: "Espresso", latteName: "Latte", cappuccinoName: "Capuchino",
+    frappeName: "Frappé", frappeDesc: "Frappé cremoso y refrescante, cubierto con crema batida.",
+    flavorLabel: "Sabor", flavorChocolate: "Chocolate", flavorCaramel: "Caramelo", flavorStrawberry: "Fresa", flavorOreo: "Oreo",
+    frappeAltChocolate: "Frappé de chocolate con crema batida y sirope",
+    frappeAltCaramel: "Frappé de caramelo con crema batida",
+    frappeAltStrawberry: "Frappé de fresa con crema batida",
+    frappeAltOreo: "Frappé de galletas con crema batida",
+    tresLechesName: "Pastel tres leches",
+    tresLechesDesc: "Bizcocho suave y húmedo con una cubierta cremosa.",
+    tresLechesAlt: "Porción de pastel tres leches",
+    cheesecakeName: "Cheesecake de limón",
+    cheesecakeDesc: "Cremoso y suave, con un delicado toque cítrico.",
+    cheesecakeAlt: "Porción de cheesecake de limón",
+    selvaNegraName: "Pastel selva negra",
+    selvaNegraDesc: "Capas suaves con crema, chocolate y un toque de fresa.",
+    selvaNegraAlt: "Pastel selva negra con chocolate y fresas",
+    presentationLabel: "Presentación", sliceOption: "Slice", poundOption: "Libra",
+    orderLocal: "Hacer pedido y pagar en el local",
+    localPaymentNote: "Pedido para pagar en el local. Confirmá disponibilidad y hora de retiro con la cafetería.",
     espressoDesc: "Intenso, aromático y lleno de carácter.", latteDesc: "Espresso suave con leche cremosa.", cappuccinoDesc: "Equilibrio perfecto entre café y espuma.",
     espressoAlt: "Taza de espresso recién preparado", latteAlt: "Latte con arte de espuma", cappuccinoAlt: "Capuchino servido en una taza",
     sizeLabel: "Tamaño", sizeSmall: "Pequeño", sizeRegular: "Regular", sizeLarge: "Grande",
     sizeSmallOption: "Pequeño (-$0.50)", sizeRegularOption: "Regular", sizeLargeOption: "Grande (+$0.75)",
     milkLabel: "Tipo de leche", milkWhole: "Leche entera", milkPlant: "Leche vegetal (+$0.50)",
     milkWholeName: "Leche entera", milkPlantName: "Leche vegetal", extraShotLabel: "Shot extra (+$0.75)",
-    priceLabel: "Precio", addToCart: "Agregar", optionsNote: "Personalizá el tamaño y algunos extras antes de agregar tu bebida.",
+    priceLabel: "Precio", addToCart: "Agregar",
+    optionsNote: "Elegí las opciones disponibles para cada producto antes de agregarlo.",
     aboutKicker: "NUESTRA ESENCIA", aboutTitle: "Más que café",
     aboutText: "Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.",
     interiorAlt: "Interior cálido y acogedor de una cafetería", contactKicker: "HACÉ UNA PAUSA", contactTitle: "Visitanos",
@@ -27,13 +46,14 @@ const translations = {
     copyFailed: "No se pudo copiar el pedido. Probá de nuevo.", emptyCartMessage: "Agregá una bebida antes de preparar el pedido.",
     confirmClear: "¿Querés vaciar el carrito?", cartCleared: "Carrito vaciado.", orderSummary: "Resumen del pedido",
     clearCartTitle: "¿Vaciar carrito?", cancelClearCart: "Conservar pedido", confirmClearAction: "Sí, vaciar carrito",
-    buyNow: "Comprar", checkoutKicker: "FINALIZAR PEDIDO", checkoutTitle: "Pago de demostración",
+    buyNow: "Delivery y pagar con tarjeta (demo)", checkoutKicker: "FINALIZAR PEDIDO", checkoutTitle: "Pago de demostración",
     demoOnlyWarning: "Simulación únicamente. No ingreses datos reales de tarjetas. La información no se enviará ni se guardará.",
     checkoutTotalLabel: "Total de la compra", cardholderLabel: "Nombre ficticio del titular", cardNumberLabel: "Número de tarjeta ficticio",
     expiryLabel: "Vencimiento (MM/AA)", cvvLabel: "CVV ficticio",
     noCardStorage: "Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.",
     cancelCheckout: "Volver al carrito", confirmDemoPayment: "Simular compra", closeCheckout: "Cerrar ventana de pago",
-    demoSuccessTitle: "¡Compra simulada completada!", demoSuccessMessage: "Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.",
+    demoSuccessTitle: "¡Compra simulada completada!",
+    demoSuccessMessage: "Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.",
     demoOrderNumber: "Referencia de demostración", demoOrderTotal: "Total simulado", finishCheckout: "Finalizar",
     invalidCardNumber: "Usá un número ficticio de 13 a 19 dígitos.", invalidExpiry: "Ingresá una fecha válida en formato MM/AA.",
     expiredCard: "La fecha de vencimiento debe ser futura.", invalidCvv: "Ingresá un CVV ficticio de 3 o 4 dígitos.",
@@ -49,13 +69,32 @@ const translations = {
     intro: "Artisan coffee, authentic flavors, and a space to enjoy every little moment.", discover: "Explore the menu",
     menuKicker: "MADE TO BE ENJOYED", menuTitle: "Our menu", menuSubtitle: "Good moments, served in a cup.",
     espressoName: "Espresso", latteName: "Latte", cappuccinoName: "Cappuccino",
+    frappeName: "Frappé", frappeDesc: "A creamy, refreshing blended drink topped with whipped cream.",
+    flavorLabel: "Flavor", flavorChocolate: "Chocolate", flavorCaramel: "Caramel", flavorStrawberry: "Strawberry", flavorOreo: "Oreo",
+    frappeAltChocolate: "Chocolate frappé topped with whipped cream and syrup",
+    frappeAltCaramel: "Caramel frappé topped with whipped cream",
+    frappeAltStrawberry: "Strawberry frappé topped with whipped cream",
+    frappeAltOreo: "Cookies-and-cream frappé topped with whipped cream",
+    tresLechesName: "Tres leches cake",
+    tresLechesDesc: "Soft, moist sponge cake with a creamy topping.",
+    tresLechesAlt: "Slice of tres leches cake",
+    cheesecakeName: "Lemon cheesecake",
+    cheesecakeDesc: "Creamy and smooth with a delicate citrus touch.",
+    cheesecakeAlt: "Slice of lemon cheesecake",
+    selvaNegraName: "Black Forest cake",
+    selvaNegraDesc: "Soft layers with cream, chocolate, and a touch of strawberry.",
+    selvaNegraAlt: "Black Forest cake with chocolate and strawberries",
+    presentationLabel: "Presentation", sliceOption: "Slice", poundOption: "Pound",
+    orderLocal: "Order and pay at the café",
+    localPaymentNote: "Order for payment at the café. Confirm availability and pickup time with the café.",
     espressoDesc: "Bold, aromatic, and full of character.", latteDesc: "Smooth espresso with creamy milk.", cappuccinoDesc: "The perfect balance of coffee and foam.",
     espressoAlt: "A freshly prepared espresso", latteAlt: "Latte with milk foam art", cappuccinoAlt: "Cappuccino served in a cup",
     sizeLabel: "Size", sizeSmall: "Small", sizeRegular: "Regular", sizeLarge: "Large",
     sizeSmallOption: "Small (-$0.50)", sizeRegularOption: "Regular", sizeLargeOption: "Large (+$0.75)",
     milkLabel: "Milk type", milkWhole: "Whole milk", milkPlant: "Plant-based milk (+$0.50)",
     milkWholeName: "Whole milk", milkPlantName: "Plant-based milk", extraShotLabel: "Extra shot (+$0.75)",
-    priceLabel: "Price", addToCart: "Add", optionsNote: "Customize the size and extras before adding your drink.",
+    priceLabel: "Price", addToCart: "Add",
+    optionsNote: "Choose the available options for each product before adding it.",
     aboutKicker: "OUR ESSENCE", aboutTitle: "More than coffee",
     aboutText: "Luna Café is a place to slow down, share conversations, and enjoy something special.",
     interiorAlt: "Warm and welcoming coffee shop interior", contactKicker: "TAKE A BREAK", contactTitle: "Visit us",
@@ -68,13 +107,14 @@ const translations = {
     copyFailed: "Could not copy the order. Please try again.", emptyCartMessage: "Add a drink before preparing your order.",
     confirmClear: "Would you like to empty the cart?", cartCleared: "Cart emptied.", orderSummary: "Order summary",
     clearCartTitle: "Empty your cart?", cancelClearCart: "Keep my order", confirmClearAction: "Yes, empty cart",
-    buyNow: "Buy", checkoutKicker: "COMPLETE YOUR ORDER", checkoutTitle: "Demo checkout",
+    buyNow: "Delivery & pay by card (demo)", checkoutKicker: "COMPLETE YOUR ORDER", checkoutTitle: "Demo checkout",
     demoOnlyWarning: "Demo only. Do not enter real card details. This information will not be sent or saved.",
     checkoutTotalLabel: "Order total", cardholderLabel: "Fictional cardholder name", cardNumberLabel: "Fictional card number",
     expiryLabel: "Expiration (MM/YY)", cvvLabel: "Fictional CVV",
     noCardStorage: "These fields only demonstrate the interface. No transaction takes place.",
     cancelCheckout: "Back to cart", confirmDemoPayment: "Simulate purchase", closeCheckout: "Close checkout window",
-    demoSuccessTitle: "Demo purchase completed!", demoSuccessMessage: "This is a demonstration. No charge was made and no banking information was sent.",
+    demoSuccessTitle: "Demo purchase completed!",
+    demoSuccessMessage: "This is a demonstration. No charge was made and no banking information was sent.",
     demoOrderNumber: "Demo reference", demoOrderTotal: "Simulated total", finishCheckout: "Done",
     invalidCardNumber: "Enter a fictional number containing 13 to 19 digits.", invalidExpiry: "Enter a valid expiration date in MM/YY format.",
     expiredCard: "The expiration date must be in the future.", invalidCvv: "Enter a fictional CVV with 3 or 4 digits.",
@@ -86,7 +126,11 @@ const translations = {
 const products = {
   espresso: { nameKey: "espressoName", basePrice: 2.50, hasMilkOptions: false },
   latte: { nameKey: "latteName", basePrice: 3.50, hasMilkOptions: true },
-  cappuccino: { nameKey: "cappuccinoName", basePrice: 3.25, hasMilkOptions: true }
+  cappuccino: { nameKey: "cappuccinoName", basePrice: 3.25, hasMilkOptions: true },
+  frappe: { nameKey: "frappeName", basePrice: 3.00, hasMilkOptions: false, type: "frappe" },
+  "tres-leches": { nameKey: "tresLechesName", hasMilkOptions: false, type: "dessert", presentations: { slice: 2.18, pound: 21.84 } },
+  cheesecake: { nameKey: "cheesecakeName", hasMilkOptions: false, type: "dessert", presentations: { slice: 1.77, pound: 20.48 } },
+  "selva-negra": { nameKey: "selvaNegraName", hasMilkOptions: false, type: "dessert", presentations: { slice: 2.46, pound: 17.75 } }
 };
 
 const prices = {
@@ -95,9 +139,17 @@ const prices = {
   extraShot: 0.75
 };
 
+const frappeFlavors = {
+  chocolate: { image: "./Img/frappe-chocolate.webp", altKey: "frappeAltChocolate", nameKey: "flavorChocolate" },
+  caramel: { image: "./Img/pexels-casa-norte-23254957-6680481.webp", altKey: "frappeAltCaramel", nameKey: "flavorCaramel" },
+  strawberry: { image: "./Img/images.webp", altKey: "frappeAltStrawberry", nameKey: "flavorStrawberry" },
+  oreo: { image: "./Img/pexels-dextarstudio-16825488.webp", altKey: "frappeAltOreo", nameKey: "flavorOreo" }
+};
+
 const CART_STORAGE_KEY = "luna-cafe-cart";
 const THEME_STORAGE_KEY = "luna-cafe-theme";
 const DEMO_ORDERS_KEY = "luna-cafe-demo-orders";
+const WHATSAPP_NUMBER = ""; // Número del negocio en formato internacional, solo dígitos.
 
 function initLunaCafe() {
   const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -110,7 +162,7 @@ function initLunaCafe() {
     themeButton: $("#theme-toggle"), themeLabel: $("#theme-label"), cartToggle: $("#cart-toggle"), mobileCartToggle: $("#mobile-cart-toggle"),
     cartDrawer: $("#cart-drawer"), cartOverlay: $("#cart-overlay"), closeCartButton: $("#close-cart"), browseMenuButton: $("#browse-menu"),
     cartItemsContainer: $("#cart-items"), cartEmptyState: $("#cart-empty-state"), subtotal: $("#cart-subtotal"),
-    copyOrderButton: $("#copy-order"), buyNowButton: $("#buy-now"), clearCartButton: $("#clear-cart"),
+    localOrderButton: $("#order-local"), buyNowButton: $("#buy-now"), clearCartButton: $("#clear-cart"),
     clearLayer: $("#clear-cart-layer"), clearDialog: $("#clear-cart-dialog"), clearBackdrop: $("#clear-cart-backdrop"),
     cancelClearButton: $("#cancel-clear-cart"), confirmClearButton: $("#confirm-clear-cart"),
     checkoutLayer: $("#checkout-layer"), checkoutModal: $("#checkout-modal"), checkoutBackdrop: $("#checkout-backdrop"),
@@ -137,7 +189,7 @@ function initLunaCafe() {
   const t = () => translations[language];
   const money = (value) => `$${Number(value).toFixed(2)}`;
   const escapeHTML = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
-  const keyFor = (item) => `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}`;
+  const keyFor = (item) => `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
 
   function readStorage(key, fallback = null) {
     try { return localStorage.getItem(key) ?? fallback; }
@@ -162,15 +214,26 @@ function initLunaCafe() {
       const cleaned = [];
 
       for (const value of stored) {
-        if (!value || !products[value.id] || !["small", "regular", "large"].includes(value.size)) continue;
+        if (!value || !products[value.id]) continue;
+
+        const product = products[value.id];
+        const validSizes = product.type === "dessert"
+          ? ["slice", "pound"]
+          : ["small", "regular", "large"];
+
+        if (!validSizes.includes(value.size)) continue;
 
         const item = {
           id: value.id,
           size: value.size,
-          milk: products[value.id].hasMilkOptions && value.milk === "plant" ? "plant" : "whole",
+          milk: product.hasMilkOptions && value.milk === "plant" ? "plant" : "whole",
           extraShot: Boolean(value.extraShot),
           qty: Math.max(1, Math.min(99, Math.floor(Number(value.qty) || 1)))
         };
+
+        if (product.type === "frappe") {
+          item.flavor = Object.hasOwn(frappeFlavors, value.flavor) ? value.flavor : "chocolate";
+        }
 
         const duplicate = cleaned.find((entry) => keyFor(entry) === keyFor(item));
 
@@ -202,6 +265,10 @@ function initLunaCafe() {
   function getPrice(item) {
     const product = products[item.id];
     if (!product) return 0;
+
+    if (product.type === "dessert") {
+      return product.presentations[item.size] ?? product.presentations.slice;
+    }
 
     let value = product.basePrice + (prices.size[item.size] || 0);
 
@@ -302,10 +369,21 @@ function initLunaCafe() {
   }
 
   function optionSummary(item) {
+    const product = products[item.id];
+
+    if (product.type === "dessert") {
+      return item.size === "pound" ? t().poundOption : t().sliceOption;
+    }
+
     const size = item.size === "small" ? t().sizeSmall : item.size === "large" ? t().sizeLarge : t().sizeRegular;
     const options = [size];
 
-    if (products[item.id].hasMilkOptions) {
+    if (product.type === "frappe") {
+      const flavor = frappeFlavors[item.flavor] || frappeFlavors.chocolate;
+      options.push(t()[flavor.nameKey]);
+    }
+
+    if (product.hasMilkOptions) {
       options.push(item.milk === "plant" ? t().milkPlantName : t().milkWholeName);
     }
 
@@ -320,7 +398,7 @@ function initLunaCafe() {
     el.checkoutTotal.textContent = money(subtotal());
     el.cartEmptyState.hidden = cart.length > 0;
     el.cartItemsContainer.hidden = cart.length === 0;
-    el.copyOrderButton.disabled = cart.length === 0;
+    el.localOrderButton.disabled = cart.length === 0;
     el.buyNowButton.disabled = cart.length === 0;
     el.clearCartButton.disabled = cart.length === 0;
 
@@ -412,13 +490,26 @@ function initLunaCafe() {
   }
 
   function readCardConfig(card) {
+    const flavorSelect = card.querySelector("[data-flavor-select]");
+
     return {
       id: card.dataset.productId,
       size: card.querySelector("[data-size-select]")?.value || "regular",
       milk: card.querySelector("[data-milk-select]")?.value || "whole",
       extraShot: Boolean(card.querySelector("[data-extra-shot]")?.checked),
+      ...(flavorSelect ? { flavor: flavorSelect.value } : {}),
       qty: 1
     };
+  }
+
+  function updateFrappeImage(card) {
+    const selector = card.querySelector("[data-flavor-select]");
+    const image = card.querySelector("[data-frappe-image]");
+    if (!selector || !image) return;
+
+    const flavor = frappeFlavors[selector.value] || frappeFlavors.chocolate;
+    image.src = flavor.image;
+    image.alt = t()[flavor.altKey];
   }
 
   function updateCardPrice(card) {
@@ -427,7 +518,10 @@ function initLunaCafe() {
   }
 
   function updateProductPrices() {
-    $$(".product-card").forEach(updateCardPrice);
+    $$(".product-card").forEach((card) => {
+      updateCardPrice(card);
+      if (card.dataset.productId === "frappe") updateFrappeImage(card);
+    });
   }
 
   function addToCart(item) {
@@ -441,7 +535,7 @@ function initLunaCafe() {
     toast(`${t()[products[item.id].nameKey]} ${t().addedToCart}`);
   }
 
-  function buildOrderSummary() {
+  function buildOrderSummary(note = t().checkoutNote) {
     const rows = cart.map((item) => `${item.qty} × ${t()[products[item.id].nameKey]} (${optionSummary(item)}) — ${money(getPrice(item) * item.qty)}`);
 
     return [
@@ -450,8 +544,23 @@ function initLunaCafe() {
       ...rows,
       "",
       `${t().subtotal}: ${money(subtotal())}`,
-      t().checkoutNote
+      note
     ].join("\n");
+  }
+
+  function orderLocal() {
+    if (!cart.length) {
+      toast(t().emptyCartMessage);
+      return;
+    }
+
+    const message = buildOrderSummary(t().localPaymentNote);
+    const whatsappNumber = WHATSAPP_NUMBER.replace(/\D/g, "");
+    const whatsappUrl = whatsappNumber
+      ? "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message)
+      : "https://wa.me/?text=" + encodeURIComponent(message);
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   }
 
   function fallbackCopy(value) {
@@ -664,9 +773,13 @@ function initLunaCafe() {
   });
 
   el.menuSection.addEventListener("change", (event) => {
-    if (event.target.matches("[data-size-select], [data-milk-select], [data-extra-shot]")) {
+    if (event.target.matches("[data-size-select], [data-milk-select], [data-extra-shot], [data-flavor-select]")) {
       const card = event.target.closest(".product-card");
-      if (card) updateCardPrice(card);
+
+      if (card) {
+        if (event.target.matches("[data-flavor-select]")) updateFrappeImage(card);
+        updateCardPrice(card);
+      }
     }
   });
 
@@ -720,7 +833,7 @@ function initLunaCafe() {
     }
   });
 
-  el.copyOrderButton.addEventListener("click", copyOrder);
+  el.localOrderButton.addEventListener("click", orderLocal);
   el.buyNowButton.addEventListener("click", openCheckout);
   el.closeCheckoutButton.addEventListener("click", returnToCart);
   el.checkoutBackdrop.addEventListener("click", returnToCart);
