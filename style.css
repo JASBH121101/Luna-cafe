@@ -1,3 +1,4 @@
+
 :root {
   --color-cream: #fff7eb;
   --color-paper: #fffcf6;
@@ -262,7 +263,38 @@ body.cart-open .cart-drawer { transform: translateX(0); pointer-events: auto; }
 .cart-clear, .button-text { border: 0; background: transparent; color: var(--color-muted); }
 .cart-clear { display: flex; width: 100%; margin-top: 7px; }
 .cart-clear:hover:not(:disabled) { color: var(--color-terracotta); text-decoration: underline; }
-.mobile-cart-toggle { display: none; }
+
+/* Floating cart: available on desktop and mobile. */
+.mobile-cart-toggle {
+  position: fixed;
+  z-index: 50;
+  right: 24px;
+  bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 50px;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--color-coffee);
+  color: var(--color-paper);
+  box-shadow: 0 8px 22px rgba(0,0,0,.22);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .2s, color .2s, transform .2s;
+}
+
+.mobile-cart-toggle:hover {
+  background: var(--color-terracotta);
+  color: #fff;
+}
+
+body.cart-open .mobile-cart-toggle {
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* Toast */
 .toast { position: fixed; z-index: 160; right: 24px; bottom: 24px; max-width: min(400px, calc(100vw - 32px)); padding: 12px 17px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-coffee); color: var(--color-paper); box-shadow: var(--color-soft-shadow); opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .2s, transform .2s; }
