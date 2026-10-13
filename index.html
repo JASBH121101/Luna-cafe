@@ -6,8 +6,8 @@
   <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
   <title>Luna Café | Un momento para vos</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-  <link rel="stylesheet" href="style.css?v=15">
-  <script src="script.js?v=13" defer></script>
+  <link rel="stylesheet" href="style.css?v=16">
+  <script src="script.js?v=14" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -213,7 +213,7 @@
         </article>
 
         <article class="product-card" data-product-id="cheesecake">
-          <img class="product-image" src="./Img/photo-1706799419579-592e69a2bf8f.webp" alt="Porción de cheesecake de limón" data-i18n-alt="cheesecakeAlt" width="900" height="675" loading="lazy" decoding="async">
+          <img class="product-image product-image-cheesecake" src="./Img/photo-1706799419579-592e69a2bf8f.webp" alt="Porción de cheesecake de limón" data-i18n-alt="cheesecakeAlt" width="900" height="675" loading="lazy" decoding="async">
           <div class="product-card-content">
             <h3 data-i18n="cheesecakeName">Cheesecake de limón</h3>
             <p class="product-description" data-i18n="cheesecakeDesc">Cremoso y suave, con un delicado toque cítrico.</p>
@@ -260,7 +260,7 @@
           </div>
         </article>
       </div>
-      <p class="menu-footnote" data-i18n="optionsNote">Personalizá el tamaño y algunos extras antes de agregar tu bebida.</p>
+      <p class="menu-footnote" data-i18n="optionsNote">Elegí las opciones disponibles para cada producto antes de agregarlo.</p>
     </section>
 
     <section id="nosotros" aria-labelledby="about-title">
@@ -334,7 +334,6 @@
     </div>
   </aside>
 
-  <!-- Confirmación personalizada para vaciar el carrito -->
   <div id="clear-cart-layer" class="clear-cart-layer" hidden>
     <button id="clear-cart-backdrop" class="clear-cart-backdrop" type="button" aria-label="Cerrar confirmación" data-i18n-aria-label="cancelClearCart"></button>
     <section id="clear-cart-dialog" class="clear-cart-dialog" role="alertdialog" aria-modal="true" aria-hidden="true" aria-labelledby="clear-cart-title" aria-describedby="clear-cart-message" tabindex="-1">
@@ -350,7 +349,6 @@
     </section>
   </div>
 
-  <!-- Checkout de demostración -->
   <div id="checkout-layer" class="checkout-layer" hidden>
     <button id="checkout-backdrop" class="checkout-backdrop" type="button" aria-label="Cerrar ventana de pago" data-i18n-aria-label="closeCheckout"></button>
     <section id="checkout-modal" class="checkout-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="checkout-title" tabindex="-1">
