@@ -191,7 +191,6 @@ function initLunaCafe() {
   const money = (value) => `$${Number(value).toFixed(2)}`;
   const escapeHTML = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 
-  // Función declarada para que exista al ejecutar readCart() al inicio.
   function keyFor(item) {
     return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
   }
@@ -306,6 +305,7 @@ function initLunaCafe() {
   function closeMenu() {
     el.nav.classList.remove("is-open");
     updateMenuButton();
+    updateFloatingCartVisibility();
   }
 
   function updateThemeButton() {
@@ -339,6 +339,44 @@ function initLunaCafe() {
     el.mobileCartToggle.setAttribute("aria-expanded", String(document.body.classList.contains("cart-open")));
     el.closeCartButton.setAttribute("aria-label", t().closeCart);
     el.cartOverlay.setAttribute("aria-label", t().closeCart);
+
+    updateFloatingCartVisibility();
+  }
+
+  function isElementVisibleOnScreen(element) {
+    if (!element || !element.isConnected || element.getClientRects().length === 0) {
+      return false;
+    }
+
+    const style = window.getComputedStyle(element);
+    if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") {
+      return false;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    return rect.width > 0 &&
+      rect.height > 0 &&
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < viewportHeight &&
+      rect.left < viewportWidth;
+  }
+
+  function updateFloatingCartVisibility() {
+    const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const primaryCartVisible = isElementVisibleOnScreen(el.cartToggle);
+
+    const modalOpen = ["cart-open", "checkout-open", "clear-confirm-open"]
+      .some((className) => document.body.classList.contains(className));
+
+    const shouldShow = itemCount > 0 && !primaryCartVisible && !modalOpen;
+
+    el.mobileCartToggle.classList.toggle("is-visible", shouldShow);
+    el.mobileCartToggle.setAttribute("aria-hidden", String(!shouldShow));
+    el.mobileCartToggle.tabIndex = shouldShow ? 0 : -1;
   }
 
   function setLanguage(next) {
@@ -397,8 +435,6 @@ function initLunaCafe() {
   }
 
   function renderCart() {
-    const count = cart.reduce((sum, item) => sum + item.qty, 0);
-
     el.subtotal.textContent = money(subtotal());
     el.checkoutTotal.textContent = money(subtotal());
     el.cartEmptyState.hidden = cart.length > 0;
@@ -437,6 +473,8 @@ function initLunaCafe() {
     el.backToTop.classList.toggle("is-visible", visible);
     el.backToTop.setAttribute("aria-hidden", String(!visible));
     el.backToTop.tabIndex = visible ? 0 : -1;
+
+    updateFloatingCartVisibility();
   }
 
   function openCart(trigger) {
@@ -603,7 +641,6 @@ function initLunaCafe() {
     }
   }
 
-  /* Checkout de demostración: el registro local no contiene datos de tarjeta. */
   function clearCardErrors() {
     [el.cardholder, el.cardNumber, el.cardExpiry, el.cardCvv].forEach((input) => input.setCustomValidity(""));
   }
@@ -718,10 +755,7 @@ function initLunaCafe() {
       lineTotal: Math.round(getPrice(item) * item.qty * 100) / 100
     }));
 
-    /*
-     * Solo se guarda el recibo ficticio.
-     * Nunca se conserva el número, vencimiento o CVV.
-     */
+    // Solo se guarda el recibo ficticio, nunca los datos de tarjeta.
     saveDemoOrder({
       id: orderId,
       timestamp,
@@ -749,6 +783,7 @@ function initLunaCafe() {
   el.menuButton.addEventListener("click", () => {
     el.nav.classList.toggle("is-open");
     updateMenuButton();
+    updateFloatingCartVisibility();
   });
 
   el.nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
@@ -917,6 +952,7 @@ function initLunaCafe() {
   });
 
   window.addEventListener("scroll", updateBackToTop, { passive: true });
+  window.addEventListener("resize", updateFloatingCartVisibility, { passive: true });
 
   el.backToTop.addEventListener("click", () => {
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
