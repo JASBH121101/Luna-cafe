@@ -656,7 +656,7 @@ body.cart-open .cart-drawer { transform: translateX(0); pointer-events: auto; }
 
 .mobile-cart-toggle:hover { background: var(--color-terracotta); color: #fff; }
 
-/* Floating cart button - hidden until activated by JavaScript */
+/* Floating cart button */
 .mobile-cart-fab {
   position: fixed;
   z-index: 50;
@@ -713,7 +713,7 @@ body.clear-confirm-open .mobile-cart-fab {
   pointer-events: none !important;
 }
 
-/* Toast base */
+/* Toast */
 .toast {
   position: fixed;
   z-index: 160;
@@ -1195,15 +1195,32 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
   transform: translate(-50%,-50%) scale(1);
 }
 
-/* Header layout */
+/* Header actions container */
 .header-actions { display: contents; }
 
+/* Keep the normal cart button visible in desktop navigation */
 @media (min-width: 761px) {
-  .header-actions .mobile-cart-toggle { display: none !important; }
-  .mobile-cart-fab { display: none !important; }
+  #site-navigation {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #site-navigation .cart-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .header-actions .mobile-cart-toggle,
+  .mobile-cart-fab,
+  #menu-toggle {
+    display: none !important;
+  }
 }
 
-/* Mobile layout */
+/* Mobile header cart + floating cart */
 @media (max-width: 760px) {
   .site-header { gap: 12px; }
 
@@ -1216,7 +1233,6 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
 
   #site-navigation .cart-toggle { display: none !important; }
 
-  /* Icono del carrito junto al menú hamburguesa */
   .header-actions .mobile-cart-toggle {
     position: relative !important;
     inset: auto !important;
@@ -1242,7 +1258,9 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
     transform: none !important;
   }
 
-  .header-actions .mobile-cart-toggle > span[data-i18n="viewCart"] { display: none !important; }
+  .header-actions .mobile-cart-toggle > span[data-i18n="viewCart"] {
+    display: none !important;
+  }
 
   .header-actions .mobile-cart-toggle > .icon {
     width: 22px;
@@ -1265,7 +1283,6 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
     color: var(--color-paper);
   }
 
-  /* Carrito flotante */
   .mobile-cart-fab {
     position: fixed;
     z-index: 80;
@@ -1329,3 +1346,4 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
     pointer-events: none !important;
   }
 }
+
