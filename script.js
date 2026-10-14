@@ -221,6 +221,7 @@ function initLunaCafe() {
 
   const t = () => translations[language];
   const money = (value) => `$${Number(value).toFixed(2)}`;
+
   const escapeHTML = (value) => String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -267,6 +268,7 @@ function initLunaCafe() {
         if (!value || !products[value.id]) continue;
 
         const product = products[value.id];
+
         const validSizes = product.type === "dessert"
           ? ["slice", "pound"]
           : ["small", "regular", "large"];
@@ -426,14 +428,13 @@ function initLunaCafe() {
       rect.left < viewportWidth;
   }
 
+  /* Lógica principal de visibilidad del carrito flotante */
   function updateFloatingCartVisibility() {
     const isMobile = mobileLayout
       ? mobileLayout.matches
       : window.innerWidth <= 760;
 
     const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-    const headerCart = isMobile ? el.mobileCartToggle : el.cartToggle;
-    const headerCartVisible = isElementVisibleOnScreen(headerCart);
 
     const modalOpen = [
       "cart-open",
@@ -441,15 +442,19 @@ function initLunaCafe() {
       "clear-confirm-open"
     ].some((className) => document.body.classList.contains(className));
 
-    /* El icono del encabezado solo se puede usar en la vista móvil. */
+    /* El carrito del encabezado solo se usa en móvil */
     el.mobileCartToggle.setAttribute("aria-hidden", String(!isMobile));
     el.mobileCartToggle.tabIndex = isMobile ? 0 : -1;
 
-    /* El flotante aparece si hay productos y el carrito del encabezado ya no se ve. */
+    /*
+      Mostramos el flotante después de bajar 180 px.
+      Así no dependemos de que el navegador calcule correctamente
+      si el botón del encabezado está dentro o fuera de la pantalla.
+    */
     const shouldShowFloatingCart =
       isMobile &&
       itemCount > 0 &&
-      !headerCartVisible &&
+      window.scrollY > 180 &&
       !modalOpen;
 
     el.mobileCartFab.classList.toggle("is-visible", shouldShowFloatingCart);
@@ -567,7 +572,9 @@ function initLunaCafe() {
   }
 
   function openCart(trigger) {
-    const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
+    const isMobile = mobileLayout
+      ? mobileLayout.matches
+      : window.innerWidth <= 760;
 
     const defaultTrigger = isMobile
       ? (isElementVisibleOnScreen(el.mobileCartToggle) ? el.mobileCartToggle : el.mobileCartFab)
@@ -701,6 +708,7 @@ function initLunaCafe() {
 
     const message = buildOrderSummary(t().localPaymentNote);
     const whatsappNumber = WHATSAPP_NUMBER.replace(/\D/g, "");
+
     const whatsappUrl = whatsappNumber
       ? "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message)
       : "https://wa.me/?text=" + encodeURIComponent(message);
@@ -791,12 +799,13 @@ function initLunaCafe() {
 
     if (restoreFocus) {
       const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
+
       let focusTarget = el.cartToggle;
 
       if (isMobile) {
-        focusTarget = isElementVisibleOnScreen(el.mobileCartToggle)
-          ? el.mobileCartToggle
-          : (el.mobileCartFab.classList.contains("is-visible") ? el.mobileCartFab : el.menuButton);
+        focusTarget = window.scrollY > 180
+          ? el.mobileCartFab
+          : el.mobileCartToggle;
       }
 
       focusTarget.focus();
@@ -810,9 +819,9 @@ function initLunaCafe() {
     let trigger = el.cartToggle;
 
     if (isMobile) {
-      trigger = isElementVisibleOnScreen(el.mobileCartToggle)
-        ? el.mobileCartToggle
-        : (el.mobileCartFab.classList.contains("is-visible") ? el.mobileCartFab : el.mobileCartToggle);
+      trigger = window.scrollY > 180
+        ? el.mobileCartFab
+        : el.mobileCartToggle;
     }
 
     openCart(trigger);
@@ -826,7 +835,10 @@ function initLunaCafe() {
 
   function formatExpiry() {
     const digits = el.cardExpiry.value.replace(/\D/g, "").slice(0, 4);
-    el.cardExpiry.value = digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
+    el.cardExpiry.value = digits.length > 2
+      ? `${digits.slice(0, 2)}/${digits.slice(2)}`
+      : digits;
+
     el.cardExpiry.setCustomValidity("");
   }
 
@@ -837,8 +849,14 @@ function initLunaCafe() {
 
   function validateDemoCard() {
     const digits = el.cardNumber.value.replace(/\D/g, "");
-    el.cardholder.setCustomValidity(el.cardholder.value.trim().length < 2 ? t().invalidCardholder : "");
-    el.cardNumber.setCustomValidity(digits.length < 13 || digits.length > 19 ? t().invalidCardNumber : "");
+
+    el.cardholder.setCustomValidity(
+      el.cardholder.value.trim().length < 2 ? t().invalidCardholder : ""
+    );
+
+    el.cardNumber.setCustomValidity(
+      digits.length < 13 || digits.length > 19 ? t().invalidCardNumber : ""
+    );
 
     const match = /^(0[1-9]|1[0-2])\/(\d{2})$/.exec(el.cardExpiry.value.trim());
     let expiryError = "";
@@ -850,7 +868,10 @@ function initLunaCafe() {
       const year = 2000 + Number(match[2]);
       const now = new Date();
 
-      if (year < now.getFullYear() || (year === now.getFullYear() && month < now.getMonth() + 1)) {
+      if (
+        year < now.getFullYear() ||
+        (year === now.getFullYear() && month < now.getMonth() + 1)
+      ) {
         expiryError = t().expiredCard;
       }
     }
@@ -858,7 +879,10 @@ function initLunaCafe() {
     el.cardExpiry.setCustomValidity(expiryError);
 
     const cvv = el.cardCvv.value.replace(/\D/g, "");
-    el.cardCvv.setCustomValidity(cvv.length < 3 || cvv.length > 4 ? t().invalidCvv : "");
+
+    el.cardCvv.setCustomValidity(
+      cvv.length < 3 || cvv.length > 4 ? t().invalidCvv : ""
+    );
 
     return el.checkoutForm.reportValidity();
   }
@@ -943,6 +967,7 @@ function initLunaCafe() {
   if (systemTheme?.addEventListener) {
     systemTheme.addEventListener("change", (event) => {
       const saved = readStorage(THEME_STORAGE_KEY);
+
       if (saved !== "light" && saved !== "dark") {
         setTheme(event.matches ? "dark" : "light");
       }
@@ -976,6 +1001,7 @@ function initLunaCafe() {
     if (!button) return;
 
     const card = button.closest(".product-card");
+
     if (card && products[card.dataset.productId]) {
       addToCart(readCardConfig(card));
     }
