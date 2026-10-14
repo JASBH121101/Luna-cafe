@@ -105,7 +105,7 @@ const translations = {
     checkoutNote: "Demo order: no payment is processed.", copyOrder: "Copy order", clearCart: "Empty cart",
     removeItem: "Remove", decreaseQuantity: "Decrease quantity", increaseQuantity: "Increase quantity",
     oneItem: "item", manyItems: "items", addedToCart: "was added to your cart.", copiedOrder: "Order summary copied.",
-    copyFailed: "Could not copy the order. Please try again.", emptyCartMessage: "Add a drink before preparing your order.",
+    copyFailed: "Could not copy the order. Please try again.", emptyCartMessage: "Add a drink before preparing the order.",
     confirmClear: "Would you like to empty the cart?", cartCleared: "Cart emptied.", orderSummary: "Order summary",
     clearCartTitle: "Empty your cart?", cancelClearCart: "Keep my order", confirmClearAction: "Yes, empty cart",
     buyNow: "Delivery & pay by card (demo)", checkoutKicker: "COMPLETE YOUR ORDER", checkoutTitle: "Demo checkout",
@@ -343,38 +343,13 @@ function initLunaCafe() {
     updateFloatingCartVisibility();
   }
 
-  function isElementVisibleOnScreen(element) {
-    if (!element || !element.isConnected || element.getClientRects().length === 0) {
-      return false;
-    }
-
-    const style = window.getComputedStyle(element);
-    if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") {
-      return false;
-    }
-
-    const rect = element.getBoundingClientRect();
-    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-    return rect.width > 0 &&
-      rect.height > 0 &&
-      rect.bottom > 0 &&
-      rect.right > 0 &&
-      rect.top < viewportHeight &&
-      rect.left < viewportWidth;
-  }
-
+  /* Actualización del botón de carrito del encabezado móvil */
   function updateFloatingCartVisibility() {
-    const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
-    const primaryCartVisible = isElementVisibleOnScreen(el.cartToggle);
+    const shouldShow = mobileLayout
+      ? mobileLayout.matches
+      : window.innerWidth <= 760;
 
-    const modalOpen = ["cart-open", "checkout-open", "clear-confirm-open"]
-      .some((className) => document.body.classList.contains(className));
-
-    const shouldShow = itemCount > 0 && !primaryCartVisible && !modalOpen;
-
-    el.mobileCartToggle.classList.toggle("is-visible", shouldShow);
+    el.mobileCartToggle.classList.add("is-visible");
     el.mobileCartToggle.setAttribute("aria-hidden", String(!shouldShow));
     el.mobileCartToggle.tabIndex = shouldShow ? 0 : -1;
   }
@@ -478,7 +453,7 @@ function initLunaCafe() {
   }
 
   function openCart(trigger) {
-    previousFocus = trigger || el.cartToggle;
+    previousFocus = trigger || (mobileLayout?.matches ? el.mobileCartToggle : el.cartToggle);
     closeMenu();
 
     el.cartOverlay.hidden = false;
@@ -678,7 +653,9 @@ function initLunaCafe() {
 
     updateBackToTop();
 
-    if (restoreFocus) el.cartToggle.focus();
+    if (restoreFocus) {
+      (mobileLayout?.matches ? el.mobileCartToggle : el.cartToggle).focus();
+    }
   }
 
   function returnToCart() {
