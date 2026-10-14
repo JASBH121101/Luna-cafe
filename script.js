@@ -401,34 +401,6 @@ function initLunaCafe() {
     updateFloatingCartVisibility();
   }
 
-  function isElementVisibleOnScreen(element) {
-    if (!element || !element.isConnected || element.getClientRects().length === 0) {
-      return false;
-    }
-
-    const style = window.getComputedStyle(element);
-
-    if (
-      style.display === "none" ||
-      style.visibility === "hidden" ||
-      style.opacity === "0"
-    ) {
-      return false;
-    }
-
-    const rect = element.getBoundingClientRect();
-    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-    return rect.width > 0 &&
-      rect.height > 0 &&
-      rect.bottom > 0 &&
-      rect.right > 0 &&
-      rect.top < viewportHeight &&
-      rect.left < viewportWidth;
-  }
-
-  /* Lógica principal de visibilidad del carrito flotante */
   function updateFloatingCartVisibility() {
     const isMobile = mobileLayout
       ? mobileLayout.matches
@@ -442,15 +414,9 @@ function initLunaCafe() {
       "clear-confirm-open"
     ].some((className) => document.body.classList.contains(className));
 
-    /* El carrito del encabezado solo se usa en móvil */
     el.mobileCartToggle.setAttribute("aria-hidden", String(!isMobile));
     el.mobileCartToggle.tabIndex = isMobile ? 0 : -1;
 
-    /*
-      Mostramos el flotante después de bajar 180 px.
-      Así no dependemos de que el navegador calcule correctamente
-      si el botón del encabezado está dentro o fuera de la pantalla.
-    */
     const shouldShowFloatingCart =
       isMobile &&
       itemCount > 0 &&
@@ -577,7 +543,7 @@ function initLunaCafe() {
       : window.innerWidth <= 760;
 
     const defaultTrigger = isMobile
-      ? (isElementVisibleOnScreen(el.mobileCartToggle) ? el.mobileCartToggle : el.mobileCartFab)
+      ? (window.scrollY > 180 ? el.mobileCartFab : el.mobileCartToggle)
       : el.cartToggle;
 
     previousFocus = trigger || defaultTrigger;
@@ -799,14 +765,9 @@ function initLunaCafe() {
 
     if (restoreFocus) {
       const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
-
-      let focusTarget = el.cartToggle;
-
-      if (isMobile) {
-        focusTarget = window.scrollY > 180
-          ? el.mobileCartFab
-          : el.mobileCartToggle;
-      }
+      const focusTarget = isMobile
+        ? (window.scrollY > 180 ? el.mobileCartFab : el.mobileCartToggle)
+        : el.cartToggle;
 
       focusTarget.focus();
     }
@@ -816,13 +777,9 @@ function initLunaCafe() {
     closeCheckout(false);
 
     const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
-    let trigger = el.cartToggle;
-
-    if (isMobile) {
-      trigger = window.scrollY > 180
-        ? el.mobileCartFab
-        : el.mobileCartToggle;
-    }
+    const trigger = isMobile
+      ? (window.scrollY > 180 ? el.mobileCartFab : el.mobileCartToggle)
+      : el.cartToggle;
 
     openCart(trigger);
   }
@@ -1126,6 +1083,18 @@ function initLunaCafe() {
         first.focus();
       }
     }
+  });
+
+  /* FIX: el botón ahora ejecuta la acción de volver al inicio */
+  el.backToTop.addEventListener("click", () => {
+    const reduceMotion = window.matchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false;
+
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion ? "auto" : "smooth"
+    });
   });
 
   window.addEventListener("scroll", updateBackToTop, { passive: true });
