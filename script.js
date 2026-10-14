@@ -158,20 +158,51 @@ function initLunaCafe() {
   const root = document.documentElement;
 
   const el = {
-    nav: $("#site-navigation"), menuButton: $("#menu-toggle"), menuButtonLabel: $("#menu-toggle-label"),
-    languageButton: $("#language-toggle"), languageLabelShort: $("#language-label-short"), languageLabelFull: $("#language-label-full"),
-    themeButton: $("#theme-toggle"), themeLabel: $("#theme-label"), cartToggle: $("#cart-toggle"), mobileCartToggle: $("#mobile-cart-toggle"),
-    cartDrawer: $("#cart-drawer"), cartOverlay: $("#cart-overlay"), closeCartButton: $("#close-cart"), browseMenuButton: $("#browse-menu"),
-    cartItemsContainer: $("#cart-items"), cartEmptyState: $("#cart-empty-state"), subtotal: $("#cart-subtotal"),
-    localOrderButton: $("#order-local"), buyNowButton: $("#buy-now"), clearCartButton: $("#clear-cart"),
-    clearLayer: $("#clear-cart-layer"), clearDialog: $("#clear-cart-dialog"), clearBackdrop: $("#clear-cart-backdrop"),
-    cancelClearButton: $("#cancel-clear-cart"), confirmClearButton: $("#confirm-clear-cart"),
-    checkoutLayer: $("#checkout-layer"), checkoutModal: $("#checkout-modal"), checkoutBackdrop: $("#checkout-backdrop"),
-    closeCheckoutButton: $("#close-checkout"), cancelCheckoutButton: $("#cancel-checkout"), finishCheckoutButton: $("#finish-checkout"),
-    checkoutForm: $("#checkout-form"), checkoutFormView: $("#checkout-form-view"), checkoutSuccess: $("#checkout-success"),
-    checkoutTotal: $("#checkout-total"), cardholder: $("#cardholder"), cardNumber: $("#card-number"), cardExpiry: $("#card-expiry"),
-    cardCvv: $("#card-cvv"), demoOrderNumber: $("#demo-order-number"), demoOrderTotal: $("#demo-order-total"),
-    backToTop: $("#back-to-top"), toast: $("#toast"), menuSection: $("#menu")
+    nav: $("#site-navigation"),
+    menuButton: $("#menu-toggle"),
+    menuButtonLabel: $("#menu-toggle-label"),
+    languageButton: $("#language-toggle"),
+    languageLabelShort: $("#language-label-short"),
+    languageLabelFull: $("#language-label-full"),
+    themeButton: $("#theme-toggle"),
+    themeLabel: $("#theme-label"),
+    cartToggle: $("#cart-toggle"),
+    mobileCartToggle: $("#mobile-cart-toggle"),
+    mobileCartFab: $("#mobile-cart-fab"),
+    cartDrawer: $("#cart-drawer"),
+    cartOverlay: $("#cart-overlay"),
+    closeCartButton: $("#close-cart"),
+    browseMenuButton: $("#browse-menu"),
+    cartItemsContainer: $("#cart-items"),
+    cartEmptyState: $("#cart-empty-state"),
+    subtotal: $("#cart-subtotal"),
+    localOrderButton: $("#order-local"),
+    buyNowButton: $("#buy-now"),
+    clearCartButton: $("#clear-cart"),
+    clearLayer: $("#clear-cart-layer"),
+    clearDialog: $("#clear-cart-dialog"),
+    clearBackdrop: $("#clear-cart-backdrop"),
+    cancelClearButton: $("#cancel-clear-cart"),
+    confirmClearButton: $("#confirm-clear-cart"),
+    checkoutLayer: $("#checkout-layer"),
+    checkoutModal: $("#checkout-modal"),
+    checkoutBackdrop: $("#checkout-backdrop"),
+    closeCheckoutButton: $("#close-checkout"),
+    cancelCheckoutButton: $("#cancel-checkout"),
+    finishCheckoutButton: $("#finish-checkout"),
+    checkoutForm: $("#checkout-form"),
+    checkoutFormView: $("#checkout-form-view"),
+    checkoutSuccess: $("#checkout-success"),
+    checkoutTotal: $("#checkout-total"),
+    cardholder: $("#cardholder"),
+    cardNumber: $("#card-number"),
+    cardExpiry: $("#card-expiry"),
+    cardCvv: $("#card-cvv"),
+    demoOrderNumber: $("#demo-order-number"),
+    demoOrderTotal: $("#demo-order-total"),
+    backToTop: $("#back-to-top"),
+    toast: $("#toast"),
+    menuSection: $("#menu")
   };
 
   if (Object.values(el).some((node) => !node)) {
@@ -181,6 +212,7 @@ function initLunaCafe() {
 
   const systemTheme = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
   const mobileLayout = window.matchMedia ? window.matchMedia("(max-width: 760px)") : null;
+
   let language = "es";
   let cart = readCart();
   let toastTimer = null;
@@ -189,20 +221,33 @@ function initLunaCafe() {
 
   const t = () => translations[language];
   const money = (value) => `$${Number(value).toFixed(2)}`;
-  const escapeHTML = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+  const escapeHTML = (value) => String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
   function keyFor(item) {
     return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
   }
 
   function readStorage(key, fallback = null) {
-    try { return localStorage.getItem(key) ?? fallback; }
-    catch (error) { return fallback; }
+    try {
+      return localStorage.getItem(key) ?? fallback;
+    } catch (error) {
+      return fallback;
+    }
   }
 
   function writeStorage(key, value) {
-    try { localStorage.setItem(key, value); return true; }
-    catch (error) { console.warn(`No se pudo guardar ${key} en este navegador.`); return false; }
+    try {
+      localStorage.setItem(key, value);
+      return true;
+    } catch (error) {
+      console.warn(`No se pudo guardar ${key} en este navegador.`);
+      return false;
+    }
   }
 
   function saveCart() {
@@ -213,6 +258,7 @@ function initLunaCafe() {
     try {
       const raw = localStorage.getItem(CART_STORAGE_KEY);
       const stored = raw ? JSON.parse(raw) : [];
+
       if (!Array.isArray(stored)) return [];
 
       const cleaned = [];
@@ -328,30 +374,87 @@ function initLunaCafe() {
   function updateCartLabels() {
     const count = cart.reduce((sum, item) => sum + item.qty, 0);
     const label = `${t().openCart}: ${count} ${count === 1 ? t().oneItem : t().manyItems}`;
+    const cartOpen = document.body.classList.contains("cart-open");
 
     $("#cart-count").textContent = String(count);
     $("#mobile-cart-count").textContent = String(count);
-    $("#cart-count").setAttribute("aria-label", `${count} ${count === 1 ? t().oneItem : t().manyItems}`);
+    $("#mobile-cart-fab-count").textContent = String(count);
+
+    $("#cart-count").setAttribute(
+      "aria-label",
+      `${count} ${count === 1 ? t().oneItem : t().manyItems}`
+    );
 
     el.cartToggle.setAttribute("aria-label", label);
     el.mobileCartToggle.setAttribute("aria-label", label);
-    el.cartToggle.setAttribute("aria-expanded", String(document.body.classList.contains("cart-open")));
-    el.mobileCartToggle.setAttribute("aria-expanded", String(document.body.classList.contains("cart-open")));
+    el.mobileCartFab.setAttribute("aria-label", label);
+
+    el.cartToggle.setAttribute("aria-expanded", String(cartOpen));
+    el.mobileCartToggle.setAttribute("aria-expanded", String(cartOpen));
+    el.mobileCartFab.setAttribute("aria-expanded", String(cartOpen));
+
     el.closeCartButton.setAttribute("aria-label", t().closeCart);
     el.cartOverlay.setAttribute("aria-label", t().closeCart);
 
     updateFloatingCartVisibility();
   }
 
-  /* Actualización del botón de carrito del encabezado móvil */
+  function isElementVisibleOnScreen(element) {
+    if (!element || !element.isConnected || element.getClientRects().length === 0) {
+      return false;
+    }
+
+    const style = window.getComputedStyle(element);
+
+    if (
+      style.display === "none" ||
+      style.visibility === "hidden" ||
+      style.opacity === "0"
+    ) {
+      return false;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    return rect.width > 0 &&
+      rect.height > 0 &&
+      rect.bottom > 0 &&
+      rect.right > 0 &&
+      rect.top < viewportHeight &&
+      rect.left < viewportWidth;
+  }
+
   function updateFloatingCartVisibility() {
-    const shouldShow = mobileLayout
+    const isMobile = mobileLayout
       ? mobileLayout.matches
       : window.innerWidth <= 760;
 
-    el.mobileCartToggle.classList.add("is-visible");
-    el.mobileCartToggle.setAttribute("aria-hidden", String(!shouldShow));
-    el.mobileCartToggle.tabIndex = shouldShow ? 0 : -1;
+    const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const headerCart = isMobile ? el.mobileCartToggle : el.cartToggle;
+    const headerCartVisible = isElementVisibleOnScreen(headerCart);
+
+    const modalOpen = [
+      "cart-open",
+      "checkout-open",
+      "clear-confirm-open"
+    ].some((className) => document.body.classList.contains(className));
+
+    /* El icono del encabezado solo se puede usar en la vista móvil. */
+    el.mobileCartToggle.setAttribute("aria-hidden", String(!isMobile));
+    el.mobileCartToggle.tabIndex = isMobile ? 0 : -1;
+
+    /* El flotante aparece si hay productos y el carrito del encabezado ya no se ve. */
+    const shouldShowFloatingCart =
+      isMobile &&
+      itemCount > 0 &&
+      !headerCartVisible &&
+      !modalOpen;
+
+    el.mobileCartFab.classList.toggle("is-visible", shouldShowFloatingCart);
+    el.mobileCartFab.setAttribute("aria-hidden", String(!shouldShowFloatingCart));
+    el.mobileCartFab.tabIndex = shouldShowFloatingCart ? 0 : -1;
   }
 
   function setLanguage(next) {
@@ -393,7 +496,12 @@ function initLunaCafe() {
       return item.size === "pound" ? t().poundOption : t().sliceOption;
     }
 
-    const size = item.size === "small" ? t().sizeSmall : item.size === "large" ? t().sizeLarge : t().sizeRegular;
+    const size = item.size === "small"
+      ? t().sizeSmall
+      : item.size === "large"
+        ? t().sizeLarge
+        : t().sizeRegular;
+
     const options = [size];
 
     if (product.type === "frappe") {
@@ -443,7 +551,13 @@ function initLunaCafe() {
   }
 
   function updateBackToTop() {
-    const visible = window.scrollY > 420 && !["cart-open", "checkout-open", "clear-confirm-open"].some((name) => document.body.classList.contains(name));
+    const modalOpen = [
+      "cart-open",
+      "checkout-open",
+      "clear-confirm-open"
+    ].some((name) => document.body.classList.contains(name));
+
+    const visible = window.scrollY > 420 && !modalOpen;
 
     el.backToTop.classList.toggle("is-visible", visible);
     el.backToTop.setAttribute("aria-hidden", String(!visible));
@@ -453,7 +567,14 @@ function initLunaCafe() {
   }
 
   function openCart(trigger) {
-    previousFocus = trigger || (mobileLayout?.matches ? el.mobileCartToggle : el.cartToggle);
+    const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
+
+    const defaultTrigger = isMobile
+      ? (isElementVisibleOnScreen(el.mobileCartToggle) ? el.mobileCartToggle : el.mobileCartFab)
+      : el.cartToggle;
+
+    previousFocus = trigger || defaultTrigger;
+
     closeMenu();
 
     el.cartOverlay.hidden = false;
@@ -473,7 +594,9 @@ function initLunaCafe() {
     updateCartLabels();
     updateBackToTop();
 
-    if (restoreFocus && previousFocus) previousFocus.focus();
+    if (restoreFocus && previousFocus && previousFocus.isConnected) {
+      previousFocus.focus();
+    }
   }
 
   function openClearDialog() {
@@ -495,7 +618,9 @@ function initLunaCafe() {
 
     updateBackToTop();
 
-    if (restoreFocus && clearFocus) clearFocus.focus();
+    if (restoreFocus && clearFocus && clearFocus.isConnected) {
+      clearFocus.focus();
+    }
   }
 
   function confirmClearCart() {
@@ -554,7 +679,9 @@ function initLunaCafe() {
   }
 
   function buildOrderSummary(note = t().checkoutNote) {
-    const rows = cart.map((item) => `${item.qty} × ${t()[products[item.id].nameKey]} (${optionSummary(item)}) — ${money(getPrice(item) * item.qty)}`);
+    const rows = cart.map((item) =>
+      `${item.qty} × ${t()[products[item.id].nameKey]} (${optionSummary(item)}) — ${money(getPrice(item) * item.qty)}`
+    );
 
     return [
       `Luna Café — ${t().orderSummary}`,
@@ -592,8 +719,11 @@ function initLunaCafe() {
 
     let copied = false;
 
-    try { copied = document.execCommand("copy"); }
-    catch (error) { copied = false; }
+    try {
+      copied = document.execCommand("copy");
+    } catch (error) {
+      copied = false;
+    }
 
     field.remove();
     return copied;
@@ -608,8 +738,12 @@ function initLunaCafe() {
     const value = buildOrderSummary();
 
     try {
-      if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
-      else if (!fallbackCopy(value)) throw new Error("Clipboard unavailable");
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else if (!fallbackCopy(value)) {
+        throw new Error("Clipboard unavailable");
+      }
+
       toast(t().copiedOrder);
     } catch (error) {
       toast(fallbackCopy(value) ? t().copiedOrder : t().copyFailed);
@@ -617,7 +751,9 @@ function initLunaCafe() {
   }
 
   function clearCardErrors() {
-    [el.cardholder, el.cardNumber, el.cardExpiry, el.cardCvv].forEach((input) => input.setCustomValidity(""));
+    [el.cardholder, el.cardNumber, el.cardExpiry, el.cardCvv].forEach((input) => {
+      input.setCustomValidity("");
+    });
   }
 
   function openCheckout() {
@@ -654,13 +790,32 @@ function initLunaCafe() {
     updateBackToTop();
 
     if (restoreFocus) {
-      (mobileLayout?.matches ? el.mobileCartToggle : el.cartToggle).focus();
+      const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
+      let focusTarget = el.cartToggle;
+
+      if (isMobile) {
+        focusTarget = isElementVisibleOnScreen(el.mobileCartToggle)
+          ? el.mobileCartToggle
+          : (el.mobileCartFab.classList.contains("is-visible") ? el.mobileCartFab : el.menuButton);
+      }
+
+      focusTarget.focus();
     }
   }
 
   function returnToCart() {
     closeCheckout(false);
-    openCart(mobileLayout?.matches ? el.mobileCartToggle : el.cartToggle);
+
+    const isMobile = mobileLayout ? mobileLayout.matches : window.innerWidth <= 760;
+    let trigger = el.cartToggle;
+
+    if (isMobile) {
+      trigger = isElementVisibleOnScreen(el.mobileCartToggle)
+        ? el.mobileCartToggle
+        : (el.mobileCartFab.classList.contains("is-visible") ? el.mobileCartFab : el.mobileCartToggle);
+    }
+
+    openCart(trigger);
   }
 
   function formatCardNumber() {
@@ -763,24 +918,40 @@ function initLunaCafe() {
     updateFloatingCartVisibility();
   });
 
-  el.nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-
-  document.addEventListener("click", (event) => {
-    if (el.nav.classList.contains("is-open") && !el.nav.contains(event.target) && !el.menuButton.contains(event.target)) closeMenu();
+  el.nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
 
-  el.languageButton.addEventListener("click", () => setLanguage(language === "es" ? "en" : "es"));
-  el.themeButton.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark", true));
+  document.addEventListener("click", (event) => {
+    if (
+      el.nav.classList.contains("is-open") &&
+      !el.nav.contains(event.target) &&
+      !el.menuButton.contains(event.target)
+    ) {
+      closeMenu();
+    }
+  });
+
+  el.languageButton.addEventListener("click", () => {
+    setLanguage(language === "es" ? "en" : "es");
+  });
+
+  el.themeButton.addEventListener("click", () => {
+    setTheme(root.dataset.theme === "dark" ? "light" : "dark", true);
+  });
 
   if (systemTheme?.addEventListener) {
     systemTheme.addEventListener("change", (event) => {
       const saved = readStorage(THEME_STORAGE_KEY);
-      if (saved !== "light" && saved !== "dark") setTheme(event.matches ? "dark" : "light");
+      if (saved !== "light" && saved !== "dark") {
+        setTheme(event.matches ? "dark" : "light");
+      }
     });
   }
 
   el.cartToggle.addEventListener("click", () => openCart(el.cartToggle));
   el.mobileCartToggle.addEventListener("click", () => openCart(el.mobileCartToggle));
+  el.mobileCartFab.addEventListener("click", () => openCart(el.mobileCartFab));
   el.closeCartButton.addEventListener("click", () => closeCart(true));
   el.cartOverlay.addEventListener("click", () => closeCart(true));
 
@@ -805,7 +976,9 @@ function initLunaCafe() {
     if (!button) return;
 
     const card = button.closest(".product-card");
-    if (card && products[card.dataset.productId]) addToCart(readCardConfig(card));
+    if (card && products[card.dataset.productId]) {
+      addToCart(readCardConfig(card));
+    }
   });
 
   el.cartItemsContainer.addEventListener("click", (event) => {
@@ -818,8 +991,9 @@ function initLunaCafe() {
 
     if (!item) return;
 
-    if (action === "increase") item.qty = Math.min(99, item.qty + 1);
-    else if (action === "decrease") {
+    if (action === "increase") {
+      item.qty = Math.min(99, item.qty + 1);
+    } else if (action === "decrease") {
       item.qty -= 1;
       if (item.qty <= 0) cart = cart.filter((line) => keyFor(line) !== itemKey);
     } else if (action === "remove") {
@@ -931,14 +1105,10 @@ function initLunaCafe() {
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   window.addEventListener("resize", updateFloatingCartVisibility, { passive: true });
 
-  el.backToTop.addEventListener("click", () => {
-    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-  });
-
   if (mobileLayout?.addEventListener) {
-    mobileLayout.addEventListener("change", (event) => {
-      if (!event.matches) closeMenu();
+    mobileLayout.addEventListener("change", () => {
+      closeMenu();
+      updateFloatingCartVisibility();
     });
   }
 
