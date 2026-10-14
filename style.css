@@ -1,4 +1,3 @@
-
 :root {
   --color-cream: #fff7eb;
   --color-paper: #fffcf6;
@@ -1214,9 +1213,13 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
   }
 
   .header-actions .mobile-cart-toggle,
-  .mobile-cart-fab,
   #menu-toggle {
     display: none !important;
+  }
+
+  /* No ocultar el carrito flotante en escritorio */
+  .mobile-cart-fab {
+    display: inline-flex;
   }
 }
 
@@ -1346,4 +1349,3 @@ html[data-theme="dark"] .cart-overlay { background: rgba(0,0,0,.68); }
     pointer-events: none !important;
   }
 }
-
