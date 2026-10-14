@@ -7,32 +7,78 @@
   <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
   <title>Luna Café | Un momento para vos</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-  <link rel="stylesheet" href="style.css?v=17">
-  <script src="script.js?v=15" defer></script>
+  <link rel="stylesheet" href="style.css?v=18">
+  <script src="script.js?v=16" defer></script>
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#inicio" aria-label="Luna Café, inicio">Luna Café</a>
-    <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Abrir menú">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-      <span class="sr-only" id="menu-toggle-label">Abrir menú</span>
-    </button>
+
+    <div class="header-actions">
+      <button id="mobile-cart-toggle" class="mobile-cart-toggle" type="button"
+        aria-controls="cart-drawer"
+        aria-expanded="false"
+        aria-label="Abrir carrito"
+        aria-hidden="true"
+        tabindex="-1">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
+          <circle cx="10" cy="20" r="1.2"></circle>
+          <circle cx="18" cy="20" r="1.2"></circle>
+        </svg>
+        <span data-i18n="viewCart">Ver carrito</span>
+        <span id="mobile-cart-count" class="cart-count">0</span>
+      </button>
+
+      <button id="menu-toggle" class="menu-toggle" type="button"
+        aria-controls="site-navigation"
+        aria-expanded="false"
+        aria-label="Abrir menú">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <span class="sr-only" id="menu-toggle-label">Abrir menú</span>
+      </button>
+    </div>
+
     <nav id="site-navigation" aria-label="Navegación principal">
       <a href="#inicio" data-i18n="home">Inicio</a>
       <a href="#menu" data-i18n="menu">Menú</a>
       <a href="#nosotros" data-i18n="about">Nosotros</a>
       <a href="#contacto" data-i18n="contact">Contacto</a>
-      <button id="cart-toggle" class="nav-action cart-toggle" type="button" aria-controls="cart-drawer" aria-expanded="false" aria-label="Abrir carrito">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
-        <span data-i18n="cartLabel">Carrito</span><span id="cart-count" class="cart-count" aria-label="0 artículos">0</span>
+
+      <button id="cart-toggle" class="nav-action cart-toggle" type="button"
+        aria-controls="cart-drawer"
+        aria-expanded="false"
+        aria-label="Abrir carrito">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
+          <circle cx="10" cy="20" r="1.2"></circle>
+          <circle cx="18" cy="20" r="1.2"></circle>
+        </svg>
+        <span data-i18n="cartLabel">Carrito</span>
+        <span id="cart-count" class="cart-count" aria-label="0 artículos">0</span>
       </button>
-      <button id="language-toggle" class="nav-action language-toggle" type="button" aria-label="Cambiar idioma" title="Cambiar idioma">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg>
-        <span id="language-label-short" class="language-label-short">EN</span><span id="language-label-full" class="language-label-full">English</span>
+
+      <button id="language-toggle" class="nav-action language-toggle" type="button"
+        aria-label="Cambiar idioma" title="Cambiar idioma">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path>
+        </svg>
+        <span id="language-label-short" class="language-label-short">EN</span>
+        <span id="language-label-full" class="language-label-full">English</span>
       </button>
-      <button id="theme-toggle" class="nav-action theme-toggle" type="button" aria-label="Modo oscuro" aria-pressed="false" title="Modo oscuro">
-        <svg id="theme-icon-moon" class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.5 6.5 0 0 0 8.268 8.268c.344-.215.825-.003.803.401"></path></svg>
-        <svg id="theme-icon-sun" class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42 1.42m11.3-11.3 1.42-1.42"></path></svg>
+
+      <button id="theme-toggle" class="nav-action theme-toggle" type="button"
+        aria-label="Modo oscuro" aria-pressed="false" title="Modo oscuro">
+        <svg id="theme-icon-moon" class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6.5 6.5 0 0 0 8.268 8.268c.344-.215.825-.003.803.401"></path>
+        </svg>
+        <svg id="theme-icon-sun" class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l-1.42 1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
         <span id="theme-label">Modo oscuro</span>
       </button>
     </nav>
@@ -286,11 +332,6 @@
   <footer class="site-footer">
     <p data-i18n="footer">© 2026 Luna Café. Todos los derechos reservados.</p>
   </footer>
-
-  <button id="mobile-cart-toggle" class="mobile-cart-toggle" type="button" aria-controls="cart-drawer" aria-expanded="false" aria-label="Abrir carrito">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
-    <span data-i18n="viewCart">Ver carrito</span><span id="mobile-cart-count" class="cart-count">0</span>
-  </button>
 
   <button id="cart-overlay" class="cart-overlay" type="button" aria-label="Cerrar carrito" hidden></button>
 
