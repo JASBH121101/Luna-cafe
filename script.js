@@ -1,4 +1,3 @@
-
 const translations = {
   es: {
     languageShort: "EN", languageFull: "English", languageLabel: "Cambiar idioma",
@@ -38,13 +37,13 @@ const translations = {
     aboutKicker: "NUESTRA ESENCIA", aboutTitle: "Más que café",
     aboutText: "Luna Café es un lugar para bajar el ritmo, compartir conversaciones y disfrutar algo especial.",
     interiorAlt: "Interior cálido y acogedor de una cafetería", contactKicker: "HACÉ UNA PAUSA", contactTitle: "Visitanos",
-    contactText: "Pronto compartiremos nuestra ubicación y horarios.", contactCta: "Elegir una bebida",
+    contactText: "Pronto compartiremos nuestra ubicación y horarios.", contactCta: "Ordenar",
     footer: "© 2026 Luna Café. Todos los derechos reservados.", orderKicker: "TU SELECCIÓN", cartTitle: "Tu pedido",
-    cartEmpty: "Tu carrito está vacío.", cartEmptyHint: "Elegí una bebida para empezar.", viewMenu: "Ver menú", subtotal: "Subtotal",
+    cartEmpty: "Tu carrito está vacío.", cartEmptyHint: "Elegí un producto para empezar.", viewMenu: "Ver menú", subtotal: "Subtotal",
     checkoutNote: "Pedido de demostración: no se procesa ningún pago.", copyOrder: "Copiar pedido", clearCart: "Vaciar carrito",
     removeItem: "Quitar", decreaseQuantity: "Disminuir cantidad", increaseQuantity: "Aumentar cantidad",
     oneItem: "artículo", manyItems: "artículos", addedToCart: "se agregó al carrito.", copiedOrder: "Resumen del pedido copiado.",
-    copyFailed: "No se pudo copiar el pedido. Probá de nuevo.", emptyCartMessage: "Agregá una bebida antes de preparar el pedido.",
+    copyFailed: "No se pudo copiar el pedido. Probá de nuevo.", emptyCartMessage: "Agregá un producto antes de preparar el pedido.",
     confirmClear: "¿Querés vaciar el carrito?", cartCleared: "Carrito vaciado.", orderSummary: "Resumen del pedido",
     clearCartTitle: "¿Vaciar carrito?", cancelClearCart: "Conservar pedido", confirmClearAction: "Sí, vaciar carrito",
     buyNow: "Delivery y pagar con tarjeta (demo)", checkoutKicker: "FINALIZAR PEDIDO", checkoutTitle: "Pago de demostración",
@@ -99,13 +98,13 @@ const translations = {
     aboutKicker: "OUR ESSENCE", aboutTitle: "More than coffee",
     aboutText: "Luna Café is a place to slow down, share conversations, and enjoy something special.",
     interiorAlt: "Warm and welcoming coffee shop interior", contactKicker: "TAKE A BREAK", contactTitle: "Visit us",
-    contactText: "Our location and opening hours will be available soon.", contactCta: "Choose a drink",
+    contactText: "Our location and opening hours will be available soon.", contactCta: "Order",
     footer: "© 2026 Luna Café. All rights reserved.", orderKicker: "YOUR SELECTION", cartTitle: "Your order",
-    cartEmpty: "Your cart is empty.", cartEmptyHint: "Choose a drink to get started.", viewMenu: "View menu", subtotal: "Subtotal",
+    cartEmpty: "Your cart is empty.", cartEmptyHint: "Choose a product to get started.", viewMenu: "View menu", subtotal: "Subtotal",
     checkoutNote: "Demo order: no payment is processed.", copyOrder: "Copy order", clearCart: "Empty cart",
     removeItem: "Remove", decreaseQuantity: "Decrease quantity", increaseQuantity: "Increase quantity",
     oneItem: "item", manyItems: "items", addedToCart: "was added to your cart.", copiedOrder: "Order summary copied.",
-    copyFailed: "Could not copy the order. Please try again.", emptyCartMessage: "Add a drink before preparing the order.",
+    copyFailed: "Could not copy the order. Please try again.", emptyCartMessage: "Add a product before preparing the order.",
     confirmClear: "Would you like to empty the cart?", cartCleared: "Cart emptied.", orderSummary: "Order summary",
     clearCartTitle: "Empty your cart?", cancelClearCart: "Keep my order", confirmClearAction: "Yes, empty cart",
     buyNow: "Delivery & pay by card (demo)", checkoutKicker: "COMPLETE YOUR ORDER", checkoutTitle: "Demo checkout",
@@ -418,7 +417,6 @@ function initLunaCafe() {
     el.mobileCartToggle.tabIndex = isMobile ? 0 : -1;
 
     const shouldShowFloatingCart =
-      isMobile &&
       itemCount > 0 &&
       window.scrollY > 180 &&
       !modalOpen;
@@ -1085,7 +1083,7 @@ function initLunaCafe() {
     }
   });
 
-  /* FIX: el botón ahora ejecuta la acción de volver al inicio */
+  /* Botón para volver al inicio */
   el.backToTop.addEventListener("click", () => {
     const reduceMotion = window.matchMedia
       ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
