@@ -7,8 +7,8 @@
   <meta name="description" content="Luna Café: café de especialidad, bebidas artesanales y repostería.">
   <title>Luna Café | Un momento para vos</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2">
-  <link rel="stylesheet" href="style.css?v=18">
-  <script src="script.js?v=16" defer></script>
+  <link rel="stylesheet" href="style.css?v=19">
+  <script src="script.js?v=17" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -307,6 +307,7 @@
           </div>
         </article>
       </div>
+
       <p class="menu-footnote" data-i18n="optionsNote">Elegí las opciones disponibles para cada producto antes de agregarlo.</p>
     </section>
 
@@ -333,6 +334,21 @@
     <p data-i18n="footer">© 2026 Luna Café. Todos los derechos reservados.</p>
   </footer>
 
+  <!-- Carrito flotante móvil: aparece al desplazarse si hay productos -->
+  <button id="mobile-cart-fab" class="mobile-cart-fab" type="button"
+    aria-controls="cart-drawer"
+    aria-expanded="false"
+    aria-label="Abrir carrito"
+    aria-hidden="true"
+    tabindex="-1">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
+      <circle cx="10" cy="20" r="1.2"></circle>
+      <circle cx="18" cy="20" r="1.2"></circle>
+    </svg>
+    <span id="mobile-cart-fab-count" class="cart-count">0</span>
+  </button>
+
   <button id="cart-overlay" class="cart-overlay" type="button" aria-label="Cerrar carrito" hidden></button>
 
   <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1">
@@ -349,7 +365,11 @@
     <div class="cart-drawer-body">
       <div id="cart-empty-state" class="cart-empty-state">
         <div class="empty-cart-icon" aria-hidden="true">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path>
+            <circle cx="10" cy="20" r="1.2"></circle>
+            <circle cx="18" cy="20" r="1.2"></circle>
+          </svg>
         </div>
         <h3 data-i18n="cartEmpty">Tu carrito está vacío.</h3>
         <p data-i18n="cartEmptyHint">Elegí una bebida para empezar.</p>
@@ -359,16 +379,24 @@
     </div>
 
     <div class="cart-drawer-footer">
-      <div class="cart-subtotal-row"><span data-i18n="subtotal">Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+      <div class="cart-subtotal-row">
+        <span data-i18n="subtotal">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
       <p class="cart-disclaimer" data-i18n="checkoutNote">Pedido de demostración: no se procesa ningún pago.</p>
 
       <button id="buy-now" class="button button-primary cart-checkout" type="button" disabled>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+          <path d="M2 10h20"></path>
+        </svg>
         <span data-i18n="buyNow">Delivery y pagar con tarjeta (demo)</span>
       </button>
 
       <button id="order-local" class="button button-outline cart-checkout" type="button" disabled>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18M5 10V6l7-3 7 3v4M5 10v10h14V10M9 20v-6h6v6"></path></svg>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 10h18M5 10V6l7-3 7 3v4M5 10v10h14V10M9 20v-6h6v6"></path>
+        </svg>
         <span data-i18n="orderLocal">Hacer pedido y pagar en el local</span>
       </button>
 
@@ -407,21 +435,29 @@
       <div class="checkout-body">
         <div id="checkout-form-view">
           <div class="demo-payment-warning" role="note">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 22 21H2L12 3Z"></path><path d="M12 9v5m0 3h.01"></path></svg>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 22 21H2L12 3Z"></path>
+              <path d="M12 9v5m0 3h.01"></path>
+            </svg>
             <p data-i18n="demoOnlyWarning">Simulación únicamente. No ingreses datos reales de tarjetas. La información no se enviará ni se guardará.</p>
           </div>
 
-          <div class="checkout-order-total"><span data-i18n="checkoutTotalLabel">Total de la compra</span><strong id="checkout-total">$0.00</strong></div>
+          <div class="checkout-order-total">
+            <span data-i18n="checkoutTotalLabel">Total de la compra</span>
+            <strong id="checkout-total">$0.00</strong>
+          </div>
 
           <form id="checkout-form" class="checkout-form" autocomplete="off">
             <div class="form-field">
               <label for="cardholder" data-i18n="cardholderLabel">Nombre ficticio del titular</label>
               <input id="cardholder" type="text" maxlength="80" autocomplete="off" required>
             </div>
+
             <div class="form-field">
               <label for="card-number" data-i18n="cardNumberLabel">Número de tarjeta ficticio</label>
               <input id="card-number" type="text" inputmode="numeric" maxlength="23" placeholder="4242 4242 4242 4242" autocomplete="off" spellcheck="false" required>
             </div>
+
             <div class="checkout-card-row">
               <div class="form-field">
                 <label for="card-expiry" data-i18n="expiryLabel">Vencimiento (MM/AA)</label>
@@ -432,16 +468,22 @@
                 <input id="card-cvv" type="password" inputmode="numeric" maxlength="4" placeholder="•••" autocomplete="off" required>
               </div>
             </div>
+
             <p class="checkout-security-note" data-i18n="noCardStorage">Estos campos solo sirven para mostrar la interfaz. No se realiza ninguna transacción.</p>
+
             <div class="checkout-actions">
               <button id="cancel-checkout" class="button button-outline" type="button" data-i18n="cancelCheckout">Volver al carrito</button>
-              <button id="confirm-payment" class="button button-primary" type="submit"><span data-i18n="confirmDemoPayment">Simular compra</span></button>
+              <button id="confirm-payment" class="button button-primary" type="submit">
+                <span data-i18n="confirmDemoPayment">Simular compra</span>
+              </button>
             </div>
           </form>
         </div>
 
         <div id="checkout-success" class="checkout-success" hidden>
-          <div class="checkout-success-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></div>
+          <div class="checkout-success-icon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
+          </div>
           <h3 data-i18n="demoSuccessTitle">¡Compra simulada completada!</h3>
           <p data-i18n="demoSuccessMessage">Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.</p>
           <div class="demo-receipt">
@@ -462,3 +504,4 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
+
