@@ -8,6 +8,13 @@ const translations = {
     contact: "Contacto",
     cartLabel: "Carrito",
     viewCart: "Ver carrito",
+    buyProduct: "Comprar",
+    customizeKicker: "A TU GUSTO",
+    customizeTitle: "Personalizá tu pedido",
+    closeProductModal: "Cerrar personalización",
+    quantityLabel: "Cantidad",
+    unitPriceLabel: "Importe total",
+    cancel: "Cancelar",
     languageShort: "EN",
     languageFull: "English",
     languageLabel: "Cambiar idioma",
@@ -86,9 +93,9 @@ const translations = {
     sizeSmall: "Pequeño",
     sizeRegular: "Regular",
     sizeLarge: "Grande",
-    sizeSmallOption: "Pequeño (-$0.50)",
+    sizeSmallOption: "Pequeño",
     sizeRegularOption: "Regular",
-    sizeLargeOption: "Grande (+$0.75)",
+    sizeLargeOption: "Grande",
 
     milkLabel: "Tipo de leche",
     milkWhole: "Leche entera",
@@ -98,11 +105,12 @@ const translations = {
 
     extraShotLabel: "Shot extra (+$0.75)",
     priceLabel: "Precio",
-    addToCart: "Agregar",
+    addToCart: "Ordenar",
+    addToOrder: "Ordenar",
     presentationLabel: "Presentación",
-    sliceOption: "Porción",
+    sliceOption: "Slice",
     poundOption: "Libra",
-    optionsNote: "Revisá las opciones disponibles y el precio antes de agregar cada producto al carrito.",
+    optionsNote: "Elegí un producto para personalizarlo y revisar su precio antes de agregarlo al pedido.",
     menuFooterTitle: "Un detalle a tu gusto.",
 
     aboutKicker: "NUESTRA ESENCIA",
@@ -124,7 +132,7 @@ const translations = {
     stepOneTitle: "Encontrá tu antojo",
     stepOneText: "Explorá las bebidas y los postres, o usá los filtros para encontrar lo que buscás.",
     stepTwoTitle: "Elegí los detalles",
-    stepTwoText: "Ajustá el tamaño y las opciones disponibles. El precio se actualizará en la tarjeta.",
+    stepTwoText: "Elegí las opciones disponibles en la ventana de personalización y revisá el precio actualizado.",
     stepThreeTitle: "Revisá tu selección",
     stepThreeText: "Comprobá las cantidades y el subtotal en el carrito antes de continuar.",
     stepsCta: "Empezar a elegir",
@@ -133,15 +141,15 @@ const translations = {
     faqTitle: "¿Tenés alguna duda?",
     faqIntro: "Aquí encontrarás respuestas sobre las opciones del menú y el funcionamiento de esta página.",
     faqQ1: "¿Puedo personalizar mi bebida?",
-    faqA1: "Sí. Según el producto, podés elegir el tamaño, el tipo de leche, el sabor del frappé o agregar un shot extra. Las opciones disponibles aparecen en cada tarjeta del menú.",
+    faqA1: "Sí. Al pulsar Comprar se abre una ventana donde podés elegir el tamaño, el tipo de leche, el sabor del frappé o la presentación del postre, según el producto.",
     faqQ2: "¿El precio cambia al seleccionar opciones?",
-    faqA2: "Sí. Cuando elegís un tamaño o un extra con precio diferente, el importe de la tarjeta se actualiza automáticamente antes de agregar el producto.",
+    faqA2: "Sí. El importe total se actualiza automáticamente al cambiar el tamaño, las opciones o la cantidad.",
     faqQ3: "¿Cómo funciona el carrito de compras?",
     faqA3: "Al agregar un producto, aparece una notificación y se actualiza el contador. Desde el carrito podés revisar las opciones elegidas, modificar las cantidades y consultar el subtotal.",
     faqQ4: "¿Se realizan pagos reales con tarjeta?",
-    faqA4: "No. El proceso de pago es una demostración de la interfaz. No procesa cobros, no envía datos bancarios y no debés introducir información real de una tarjeta.",
-    faqQ5: "¿Puedo enviar mi pedido por WhatsApp?",
-    faqA5: "El botón prepara un mensaje con tu selección. Para dirigirlo al negocio, hay que configurar previamente el número de WhatsApp correspondiente. Esta versión es una demostración y no confirma pedidos reales.",
+    faqA4: "No. El proceso de pago es una demostración de la interfaz. No procesa cobros ni envía datos bancarios. No introduzcas información real de una tarjeta.",
+    faqQ5: "¿Puedo preparar mi pedido y pagar en el local?",
+    faqA5: "Podés registrar un pedido de demostración para pagar en el local. Esta versión no envía pedidos a un negocio real ni confirma disponibilidad.",
     faqQ6: "¿Dónde está ubicada Luna Café y cuáles son sus horarios?",
     faqA6: "La ubicación y los horarios se publicarán cuando la información esté confirmada. Por ahora, la página funciona como una demostración de portafolio.",
 
@@ -161,13 +169,15 @@ const translations = {
     subtotal: "Subtotal",
     checkoutNote: "Pedido de demostración: no se procesa ningún pago.",
     buyNow: "Simular pago con tarjeta",
-    orderLocal: "Preparar pedido por WhatsApp",
+    orderLocal: "Pagar en el local y hacer pedido",
     clearCart: "Vaciar carrito",
     removeItem: "Quitar",
     decreaseQuantity: "Disminuir cantidad",
     increaseQuantity: "Aumentar cantidad",
-    oneItem: "artículo",
-    manyItems: "artículos",
+
+    oneItem: "tipo de producto",
+    manyItems: "tipos de productos",
+
     addedToCart: "se agregó al carrito.",
     cartCleared: "Carrito vaciado.",
     emptyCartMessage: "Agregá un producto antes de preparar el pedido.",
@@ -189,6 +199,8 @@ const translations = {
     confirmDemoPayment: "Simular compra",
     closeCheckout: "Cerrar ventana de pago",
     demoSuccessTitle: "¡Compra simulada completada!",
+    localOrderSuccessTitle: "¡Pedido preparado!",
+    localOrderSuccessMessage: "Tu pedido de demostración quedó registrado con pago pendiente en el local. No se realizó ningún cobro.",
     demoSuccessMessage: "Esto es una demostración. No se realizó ningún cobro ni se enviaron datos bancarios.",
     demoOrderNumber: "Referencia de demostración",
     demoOrderTotal: "Total simulado",
@@ -210,6 +222,13 @@ const translations = {
     contact: "Contact",
     cartLabel: "Cart",
     viewCart: "View cart",
+    buyProduct: "Buy",
+    customizeKicker: "MAKE IT YOURS",
+    customizeTitle: "Customize your order",
+    closeProductModal: "Close customization",
+    quantityLabel: "Quantity",
+    unitPriceLabel: "Total",
+    cancel: "Cancel",
     languageShort: "ES",
     languageFull: "Español",
     languageLabel: "Change language",
@@ -288,9 +307,9 @@ const translations = {
     sizeSmall: "Small",
     sizeRegular: "Regular",
     sizeLarge: "Large",
-    sizeSmallOption: "Small (-$0.50)",
+    sizeSmallOption: "Small",
     sizeRegularOption: "Regular",
-    sizeLargeOption: "Large (+$0.75)",
+    sizeLargeOption: "Large",
 
     milkLabel: "Milk type",
     milkWhole: "Whole milk",
@@ -300,11 +319,12 @@ const translations = {
 
     extraShotLabel: "Extra shot (+$0.75)",
     priceLabel: "Price",
-    addToCart: "Add",
+    addToCart: "Order",
+    addToOrder: "Order",
     presentationLabel: "Presentation",
     sliceOption: "Slice",
     poundOption: "Pound",
-    optionsNote: "Review the available options and price before adding each item to the cart.",
+    optionsNote: "Choose a product to customize it and review its price before adding it to your order.",
     menuFooterTitle: "A detail, just the way you like it.",
 
     aboutKicker: "OUR ESSENCE",
@@ -326,7 +346,7 @@ const translations = {
     stepOneTitle: "Find your craving",
     stepOneText: "Browse drinks and desserts, or use the filters to find what you're looking for.",
     stepTwoTitle: "Choose the details",
-    stepTwoText: "Adjust the size and available options. The price updates on the product card.",
+    stepTwoText: "Choose the available options in the customization window and review the updated price.",
     stepThreeTitle: "Review your selection",
     stepThreeText: "Check the quantities and subtotal in your cart before continuing.",
     stepsCta: "Start choosing",
@@ -335,15 +355,15 @@ const translations = {
     faqTitle: "Have a question?",
     faqIntro: "Find answers about the menu options and how this page works.",
     faqQ1: "Can I customize my drink?",
-    faqA1: "Yes. Depending on the product, you can choose the size, milk type, frappé flavor, or add an extra shot. Available options appear on each menu card.",
+    faqA1: "Yes. Click Buy to open a window where you can choose the size, milk type, frappé flavor, or dessert presentation, depending on the product.",
     faqQ2: "Does the price change when I select options?",
-    faqA2: "Yes. When you choose a size or an extra with a different price, the amount on the product card updates automatically before you add the item.",
+    faqA2: "Yes. The total updates automatically when you change the size, options, or quantity.",
     faqQ3: "How does the shopping cart work?",
     faqA3: "When you add a product, a notification appears and the item counter updates. In the cart, you can review your choices, change quantities, and check the subtotal.",
     faqQ4: "Are real card payments processed?",
     faqA4: "No. Checkout is an interface demonstration. It does not process charges or send banking information. Do not enter real card details.",
-    faqQ5: "Can I send my order through WhatsApp?",
-    faqA5: "The button prepares a message with your selection. To send it to the business, the correct WhatsApp number must be configured. This demo does not confirm real orders.",
+    faqQ5: "Can I prepare my order and pay at the café?",
+    faqA5: "You can register a demo order with payment due at the café. This demo does not send orders to a real business or confirm availability.",
     faqQ6: "Where is Luna Café located, and what are its hours?",
     faqA6: "Location and opening hours will be published once confirmed. For now, the page is a portfolio demonstration.",
 
@@ -363,13 +383,15 @@ const translations = {
     subtotal: "Subtotal",
     checkoutNote: "Demo order: no payment is processed.",
     buyNow: "Simulate card checkout",
-    orderLocal: "Prepare order with WhatsApp",
+    orderLocal: "Pay at the café and place order",
     clearCart: "Empty cart",
     removeItem: "Remove",
     decreaseQuantity: "Decrease quantity",
     increaseQuantity: "Increase quantity",
-    oneItem: "item",
-    manyItems: "items",
+
+    oneItem: "product type",
+    manyItems: "product types",
+
     addedToCart: "was added to your cart.",
     cartCleared: "Cart emptied.",
     emptyCartMessage: "Add a product before preparing the order.",
@@ -391,6 +413,8 @@ const translations = {
     confirmDemoPayment: "Simulate purchase",
     closeCheckout: "Close checkout window",
     demoSuccessTitle: "Demo purchase completed!",
+    localOrderSuccessTitle: "Your order is ready!",
+    localOrderSuccessMessage: "Your demo order has been registered with payment due at the café. No charge was made.",
     demoSuccessMessage: "This is a demonstration. No charge was made and no banking information was sent.",
     demoOrderNumber: "Demo reference",
     demoOrderTotal: "Simulated total",
@@ -404,19 +428,69 @@ const translations = {
   }
 };
 
+/* =========================================================
+   PRODUCTOS Y PRECIOS
+   ========================================================= */
+
 const products = {
-  espresso: { nameKey: "espressoName", basePrice: 2.50 },
-  latte: { nameKey: "latteName", basePrice: 3.50, hasMilkOptions: true },
-  cappuccino: { nameKey: "cappuccinoName", basePrice: 3.25, hasMilkOptions: true },
-  frappe: { nameKey: "frappeName", basePrice: 3.00, type: "frappe" },
-  "tres-leches": { nameKey: "tresLechesName", type: "dessert", presentations: { slice: 2.18, pound: 21.84 } },
-  cheesecake: { nameKey: "cheesecakeName", type: "dessert", presentations: { slice: 1.77, pound: 20.48 } },
-  "selva-negra": { nameKey: "selvaNegraName", type: "dessert", presentations: { slice: 2.46, pound: 17.75 } },
-  brownies: { nameKey: "browniesName", type: "dessert", presentations: { piece: 0.81 } }
+  espresso: {
+    nameKey: "espressoName",
+    basePrice: 2.50
+  },
+  latte: {
+    nameKey: "latteName",
+    basePrice: 3.50,
+    hasMilkOptions: true
+  },
+  cappuccino: {
+    nameKey: "cappuccinoName",
+    basePrice: 3.25,
+    hasMilkOptions: true
+  },
+  frappe: {
+    nameKey: "frappeName",
+    basePrice: 3.00,
+    type: "frappe"
+  },
+  "tres-leches": {
+    nameKey: "tresLechesName",
+    type: "dessert",
+    presentations: {
+      slice: 2.18,
+      pound: 21.84
+    }
+  },
+  cheesecake: {
+    nameKey: "cheesecakeName",
+    type: "dessert",
+    presentations: {
+      slice: 1.77,
+      pound: 20.48
+    }
+  },
+  "selva-negra": {
+    nameKey: "selvaNegraName",
+    type: "dessert",
+    presentations: {
+      slice: 2.46,
+      pound: 17.75
+    }
+  },
+  brownies: {
+    nameKey: "browniesName",
+    type: "dessert",
+    presentations: {
+      piece: 0.81
+    }
+  }
 };
 
 const prices = {
-  size: { small: -0.50, regular: 0, large: 0.75 },
+  size: {
+    small: -0.50,
+    regular: 0,
+    large: 0.75
+  },
   plantMilk: 0.50,
   extraShot: 0.75
 };
@@ -448,7 +522,6 @@ const CART_STORAGE_KEY = "luna-cafe-cart";
 const THEME_STORAGE_KEY = "luna-cafe-theme";
 const LANGUAGE_STORAGE_KEY = "luna-cafe-language";
 const DEMO_ORDERS_KEY = "luna-cafe-demo-orders";
-const WHATSAPP_NUMBER = ""; // Configurá el número del negocio, solo dígitos y prefijo internacional.
 
 function localStorageSafe(key, fallback = null) {
   try {
@@ -528,6 +601,19 @@ function initLunaCafe() {
     backToTop: $("#back-to-top"),
     toast: $("#toast"),
 
+    productModalLayer: $("#product-modal-layer"),
+    productModal: $("#product-modal"),
+    productModalBackdrop: $("#product-modal-backdrop"),
+    closeProductModalButton: $("#close-product-modal"),
+    cancelProductModalButton: $("#cancel-product-modal"),
+    confirmProductModalButton: $("#confirm-product-modal"),
+    productModalOptions: $("#product-modal-options"),
+    productModalImage: $("#product-modal-image"),
+    productModalName: $("#product-modal-name"),
+    productModalDescription: $("#product-modal-description"),
+    productModalPrice: $("#product-modal-price"),
+    productModalQuantity: $("#product-modal-quantity"),
+
     menu: $("#menu"),
     filterStatus: $("#menu-filter-status"),
     mobileFilterToggle: $("#mobile-filter-toggle"),
@@ -536,7 +622,9 @@ function initLunaCafe() {
   };
 
   if (Object.values(el).some((node) => !node)) {
-    console.error("Luna Café: faltan elementos en el HTML. Comprobá que el archivo se haya copiado completo.");
+    console.error(
+      "Luna Café: faltan elementos en el HTML. Comprobá que el archivo se haya copiado completo."
+    );
     return;
   }
 
@@ -548,10 +636,34 @@ function initLunaCafe() {
   let toastTimer = null;
   let previousCartFocus = null;
   let clearFocus = null;
+  let productModalFocus = null;
+  let activeProductId = null;
+  let selectedFrappeFlavor = "chocolate";
 
   const t = () => translations[language];
   const money = (amount) => `$${Number(amount).toFixed(2)}`;
-  const getItemCount = () => cart.reduce((sum, item) => sum + item.qty, 0);
+
+  /*
+   * Cantidad total de unidades pedidas.
+   * Se usa para conservar las cantidades del carrito,
+   * no para el contador redondo del encabezado.
+   */
+  const getItemCount = () =>
+    cart.reduce((sum, item) => sum + item.qty, 0);
+
+  /*
+   * NUEVO:
+   * Cuenta los tipos de productos distintos usando sus IDs.
+   *
+   * Cinco espressos = 1 tipo.
+   * Cinco espressos + un latte = 2 tipos.
+   * Cinco espressos + un latte + dos brownies = 3 tipos.
+   *
+   * Si un producto está personalizado de dos formas diferentes,
+   * se sigue contando como un solo tipo en el contador exterior.
+   */
+  const getUniqueProductCount = () =>
+    new Set(cart.map((item) => item.id)).size;
 
   const escapeHTML = (value) => String(value)
     .replaceAll("&", "&amp;")
@@ -560,13 +672,12 @@ function initLunaCafe() {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  const keyFor = (item) =>
-    `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
-
   function defaultSize(product) {
-    return product.type === "dessert"
-      ? Object.keys(product.presentations)[0]
-      : "regular";
+    if (product.type === "dessert") {
+      return product.presentations.slice !== undefined ? "slice" : "piece";
+    }
+
+    return "regular";
   }
 
   function readCart() {
@@ -623,6 +734,10 @@ function initLunaCafe() {
     writeStorage(CART_STORAGE_KEY, JSON.stringify(cart));
   }
 
+  function keyFor(item) {
+    return `${item.id}|${item.size}|${item.milk}|${item.extraShot ? 1 : 0}|${item.flavor || ""}`;
+  }
+
   function subtotal() {
     return cart.reduce((sum, item) => sum + getPrice(item) * item.qty, 0);
   }
@@ -643,7 +758,9 @@ function initLunaCafe() {
       value += prices.plantMilk;
     }
 
-    if (item.extraShot) value += prices.extraShot;
+    if (item.extraShot) {
+      value += prices.extraShot;
+    }
 
     return Math.max(0, Math.round(value * 100) / 100);
   }
@@ -658,7 +775,10 @@ function initLunaCafe() {
     }, 2600);
   }
 
-  /* TEMA */
+  /* =======================================================
+     TEMA
+     ======================================================= */
+
   function setTheme(theme, remember = false) {
     root.dataset.theme = theme;
 
@@ -672,7 +792,10 @@ function initLunaCafe() {
     if (remember) writeStorage(THEME_STORAGE_KEY, theme);
   }
 
-  /* NAVEGACIÓN */
+  /* =======================================================
+     NAVEGACIÓN
+     ======================================================= */
+
   function updateMenuButton() {
     const isOpen = el.nav.classList.contains("is-open");
     const label = isOpen ? t().closeMenu : t().openMenu;
@@ -689,7 +812,10 @@ function initLunaCafe() {
     updateFloatingCart();
   }
 
-  /* FILTROS */
+  /* =======================================================
+     FILTROS
+     ======================================================= */
+
   function updateMenuFilter(filter = activeFilter) {
     const keys = {
       all: "filterAll",
@@ -708,7 +834,6 @@ function initLunaCafe() {
 
     $$("[data-menu-filter]", el.menu).forEach((button) => {
       const active = button.dataset.menuFilter === filter;
-
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
     });
@@ -731,7 +856,10 @@ function initLunaCafe() {
     if (restoreFocus) el.mobileFilterToggle.focus();
   }
 
-  /* IDIOMA */
+  /* =======================================================
+     IDIOMA
+     ======================================================= */
+
   function setLanguage(next, remember = false) {
     language = translations[next] ? next : "es";
     root.lang = language;
@@ -749,7 +877,9 @@ function initLunaCafe() {
 
     $$("[data-i18n-aria-label]").forEach((node) => {
       const key = node.dataset.i18nAriaLabel;
-      if (Object.hasOwn(t(), key)) node.setAttribute("aria-label", t()[key]);
+      if (Object.hasOwn(t(), key)) {
+        node.setAttribute("aria-label", t()[key]);
+      }
     });
 
     el.languageShort.textContent = t().languageShort;
@@ -760,49 +890,38 @@ function initLunaCafe() {
     setTheme(root.dataset.theme || "light");
     updateMenuButton();
     updateMenuFilter(activeFilter);
-    updatePricesAndImages();
+    translateProductModalOptions();
+    updateProductModalPrice();
     renderCart();
 
-    if (remember) writeStorage(LANGUAGE_STORAGE_KEY, language);
+    if (remember) {
+      writeStorage(LANGUAGE_STORAGE_KEY, language);
+    }
   }
 
-  /* PRODUCTOS */
+  /* =======================================================
+     CONFIGURACIÓN DE PRODUCTO
+     ======================================================= */
+
   function readCardConfig(card) {
-    const product = products[card.dataset.productId];
+    const id = card.dataset.productId;
+    const product = products[id];
+
+    if (!product) return null;
+
     const sizeSelect = card.querySelector("[data-size-select]");
     const milkSelect = card.querySelector("[data-milk-select]");
     const shotCheckbox = card.querySelector("[data-extra-shot]");
     const flavorSelect = card.querySelector("[data-flavor-select]");
 
     return {
-      id: card.dataset.productId,
+      id,
       size: sizeSelect?.value || defaultSize(product),
       milk: milkSelect?.value || "whole",
       extraShot: Boolean(shotCheckbox?.checked),
       ...(flavorSelect ? { flavor: flavorSelect.value } : {}),
       qty: 1
     };
-  }
-
-  function updatePricesAndImages() {
-    $$(".product-card").forEach((card) => {
-      const price = card.querySelector("[data-current-price]");
-
-      if (price) {
-        price.textContent = money(getPrice(readCardConfig(card)));
-      }
-
-      if (card.dataset.productId === "frappe") {
-        const flavorName = card.querySelector("[data-flavor-select]")?.value || "chocolate";
-        const flavor = frappeFlavors[flavorName] || frappeFlavors.chocolate;
-        const image = card.querySelector("[data-frappe-image]");
-
-        if (image) {
-          image.src = flavor.image;
-          image.alt = t()[flavor.altKey];
-        }
-      }
-    });
   }
 
   function getOptionSummary(item) {
@@ -836,7 +955,153 @@ function initLunaCafe() {
     return parts.join(" · ");
   }
 
-  /* CARRITO */
+  /* =======================================================
+     MODAL DE PERSONALIZACIÓN
+     ======================================================= */
+
+  function translateProductModalOptions() {
+    if (!el.productModalOptions) return;
+
+    $$("[data-i18n]", el.productModalOptions).forEach((node) => {
+      const key = node.dataset.i18n;
+      if (Object.hasOwn(t(), key)) node.textContent = t()[key];
+    });
+
+    $$("[data-i18n-alt]", el.productModalOptions).forEach((node) => {
+      const key = node.dataset.i18nAlt;
+      if (Object.hasOwn(t(), key)) node.alt = t()[key];
+    });
+  }
+
+  function updateProductModalPrice() {
+    if (!activeProductId || !el.productModalOptions) return;
+
+    const configuredItem = readCardConfig(el.productModal);
+    if (!configuredItem) return;
+
+    const quantityText = el.productModalQuantity.value.trim();
+    const parsedQuantity = Number.parseInt(quantityText, 10);
+
+    const quantity = quantityText === ""
+      ? 0
+      : Math.max(
+          0,
+          Math.min(99, Number.isFinite(parsedQuantity) ? parsedQuantity : 0)
+        );
+
+    const total = Math.round(getPrice(configuredItem) * quantity * 100) / 100;
+    el.productModalPrice.textContent = money(total);
+
+    const flavorSelect =
+      el.productModalOptions.querySelector("[data-flavor-select]");
+
+    if (flavorSelect && activeProductId === "frappe") {
+      selectedFrappeFlavor = flavorSelect.value;
+
+      const flavor =
+        frappeFlavors[selectedFrappeFlavor] || frappeFlavors.chocolate;
+
+      const cardImage = $("[data-frappe-image]");
+
+      el.productModalImage.src = flavor.image;
+      el.productModalImage.alt = t()[flavor.altKey];
+
+      if (cardImage) {
+        cardImage.src = flavor.image;
+        cardImage.alt = t()[flavor.altKey];
+      }
+    }
+  }
+
+  function openProductModal(card, trigger) {
+    const id = card?.dataset.productId;
+    if (!id || !products[id]) return;
+
+    activeProductId = id;
+    productModalFocus = trigger || document.activeElement;
+    el.productModal.dataset.productId = id;
+
+    el.productModalName.textContent = t()[products[id].nameKey];
+
+    const description = card.querySelector(".product-description");
+    el.productModalDescription.textContent = description
+      ? description.textContent.trim()
+      : "";
+
+    const image = card.querySelector(".product-image");
+    el.productModalImage.src = image ? image.src : "";
+    el.productModalImage.alt = image ? image.alt : t()[products[id].nameKey];
+
+    const template = card.querySelector(".product-options-template");
+    el.productModalOptions.replaceChildren();
+
+    if (template) {
+      el.productModalOptions.append(template.content.cloneNode(true));
+    }
+
+    const modalFlavorSelect =
+      el.productModalOptions.querySelector("[data-flavor-select]");
+
+    if (modalFlavorSelect && id === "frappe") {
+      modalFlavorSelect.value = selectedFrappeFlavor;
+    }
+
+    translateProductModalOptions();
+
+    // Empieza siempre en una unidad; las bebidas usan Regular
+    // y los pasteles empiezan en Slice.
+    el.productModalQuantity.value = "1";
+
+    el.productModalLayer.hidden = false;
+    el.productModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("product-modal-open");
+
+    updateProductModalPrice();
+
+    window.requestAnimationFrame(() => el.productModal.focus());
+  }
+
+  function closeProductModal(restoreFocus = true) {
+    if (el.productModalLayer.hidden) return;
+
+    el.productModalLayer.hidden = true;
+    el.productModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("product-modal-open");
+
+    activeProductId = null;
+    el.productModalOptions.replaceChildren();
+
+    updateFloatingCart();
+
+    if (
+      restoreFocus
+      && productModalFocus
+      && typeof productModalFocus.focus === "function"
+    ) {
+      productModalFocus.focus();
+    }
+  }
+
+  function confirmProductOrder() {
+    if (!activeProductId) return;
+
+    const quantity = Math.max(
+      1,
+      Math.min(99, Number.parseInt(el.productModalQuantity.value, 10) || 1)
+    );
+
+    const item = readCardConfig(el.productModal);
+    if (!item) return;
+
+    item.qty = quantity;
+    addToCart(item);
+    closeProductModal(false);
+  }
+
+  /* =======================================================
+     CARRITO
+     ======================================================= */
+
   function renderCart() {
     el.subtotal.textContent = money(subtotal());
     el.checkoutTotal.textContent = money(subtotal());
@@ -863,14 +1128,22 @@ function initLunaCafe() {
         </div>
 
         <div class="quantity-control" aria-label="${escapeHTML(name)}">
-          <button type="button" data-cart-action="decrease" data-cart-key="${key}"
+          <button type="button"
+            data-cart-action="decrease"
+            data-cart-key="${key}"
             aria-label="${escapeHTML(t().decreaseQuantity)}">−</button>
+
           <span class="quantity-value">${item.qty}</span>
-          <button type="button" data-cart-action="increase" data-cart-key="${key}"
+
+          <button type="button"
+            data-cart-action="increase"
+            data-cart-key="${key}"
             aria-label="${escapeHTML(t().increaseQuantity)}">+</button>
         </div>
 
-        <button class="remove-item" type="button" data-cart-action="remove"
+        <button class="remove-item"
+          type="button"
+          data-cart-action="remove"
           data-cart-key="${key}">${escapeHTML(t().removeItem)}</button>
       </article>`;
     }).join("");
@@ -878,14 +1151,32 @@ function initLunaCafe() {
     updateCartLabels();
   }
 
+  /*
+   * ACTUALIZACIÓN DEL CONTADOR EXTERIOR
+   *
+   * Antes se usaba getItemCount(), que suma todas las unidades.
+   * Ahora usamos getUniqueProductCount(), que cuenta IDs distintos.
+   *
+   * El número que aparece fuera del carrito cambia, pero las
+   * cantidades individuales dentro del carrito no se modifican.
+   */
   function updateCartLabels() {
-    const count = getItemCount();
-    const label = `${t().openCart}: ${count} ${count === 1 ? t().oneItem : t().manyItems}`;
+    const count = getUniqueProductCount();
+
+    const label = `${t().openCart}: ${count} ${
+      count === 1 ? t().oneItem : t().manyItems
+    }`;
+
     const isOpen = document.body.classList.contains("cart-open");
 
     $("#cart-count").textContent = String(count);
     $("#mobile-cart-count").textContent = String(count);
     $("#mobile-cart-fab-count").textContent = String(count);
+
+    el.mobileCartToggle.classList.toggle(
+      "is-cart-empty",
+      count === 0
+    );
 
     [el.cartToggle, el.mobileCartToggle, el.floatingCart].forEach((button) => {
       button.setAttribute("aria-label", label);
@@ -898,15 +1189,18 @@ function initLunaCafe() {
   function anyModalOpen() {
     return document.body.classList.contains("cart-open")
       || document.body.classList.contains("checkout-open")
-      || document.body.classList.contains("clear-confirm-open");
+      || document.body.classList.contains("clear-confirm-open")
+      || document.body.classList.contains("product-modal-open");
   }
 
   function updateFloatingCart() {
     const isMobile = mobileLayout.matches;
-    const count = getItemCount();
+
+    // Solo necesitamos saber si hay algún producto para mostrarlo.
+    const hasProducts = cart.length > 0;
 
     const show = isMobile
-      && count > 0
+      && hasProducts
       && window.scrollY > 180
       && !anyModalOpen()
       && !el.nav.classList.contains("is-open");
@@ -941,6 +1235,10 @@ function initLunaCafe() {
 
     el.cartOverlay.hidden = false;
     el.cartDrawer.setAttribute("aria-hidden", "false");
+    el.cartToggle.setAttribute("aria-expanded", "true");
+    el.mobileCartToggle.setAttribute("aria-expanded", "true");
+    el.floatingCart.setAttribute("aria-expanded", "true");
+
     document.body.classList.add("cart-open");
 
     updateCartLabels();
@@ -950,14 +1248,18 @@ function initLunaCafe() {
 
   function closeCart(restoreFocus = false) {
     document.body.classList.remove("cart-open");
+
     el.cartDrawer.setAttribute("aria-hidden", "true");
+    el.cartToggle.setAttribute("aria-expanded", "false");
+    el.mobileCartToggle.setAttribute("aria-expanded", "false");
+    el.floatingCart.setAttribute("aria-expanded", "false");
     el.cartOverlay.hidden = true;
 
     updateCartLabels();
     updateBackToTop();
 
     if (restoreFocus && previousCartFocus?.isConnected) {
-      previousCartFocus.focus();
+      previousCartFocus.focus({ preventScroll: true });
     }
   }
 
@@ -996,12 +1298,17 @@ function initLunaCafe() {
   }
 
   function addToCart(item) {
+    const quantity = Math.max(
+      1,
+      Math.min(99, Number.parseInt(item.qty, 10) || 1)
+    );
+
     const existing = cart.find((line) => keyFor(line) === keyFor(item));
 
     if (existing) {
-      existing.qty = Math.min(99, existing.qty + 1);
+      existing.qty = Math.min(99, existing.qty + quantity);
     } else {
-      cart.push({ ...item, qty: 1 });
+      cart.push({ ...item, qty: quantity });
     }
 
     saveCart();
@@ -1010,21 +1317,25 @@ function initLunaCafe() {
     toast(`${t()[products[item.id].nameKey]} ${t().addedToCart}`);
   }
 
-  /* PEDIDO POR WHATSAPP */
-  function orderSummary(note = t().checkoutNote) {
-    const rows = cart.map((item) =>
-      `${item.qty} × ${t()[products[item.id].nameKey]} (${getOptionSummary(item)}) — ${money(getPrice(item) * item.qty)}`
-    );
+  /* =======================================================
+     GUARDAR PEDIDOS FICTICIOS
+     ======================================================= */
 
-    return [
-      `Luna Café — ${t().cartTitle}`,
-      "",
-      ...rows,
-      "",
-      `${t().subtotal}: ${money(subtotal())}`,
-      note
-    ].join("\n");
+  function saveDemoOrder(order) {
+    let history = [];
+
+    try {
+      history = JSON.parse(localStorage.getItem(DEMO_ORDERS_KEY) || "[]");
+      if (!Array.isArray(history)) history = [];
+    } catch {
+      history = [];
+    }
+
+    history.unshift(order);
+    writeStorage(DEMO_ORDERS_KEY, JSON.stringify(history.slice(0, 50)));
   }
+
+  /* PEDIDO DE DEMOSTRACIÓN PARA PAGAR EN EL LOCAL */
 
   function orderLocal() {
     if (!cart.length) {
@@ -1032,17 +1343,55 @@ function initLunaCafe() {
       return;
     }
 
-    const message = orderSummary();
-    const phone = WHATSAPP_NUMBER.replace(/\D/g, "");
+    const total = subtotal();
+    const orderId = `LC-LOCAL-${Date.now().toString().slice(-8)}`;
 
-    const url = phone
-      ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
-      : `https://wa.me/?text=${encodeURIComponent(message)}`;
+    const items = cart.map((item) => ({
+      id: item.id,
+      name: t()[products[item.id].nameKey],
+      options: getOptionSummary(item),
+      quantity: item.qty,
+      unitPrice: getPrice(item),
+      lineTotal: Math.round(getPrice(item) * item.qty * 100) / 100
+    }));
 
-    window.open(url, "_blank", "noopener,noreferrer");
+    saveDemoOrder({
+      id: orderId,
+      timestamp: new Date().toISOString(),
+      total,
+      currency: "USD",
+      paymentMethod: "pay-at-cafe",
+      paymentStatus: "pending",
+      items,
+      demo: true
+    });
+
+    closeCart(false);
+
+    el.orderNumber.textContent = orderId;
+    el.orderTotal.textContent = money(total);
+    el.checkoutSuccess.querySelector("h3").textContent = t().localOrderSuccessTitle;
+    el.checkoutSuccess.querySelector("p").textContent = t().localOrderSuccessMessage;
+
+    el.checkoutFormView.hidden = true;
+    el.checkoutSuccess.hidden = false;
+    el.checkoutLayer.hidden = false;
+
+    el.checkoutModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("checkout-open");
+
+    cart = [];
+    saveCart();
+    renderCart();
+    updateBackToTop();
+
+    window.requestAnimationFrame(() => el.checkoutModal.focus());
   }
 
-  /* CHECKOUT DE DEMOSTRACIÓN */
+  /* =======================================================
+     CHECKOUT DE DEMOSTRACIÓN
+     ======================================================= */
+
   function openCheckout() {
     if (!cart.length) {
       toast(t().emptyCartMessage);
@@ -1055,6 +1404,10 @@ function initLunaCafe() {
 
     el.checkoutFormView.hidden = false;
     el.checkoutSuccess.hidden = true;
+
+    el.checkoutSuccess.querySelector("h3").textContent = t().demoSuccessTitle;
+    el.checkoutSuccess.querySelector("p").textContent = t().demoSuccessMessage;
+
     el.checkoutTotal.textContent = money(subtotal());
     el.checkoutLayer.hidden = false;
 
@@ -1094,7 +1447,12 @@ function initLunaCafe() {
   }
 
   function clearCardErrors() {
-    [el.cardholder, el.cardNumber, el.cardExpiry, el.cardCvv].forEach((input) => {
+    [
+      el.cardholder,
+      el.cardNumber,
+      el.cardExpiry,
+      el.cardCvv
+    ].forEach((input) => {
       input.setCustomValidity("");
     });
   }
@@ -1160,20 +1518,6 @@ function initLunaCafe() {
     return el.checkoutForm.reportValidity();
   }
 
-  function saveDemoOrder(order) {
-    let history = [];
-
-    try {
-      history = JSON.parse(localStorage.getItem(DEMO_ORDERS_KEY) || "[]");
-      if (!Array.isArray(history)) history = [];
-    } catch {
-      history = [];
-    }
-
-    history.unshift(order);
-    writeStorage(DEMO_ORDERS_KEY, JSON.stringify(history.slice(0, 50)));
-  }
-
   function simulatePurchase(event) {
     event.preventDefault();
 
@@ -1197,6 +1541,7 @@ function initLunaCafe() {
       lineTotal: Math.round(getPrice(item) * item.qty * 100) / 100
     }));
 
+    // No se guardan los datos de la tarjeta.
     saveDemoOrder({
       id: orderId,
       timestamp: new Date().toISOString(),
@@ -1211,6 +1556,7 @@ function initLunaCafe() {
 
     el.checkoutForm.reset();
     clearCardErrors();
+
     el.checkoutFormView.hidden = true;
     el.checkoutSuccess.hidden = false;
 
@@ -1221,7 +1567,10 @@ function initLunaCafe() {
     el.checkoutModal.focus();
   }
 
-  /* EVENTOS */
+  /* =======================================================
+     EVENTOS
+     ======================================================= */
+
   el.mobileFilterToggle.addEventListener("click", () => {
     const willOpen =
       el.mobileFilterToggle.getAttribute("aria-expanded") !== "true";
@@ -1283,25 +1632,44 @@ function initLunaCafe() {
     }
   });
 
-  el.menu.addEventListener("change", (event) => {
+  el.productModalOptions.addEventListener("change", (event) => {
     if (event.target.matches(
       "[data-size-select], [data-milk-select], [data-extra-shot], [data-flavor-select]"
     )) {
-      updatePricesAndImages();
+      updateProductModalPrice();
     }
   });
 
+  // Comprar abre el modal correspondiente al producto.
   el.menu.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-add-to-cart]");
+    const button = event.target.closest("[data-open-product]");
     if (!button) return;
 
     const card = button.closest(".product-card");
-
-    if (card && products[card.dataset.productId]) {
-      addToCart(readCardConfig(card));
-    }
+    if (card) openProductModal(card, button);
   });
 
+  el.productModalBackdrop.addEventListener("click", () => closeProductModal());
+  el.closeProductModalButton.addEventListener("click", () => closeProductModal());
+  el.cancelProductModalButton.addEventListener("click", () => closeProductModal());
+  el.confirmProductModalButton.addEventListener("click", confirmProductOrder);
+
+  // La cantidad se actualiza en tiempo real en el modal.
+  el.productModalQuantity.addEventListener("input", () => {
+    updateProductModalPrice();
+  });
+
+  el.productModalQuantity.addEventListener("change", () => {
+    const value = Number.parseInt(el.productModalQuantity.value, 10);
+
+    el.productModalQuantity.value = String(
+      Math.max(1, Math.min(99, Number.isFinite(value) ? value : 1))
+    );
+
+    updateProductModalPrice();
+  });
+
+  // Las cantidades dentro del carrito conservan su función habitual.
   el.cartItems.addEventListener("click", (event) => {
     const button = event.target.closest("[data-cart-action]");
     if (!button) return;
@@ -1316,6 +1684,7 @@ function initLunaCafe() {
       item.qty = Math.min(99, item.qty + 1);
     } else if (action === "decrease") {
       item.qty -= 1;
+
       if (item.qty <= 0) {
         cart = cart.filter((line) => keyFor(line) !== itemKey);
       }
@@ -1330,8 +1699,9 @@ function initLunaCafe() {
   el.cartToggle.addEventListener("click", () => openCart(el.cartToggle));
   el.mobileCartToggle.addEventListener("click", () => openCart(el.mobileCartToggle));
   el.floatingCart.addEventListener("click", () => openCart(el.floatingCart));
+
   el.closeCartButton.addEventListener("click", () => closeCart(true));
-  el.cartOverlay.addEventListener("click", () => closeCart(true));
+  el.cartOverlay.addEventListener("click", () => closeCart(false));
 
   el.browseMenuButton.addEventListener("click", () => {
     closeCart(false);
@@ -1361,6 +1731,11 @@ function initLunaCafe() {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      if (!el.productModalLayer.hidden) {
+        closeProductModal();
+        return;
+      }
+
       if (!el.mobileFilterOptions.hidden) {
         closeMobileFilter(true);
         return;
@@ -1392,9 +1767,15 @@ function initLunaCafe() {
 
     let container = null;
 
-    if (!el.clearLayer.hidden) container = el.clearDialog;
-    else if (!el.checkoutLayer.hidden) container = el.checkoutModal;
-    else if (document.body.classList.contains("cart-open")) container = el.cartDrawer;
+    if (!el.productModalLayer.hidden) {
+      container = el.productModal;
+    } else if (!el.clearLayer.hidden) {
+      container = el.clearDialog;
+    } else if (!el.checkoutLayer.hidden) {
+      container = el.checkoutModal;
+    } else if (document.body.classList.contains("cart-open")) {
+      container = el.cartDrawer;
+    }
 
     if (!container) return;
 
@@ -1417,7 +1798,8 @@ function initLunaCafe() {
   });
 
   el.backToTop.addEventListener("click", () => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     window.scrollTo({
       top: 0,
@@ -1434,6 +1816,10 @@ function initLunaCafe() {
     updateFloatingCart();
   });
 
+  /* =======================================================
+     INICIALIZACIÓN
+     ======================================================= */
+
   const savedTheme = localStorageSafe(THEME_STORAGE_KEY);
 
   const initialTheme = savedTheme === "light" || savedTheme === "dark"
@@ -1445,12 +1831,22 @@ function initLunaCafe() {
   updateMenuFilter("all");
   closeMenu();
   renderCart();
-  updatePricesAndImages();
   updateBackToTop();
 }
 
+function bootLunaCafe() {
+  try {
+    initLunaCafe();
+  } catch (error) {
+    console.error(
+      "Luna Café: ocurrió un error al iniciar la página.",
+      error
+    );
+  }
+}
+
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initLunaCafe);
+  document.addEventListener("DOMContentLoaded", bootLunaCafe, { once: true });
 } else {
-  initLunaCafe();
+  bootLunaCafe();
 }
