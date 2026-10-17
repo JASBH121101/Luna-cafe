@@ -13,7 +13,7 @@ const translations = {
     customizeTitle: "Personalizá tu pedido",
     closeProductModal: "Cerrar personalización",
     quantityLabel: "Cantidad",
-    unitPriceLabel: "Importe total",
+    unitPriceLabel: "Precio unitario",
     cancel: "Cancelar",
     languageShort: "EN",
     languageFull: "English",
@@ -161,6 +161,16 @@ const translations = {
     footer: "© 2026 Luna Café. Todos los derechos reservados.",
     footerFAQ: "Preguntas frecuentes",
 
+    reviewOrderKicker: "REVISÁ TU PEDIDO",
+    reviewOrderTitle: "Confirmar pedido",
+    reviewOrderSubtitle: "Comprobá los detalles antes de agregarlo al carrito.",
+    productLabel: "Producto",
+    extrasLabel: "Extras",
+    orderTotalLabel: "Total",
+    reviewBack: "Volver",
+    reviewConfirm: "Confirmar",
+    closeProductConfirmation: "Cerrar confirmación",
+
     orderKicker: "TU SELECCIÓN",
     cartTitle: "Tu pedido",
     cartEmpty: "Tu carrito está vacío.",
@@ -227,7 +237,7 @@ const translations = {
     customizeTitle: "Customize your order",
     closeProductModal: "Close customization",
     quantityLabel: "Quantity",
-    unitPriceLabel: "Total",
+    unitPriceLabel: "Unit price",
     cancel: "Cancel",
     languageShort: "ES",
     languageFull: "Español",
@@ -374,6 +384,16 @@ const translations = {
     contactNote: "This page is a portfolio demo; no real orders or payments are processed.",
     footer: "© 2026 Luna Café. All rights reserved.",
     footerFAQ: "Frequently asked questions",
+
+    reviewOrderKicker: "REVIEW YOUR ORDER",
+    reviewOrderTitle: "Confirm order",
+    reviewOrderSubtitle: "Check the details before adding this item to your cart.",
+    productLabel: "Product",
+    extrasLabel: "Extras",
+    orderTotalLabel: "Total",
+    reviewBack: "Back",
+    reviewConfirm: "Confirm",
+    closeProductConfirmation: "Close confirmation",
 
     orderKicker: "YOUR SELECTION",
     cartTitle: "Your order",
@@ -614,12 +634,46 @@ function initLunaCafe() {
     productModalPrice: $("#product-modal-price"),
     productModalQuantity: $("#product-modal-quantity"),
 
+    productConfirmationLayer: $("#product-confirmation-layer"),
+    productConfirmationModal: $("#product-confirmation-modal"),
+    productConfirmationBackdrop: $("#product-confirmation-backdrop"),
+    closeProductConfirmationButton: $("#close-product-confirmation"),
+    backToProductCustomizationButton: $("#back-to-product-customization"),
+    confirmProductOrderButton: $("#confirm-product-order"),
+    productConfirmationImage: $("#product-confirmation-image"),
+    productConfirmationName: $("#product-confirmation-name"),
+    productConfirmationOptions: $("#product-confirmation-options"),
+    productConfirmationSizeRow: $("#product-confirmation-size-row"),
+    productConfirmationSize: $("#product-confirmation-size"),
+    productConfirmationFlavorRow: $("#product-confirmation-flavor-row"),
+    productConfirmationFlavor: $("#product-confirmation-flavor"),
+    productConfirmationMilkRow: $("#product-confirmation-milk-row"),
+    productConfirmationMilk: $("#product-confirmation-milk"),
+    productConfirmationExtraRow: $("#product-confirmation-extra-row"),
+    productConfirmationExtra: $("#product-confirmation-extra"),
+    productConfirmationUnitPrice: $("#product-confirmation-unit-price"),
+    productConfirmationQuantity: $("#product-confirmation-quantity"),
+    productConfirmationTotal: $("#product-confirmation-total"),
+
     menu: $("#menu"),
     filterStatus: $("#menu-filter-status"),
     mobileFilterToggle: $("#mobile-filter-toggle"),
     mobileFilterOptions: $("#mobile-filter-options"),
     mobileFilterCurrent: $("#mobile-filter-current")
   };
+
+  // En pantallas táctiles, retirar el foco visual tras tocar idioma o tema.
+  if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+    [el.languageButton, el.themeButton].forEach((button) => {
+      button.addEventListener("pointerup", () => {
+        window.setTimeout(() => {
+          if (document.activeElement === button) {
+            button.blur();
+          }
+        }, 0);
+      });
+    });
+  }
 
   if (Object.values(el).some((node) => !node)) {
     console.error(
@@ -639,29 +693,16 @@ function initLunaCafe() {
   let productModalFocus = null;
   let activeProductId = null;
   let selectedFrappeFlavor = "chocolate";
+  let pendingProductOrder = null;
+  let productConfirmationReturnFocus = null;
 
   const t = () => translations[language];
   const money = (amount) => `$${Number(amount).toFixed(2)}`;
 
-  /*
-   * Cantidad total de unidades pedidas.
-   * Se usa para conservar las cantidades del carrito,
-   * no para el contador redondo del encabezado.
-   */
   const getItemCount = () =>
     cart.reduce((sum, item) => sum + item.qty, 0);
 
-  /*
-   * NUEVO:
-   * Cuenta los tipos de productos distintos usando sus IDs.
-   *
-   * Cinco espressos = 1 tipo.
-   * Cinco espressos + un latte = 2 tipos.
-   * Cinco espressos + un latte + dos brownies = 3 tipos.
-   *
-   * Si un producto está personalizado de dos formas diferentes,
-   * se sigue contando como un solo tipo en el contador exterior.
-   */
+  // El contador exterior representa tipos de productos distintos.
   const getUniqueProductCount = () =>
     new Set(cart.map((item) => item.id)).size;
 
@@ -892,6 +933,11 @@ function initLunaCafe() {
     updateMenuFilter(activeFilter);
     translateProductModalOptions();
     updateProductModalPrice();
+
+    if (!el.productConfirmationLayer.hidden && pendingProductOrder) {
+      renderProductConfirmation(pendingProductOrder);
+    }
+
     renderCart();
 
     if (remember) {
@@ -1064,6 +1110,11 @@ function initLunaCafe() {
   function closeProductModal(restoreFocus = true) {
     if (el.productModalLayer.hidden) return;
 
+    if (!el.productConfirmationLayer.hidden) {
+      closeProductConfirmation(false);
+    }
+
+    pendingProductOrder = null;
     el.productModalLayer.hidden = true;
     el.productModal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("product-modal-open");
@@ -1082,6 +1133,10 @@ function initLunaCafe() {
     }
   }
 
+  /*
+   * ORDENAR:
+   * Primero construye el resumen, pero todavía no añade el producto.
+   */
   function confirmProductOrder() {
     if (!activeProductId) return;
 
@@ -1094,7 +1149,123 @@ function initLunaCafe() {
     if (!item) return;
 
     item.qty = quantity;
+    pendingProductOrder = { ...item };
+    productConfirmationReturnFocus = el.confirmProductModalButton;
+
+    renderProductConfirmation(pendingProductOrder);
+
+    el.productConfirmationLayer.hidden = false;
+    el.productConfirmationModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("product-confirmation-open");
+
+    updateFloatingCart();
+
+    window.requestAnimationFrame(() => {
+      el.productConfirmationModal.focus();
+    });
+  }
+
+  /*
+   * Pinta los datos reales de la selección en la ventana de resumen.
+   * El precio unitario y el total se calculan con la misma función
+   * utilizada por el carrito.
+   */
+  function renderProductConfirmation(item) {
+    if (!item || !products[item.id]) return;
+
+    const product = products[item.id];
+    const card = document.querySelector(
+      `.product-card[data-product-id="${item.id}"]`
+    );
+    const image = card?.querySelector(".product-image");
+
+    const unitPrice = getPrice(item);
+    const total = Math.round(unitPrice * item.qty * 100) / 100;
+
+    el.productConfirmationName.textContent = t()[product.nameKey];
+    el.productConfirmationImage.src = image?.src || "";
+    el.productConfirmationImage.alt = image?.alt || t()[product.nameKey];
+    el.productConfirmationOptions.textContent = getOptionSummary(item);
+
+    el.productConfirmationQuantity.textContent = String(item.qty);
+    el.productConfirmationUnitPrice.textContent = money(unitPrice);
+    el.productConfirmationTotal.textContent = money(total);
+
+    if (product.type === "dessert") {
+      el.productConfirmationSizeRow.hidden = false;
+      el.productConfirmationSize.textContent = item.id === "brownies"
+        ? t().brownieUnitLabel
+        : (item.size === "pound" ? t().poundOption : t().sliceOption);
+    } else {
+      el.productConfirmationSizeRow.hidden = false;
+      el.productConfirmationSize.textContent = item.size === "small"
+        ? t().sizeSmall
+        : item.size === "large"
+          ? t().sizeLarge
+          : t().sizeRegular;
+    }
+
+    const hasFlavor = product.type === "frappe";
+
+    el.productConfirmationFlavorRow.hidden = !hasFlavor;
+    el.productConfirmationFlavor.textContent = hasFlavor
+      ? t()[frappeFlavors[item.flavor || "chocolate"].nameKey]
+      : "";
+
+    const hasMilk = Boolean(product.hasMilkOptions);
+
+    el.productConfirmationMilkRow.hidden = !hasMilk;
+    el.productConfirmationMilk.textContent = hasMilk
+      ? (item.milk === "plant" ? t().milkPlantName : t().milkWholeName)
+      : "";
+
+    const extras = [];
+
+    if (item.extraShot) {
+      extras.push(t().extraShotLabel.replace(/\s*\(.*\)$/, ""));
+    }
+
+    el.productConfirmationExtraRow.hidden = extras.length === 0;
+    el.productConfirmationExtra.textContent = extras.join(", ");
+  }
+
+  /*
+   * VOLVER:
+   * Solo cierra el resumen. No reconstruye el formulario anterior,
+   * así que se conservan tamaño, sabor, extras y cantidad.
+   */
+  function closeProductConfirmation(keepCustomization = true) {
+    if (el.productConfirmationLayer.hidden) return;
+
+    el.productConfirmationLayer.hidden = true;
+    el.productConfirmationModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("product-confirmation-open");
+
+    updateFloatingCart();
+
+    if (keepCustomization && !el.productModalLayer.hidden) {
+      if (productConfirmationReturnFocus?.isConnected) {
+        productConfirmationReturnFocus.focus({ preventScroll: true });
+      } else {
+        el.confirmProductModalButton.focus({ preventScroll: true });
+      }
+    }
+  }
+
+  /*
+   * CONFIRMAR:
+   * Agrega al carrito una sola vez, cierra las dos ventanas
+   * y actualiza el resumen del carrito.
+   */
+  function finalizeProductOrder() {
+    if (!pendingProductOrder || !activeProductId) return;
+
+    const item = { ...pendingProductOrder };
+
+    closeProductConfirmation(false);
     addToCart(item);
+
+    pendingProductOrder = null;
     closeProductModal(false);
   }
 
@@ -1152,13 +1323,8 @@ function initLunaCafe() {
   }
 
   /*
-   * ACTUALIZACIÓN DEL CONTADOR EXTERIOR
-   *
-   * Antes se usaba getItemCount(), que suma todas las unidades.
-   * Ahora usamos getUniqueProductCount(), que cuenta IDs distintos.
-   *
-   * El número que aparece fuera del carrito cambia, pero las
-   * cantidades individuales dentro del carrito no se modifican.
+   * El contador del encabezado muestra tipos de productos distintos.
+   * Las cantidades de cada producto dentro del carrito se conservan.
    */
   function updateCartLabels() {
     const count = getUniqueProductCount();
@@ -1173,10 +1339,7 @@ function initLunaCafe() {
     $("#mobile-cart-count").textContent = String(count);
     $("#mobile-cart-fab-count").textContent = String(count);
 
-    el.mobileCartToggle.classList.toggle(
-      "is-cart-empty",
-      count === 0
-    );
+    el.mobileCartToggle.classList.toggle("is-cart-empty", count === 0);
 
     [el.cartToggle, el.mobileCartToggle, el.floatingCart].forEach((button) => {
       button.setAttribute("aria-label", label);
@@ -1190,13 +1353,12 @@ function initLunaCafe() {
     return document.body.classList.contains("cart-open")
       || document.body.classList.contains("checkout-open")
       || document.body.classList.contains("clear-confirm-open")
-      || document.body.classList.contains("product-modal-open");
+      || document.body.classList.contains("product-modal-open")
+      || document.body.classList.contains("product-confirmation-open");
   }
 
   function updateFloatingCart() {
     const isMobile = mobileLayout.matches;
-
-    // Solo necesitamos saber si hay algún producto para mostrarlo.
     const hasProducts = cart.length > 0;
 
     const show = isMobile
@@ -1602,8 +1764,56 @@ function initLunaCafe() {
     updateFloatingCart();
   });
 
+  // Navegación interna sin dejar el fragmento en la URL.
   el.nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href")?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+
+      closeMenu();
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start"
+      });
+
+      try {
+        history.replaceState(null, "", location.pathname + location.search);
+      } catch {
+        // El desplazamiento sigue funcionando aunque la URL no pueda cambiar.
+      }
+    });
+  });
+
+  // También funciona para botones y enlaces internos fuera del menú principal.
+  document.querySelectorAll("a[href^='#']:not(#site-navigation a)").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href").slice(1);
+      const target = document.getElementById(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start"
+      });
+
+      try {
+        history.replaceState(null, "", location.pathname + location.search);
+      } catch {
+        // La página puede desplazarse aunque no se actualice la URL.
+      }
+    });
   });
 
   document.addEventListener("click", (event) => {
@@ -1640,7 +1850,7 @@ function initLunaCafe() {
     }
   });
 
-  // Comprar abre el modal correspondiente al producto.
+  // Comprar abre la personalización del producto.
   el.menu.addEventListener("click", (event) => {
     const button = event.target.closest("[data-open-product]");
     if (!button) return;
@@ -1652,9 +1862,32 @@ function initLunaCafe() {
   el.productModalBackdrop.addEventListener("click", () => closeProductModal());
   el.closeProductModalButton.addEventListener("click", () => closeProductModal());
   el.cancelProductModalButton.addEventListener("click", () => closeProductModal());
+
+  // Ordenar abre el resumen de confirmación.
   el.confirmProductModalButton.addEventListener("click", confirmProductOrder);
 
-  // La cantidad se actualiza en tiempo real en el modal.
+  // Controles de la ventana nueva.
+  el.productConfirmationBackdrop.addEventListener(
+    "click",
+    () => closeProductConfirmation(true)
+  );
+
+  el.closeProductConfirmationButton.addEventListener(
+    "click",
+    () => closeProductConfirmation(true)
+  );
+
+  el.backToProductCustomizationButton.addEventListener(
+    "click",
+    () => closeProductConfirmation(true)
+  );
+
+  el.confirmProductOrderButton.addEventListener(
+    "click",
+    finalizeProductOrder
+  );
+
+  // El precio se actualiza al escribir en la cantidad.
   el.productModalQuantity.addEventListener("input", () => {
     updateProductModalPrice();
   });
@@ -1669,7 +1902,26 @@ function initLunaCafe() {
     updateProductModalPrice();
   });
 
-  // Las cantidades dentro del carrito conservan su función habitual.
+  /*
+   * En el teclado móvil, Intro solo termina la edición de la cantidad
+   * y cierra el teclado virtual; no envía la orden.
+   */
+  el.productModalQuantity.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+
+    const value = Number.parseInt(el.productModalQuantity.value, 10);
+
+    el.productModalQuantity.value = String(
+      Math.max(1, Math.min(99, Number.isFinite(value) ? value : 1))
+    );
+
+    updateProductModalPrice();
+    el.productModalQuantity.blur();
+  });
+
+  // Las cantidades del carrito siguen funcionando de forma independiente.
   el.cartItems.addEventListener("click", (event) => {
     const button = event.target.closest("[data-cart-action]");
     if (!button) return;
@@ -1731,6 +1983,11 @@ function initLunaCafe() {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      if (!el.productConfirmationLayer.hidden) {
+        closeProductConfirmation(true);
+        return;
+      }
+
       if (!el.productModalLayer.hidden) {
         closeProductModal();
         return;
@@ -1767,7 +2024,9 @@ function initLunaCafe() {
 
     let container = null;
 
-    if (!el.productModalLayer.hidden) {
+    if (!el.productConfirmationLayer.hidden) {
+      container = el.productConfirmationModal;
+    } else if (!el.productModalLayer.hidden) {
       container = el.productModal;
     } else if (!el.clearLayer.hidden) {
       container = el.clearDialog;
@@ -1850,3 +2109,77 @@ if (document.readyState === "loading") {
 } else {
   bootLunaCafe();
 }
+
+
+/* =========================================================
+   CAFÉ LUNE — MARCA DE AGUA LIMITADA A LA SECCIÓN MENÚ
+   Aparece al entrar en #menu y desaparece al salir de ella.
+   ========================================================= */
+(() => {
+  const desktop = window.matchMedia("(min-width: 1280px)");
+  const menu = document.querySelector("#menu");
+
+  if (!menu) return;
+
+  let scheduled = false;
+
+  function updateCafeLuneLimits() {
+    scheduled = false;
+
+    if (!desktop.matches) {
+      document.body.classList.add("cafe-lune-hidden");
+      return;
+    }
+
+    /* Límites actuales de la sección menú en la pantalla */
+    const rect = menu.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    /* Si el menú está fuera de la pantalla, ocultar las marcas */
+    if (rect.bottom <= 0 || rect.top >= viewportHeight) {
+      document.body.classList.add("cafe-lune-hidden");
+      return;
+    }
+
+    /* Recortar la zona flotante a los límites visibles del menú */
+    const visibleTop = Math.max(0, rect.top);
+    const visibleBottom = Math.min(viewportHeight, rect.bottom);
+
+    if (visibleBottom <= visibleTop) {
+      document.body.classList.add("cafe-lune-hidden");
+      return;
+    }
+
+    document.documentElement.style.setProperty(
+      "--cafe-lune-top",
+      `${visibleTop}px`
+    );
+
+    document.documentElement.style.setProperty(
+      "--cafe-lune-bottom",
+      `${viewportHeight - visibleBottom}px`
+    );
+
+    document.body.classList.remove("cafe-lune-hidden");
+  }
+
+  function scheduleUpdate() {
+    if (scheduled) return;
+
+    scheduled = true;
+    window.requestAnimationFrame(updateCafeLuneLimits);
+  }
+
+  window.addEventListener("scroll", scheduleUpdate, {
+    passive: true
+  });
+
+  window.addEventListener("resize", scheduleUpdate, {
+    passive: true
+  });
+
+  desktop.addEventListener("change", scheduleUpdate);
+  window.addEventListener("load", scheduleUpdate);
+
+  updateCafeLuneLimits();
+})();
