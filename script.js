@@ -2127,7 +2127,7 @@ if (document.readyState === "loading") {
     scheduled = false;
 
     if (!desktop.matches) {
-      document.body.classList.add("cafe-lune-hidden");
+      document.body.classList.add("cafe-luna-hidden");
       return;
     }
 
@@ -2137,7 +2137,7 @@ if (document.readyState === "loading") {
 
     /* Si el menú está fuera de la pantalla, ocultar las marcas */
     if (rect.bottom <= 0 || rect.top >= viewportHeight) {
-      document.body.classList.add("cafe-lune-hidden");
+      document.body.classList.add("cafe-luna-hidden");
       return;
     }
 
@@ -2146,17 +2146,17 @@ if (document.readyState === "loading") {
     const visibleBottom = Math.min(viewportHeight, rect.bottom);
 
     if (visibleBottom <= visibleTop) {
-      document.body.classList.add("cafe-lune-hidden");
+      document.body.classList.add("cafe-luna-hidden");
       return;
     }
 
     document.documentElement.style.setProperty(
-      "--cafe-lune-top",
+      "--cafe-luna-top",
       `${visibleTop}px`
     );
 
     document.documentElement.style.setProperty(
-      "--cafe-lune-bottom",
+      "--cafe-luna-bottom",
       `${viewportHeight - visibleBottom}px`
     );
 
@@ -2167,7 +2167,7 @@ if (document.readyState === "loading") {
     if (scheduled) return;
 
     scheduled = true;
-    window.requestAnimationFrame(updateCafeLuneLimits);
+    window.requestAnimationFrame(updateCafeLunaLimits);
   }
 
   window.addEventListener("scroll", scheduleUpdate, {
@@ -2181,5 +2181,5 @@ if (document.readyState === "loading") {
   desktop.addEventListener("change", scheduleUpdate);
   window.addEventListener("load", scheduleUpdate);
 
-  updateCafeLuneLimits();
+  updateCafeLunaLimits();
 })();
