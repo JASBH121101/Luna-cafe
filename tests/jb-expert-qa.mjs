@@ -154,9 +154,10 @@ async function auditViewport(browser, origin, viewport) {
     const startTheme = layout.theme;
     for (const theme of ["light", "dark"]) {
       await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, theme);
+      await page.waitForTimeout(260);
       const contrastChecks = await page.evaluate(() => {
         const parse = (value) => {
-          const match = value.match(/[\\d.]+/g);
+          const match = value.match(/[0-9.]+/g);
           if (!match || match.length < 3) return null;
           return match.slice(0, 3).map(Number);
         };
@@ -259,6 +260,7 @@ async function auditViewport(browser, origin, viewport) {
     if (viewport.name === "desktop-1600" || viewport.name === "mobile-390") {
       for (const theme of ["light", "dark"]) {
         await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, theme);
+        await page.waitForTimeout(260);
         const axe = await new AxeBuilder({ page })
           .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
           .analyze();
@@ -278,6 +280,7 @@ async function auditViewport(browser, origin, viewport) {
         }
       }
       await page.evaluate(() => { document.documentElement.dataset.theme = "light"; });
+      await page.waitForTimeout(260);
     }
 
     await mkdir(OUTPUT, { recursive: true });
@@ -295,7 +298,7 @@ async function main() {
   }
 
   const index = await readFile(resolve(ROOT, "index.html"), "utf8");
-  if (!index.includes("style.css?v=20261112-expert-qa-desktop1")) {
+  if (!index.includes("style.css?v=20261112-theme-contrast2")) {
     addFailure("STALE_STYLESHEET_CACHE", "index.html does not reference the current Luna Café stylesheet revision.");
   }
 
