@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: jb-expert-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   qa:
     name: Responsive, interaction and accessibility QA
