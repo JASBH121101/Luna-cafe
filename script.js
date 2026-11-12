@@ -925,7 +925,6 @@ function initLunaCafe() {
 
     el.languageShort.textContent = t().languageShort;
     el.languageFull.textContent = t().languageFull;
-    el.languageButton.setAttribute("aria-label", t().languageLabel);
     el.languageButton.title = t().languageLabel;
 
     setTheme(root.dataset.theme || "light");
@@ -1397,6 +1396,7 @@ function initLunaCafe() {
 
     el.cartOverlay.hidden = false;
     el.cartDrawer.setAttribute("aria-hidden", "false");
+    el.cartDrawer.inert = false;
     el.cartToggle.setAttribute("aria-expanded", "true");
     el.mobileCartToggle.setAttribute("aria-expanded", "true");
     el.floatingCart.setAttribute("aria-expanded", "true");
@@ -1412,6 +1412,7 @@ function initLunaCafe() {
     document.body.classList.remove("cart-open");
 
     el.cartDrawer.setAttribute("aria-hidden", "true");
+    el.cartDrawer.inert = true;
     el.cartToggle.setAttribute("aria-expanded", "false");
     el.mobileCartToggle.setAttribute("aria-expanded", "false");
     el.floatingCart.setAttribute("aria-expanded", "false");
@@ -2109,77 +2110,3 @@ if (document.readyState === "loading") {
 } else {
   bootLunaCafe();
 }
-
-
-/* =========================================================
-   CAFÉ LUNE — MARCA DE AGUA LIMITADA A LA SECCIÓN MENÚ
-   Aparece al entrar en #menu y desaparece al salir de ella.
-   ========================================================= */
-(() => {
-  const desktop = window.matchMedia("(min-width: 1280px)");
-  const menu = document.querySelector("#menu");
-
-  if (!menu) return;
-
-  let scheduled = false;
-
-  function updateCafeLuneLimits() {
-    scheduled = false;
-
-    if (!desktop.matches) {
-      document.body.classList.add("cafe-luna-hidden");
-      return;
-    }
-
-    /* Límites actuales de la sección menú en la pantalla */
-    const rect = menu.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-
-    /* Si el menú está fuera de la pantalla, ocultar las marcas */
-    if (rect.bottom <= 0 || rect.top >= viewportHeight) {
-      document.body.classList.add("cafe-luna-hidden");
-      return;
-    }
-
-    /* Recortar la zona flotante a los límites visibles del menú */
-    const visibleTop = Math.max(0, rect.top);
-    const visibleBottom = Math.min(viewportHeight, rect.bottom);
-
-    if (visibleBottom <= visibleTop) {
-      document.body.classList.add("cafe-luna-hidden");
-      return;
-    }
-
-    document.documentElement.style.setProperty(
-      "--cafe-luna-top",
-      `${visibleTop}px`
-    );
-
-    document.documentElement.style.setProperty(
-      "--cafe-luna-bottom",
-      `${viewportHeight - visibleBottom}px`
-    );
-
-    document.body.classList.remove("cafe-lune-hidden");
-  }
-
-  function scheduleUpdate() {
-    if (scheduled) return;
-
-    scheduled = true;
-    window.requestAnimationFrame(updateCafeLunaLimits);
-  }
-
-  window.addEventListener("scroll", scheduleUpdate, {
-    passive: true
-  });
-
-  window.addEventListener("resize", scheduleUpdate, {
-    passive: true
-  });
-
-  desktop.addEventListener("change", scheduleUpdate);
-  window.addEventListener("load", scheduleUpdate);
-
-  updateCafeLunaLimits();
-})();
