@@ -3176,82 +3176,34 @@ html[data-theme="dark"] .checkout-modal {
 
 
 
+
 /* =========================================================
-   CAFÉ LUNE — MARCA DE AGUA FLOTANTE CON TOPES
-   Limitada verticalmente entre la portada y el final del menú
+   JB EXPERT QA · RETOQUE DESKTOP 2026-11-12
+   Contenedor editorial más amplio sin alterar el ritmo móvil.
    ========================================================= */
-
 @media (min-width: 1280px) {
-  body::before,
-  body::after {
-    content: "Café Lune";
-    position: fixed;
-
-    top: var(--cafe-luna-top, 15vh);
-    bottom: var(--cafe-luna-bottom, 15vh);
-
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 38px;
-    padding: 10px 5px;
-    box-sizing: border-box;
-
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.7rem, 2vw, 2.3rem);
-    font-style: italic;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: .04em;
-
-    white-space: nowrap;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-
-    opacity: var(--cafe-luna-opacity, .46);
-    pointer-events: none;
-    user-select: none;
-    overflow: hidden;
-
-    transition: opacity .2s ease;
+  :root {
+    --container: min(1440px, 92vw);
   }
 
-  body::before {
-    left: clamp(
-      18px,
-      calc((100vw - var(--container)) / 4 - 19px),
-      150px
-    );
-
-    color: #e7bd7e;
-    border-right: 1px solid rgba(231, 189, 126, .7);
+  .section-heading {
+    max-width: min(920px, 100%);
   }
 
-  body::after {
-    right: clamp(
-      18px,
-      calc((100vw - var(--container)) / 4 - 19px),
-      150px
-    );
-
-    color: #4a3023;
-    border-left: 1px solid rgba(74, 48, 35, .6);
+  .menu-filter-area {
+    margin-top: clamp(24px, 2vw, 34px);
+    margin-bottom: clamp(28px, 2.4vw, 38px);
   }
 
-  /* Cuando el área permitida sale de la pantalla */
-  body.cafe-luna-hidden::before,
-  body.cafe-luna-hidden::after {
-    opacity: 0;
+  .product-grid {
+    max-width: var(--container);
+    gap: clamp(20px, 1.8vw, 30px);
   }
 }
 
-@media (max-width: 1279.98px) {
-  body::before,
-  body::after {
-    content: none;
-    display: none;
+@media (min-width: 1680px) {
+  :root {
+    --container: min(1520px, 90vw);
   }
 }
 
