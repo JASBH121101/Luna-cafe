@@ -3244,14 +3244,14 @@ html[data-theme="dark"] .checkout-modal {
    JB EXPERT QA · CONTRASTE DE ACCIONES Y FILTROS
    Colores semánticos con contraste estable en ambos temas.
    ========================================================= */
-.button-primary {
+.button-primary:not(.hero-button) {
   border-color: var(--action-border);
   border-bottom-color: color-mix(in srgb, var(--action-bg) 62%, black);
   background: var(--action-bg);
   color: var(--action-text);
 }
 
-.button-primary:hover:not(:disabled) {
+.button-primary:hover:not(:disabled):not(.hero-button) {
   border-color: var(--action-hover-border);
   background: var(--action-hover-bg);
   color: var(--action-hover-text);
