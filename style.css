@@ -4,6 +4,19 @@
    ========================================================= */
 
 :root {
+
+  --action-bg: #201812;
+  --action-text: #fff8ed;
+  --action-border: #201812;
+  --action-hover-bg: #a94f32;
+  --action-hover-text: #fff8ed;
+  --action-hover-border: #a94f32;
+  --filter-active-bg: #201812;
+  --filter-active-text: #fff8ed;
+  --filter-active-border: #201812;
+  --filter-hover-bg: #eae0d1;
+  --filter-hover-text: #201812;
+  --filter-hover-border: #4a3023;
   --cream: #f7f2e9;
   --paper: #fffdf8;
   --coffee: #201812;
@@ -2293,6 +2306,19 @@ body.product-confirmation-open .back-to-top {
    ========================================================= */
 
 html[data-theme="dark"] {
+
+  --action-bg: #e7bd7e;
+  --action-text: #211710;
+  --action-border: #e7bd7e;
+  --action-hover-bg: #f1d3a3;
+  --action-hover-text: #211710;
+  --action-hover-border: #f1d3a3;
+  --filter-active-bg: #e7bd7e;
+  --filter-active-text: #211710;
+  --filter-active-border: #e7bd7e;
+  --filter-hover-bg: #3a3027;
+  --filter-hover-text: #fff4e6;
+  --filter-hover-border: #b79a77;
   color-scheme: dark;
   --cream: #171411;
   --paper: #211c17;
@@ -3211,4 +3237,61 @@ html[data-theme="dark"] .checkout-modal {
 /* Accessibility contrast correction: readable AA contrast on the about section. */
 .about-copy > .section-kicker {
   color: #95422d;
+}
+
+
+/* =========================================================
+   JB EXPERT QA · CONTRASTE DE ACCIONES Y FILTROS
+   Colores semánticos con contraste estable en ambos temas.
+   ========================================================= */
+.button-primary {
+  border-color: var(--action-border);
+  border-bottom-color: color-mix(in srgb, var(--action-bg) 62%, black);
+  background: var(--action-bg);
+  color: var(--action-text);
+}
+
+.button-primary:hover:not(:disabled) {
+  border-color: var(--action-hover-border);
+  background: var(--action-hover-bg);
+  color: var(--action-hover-text);
+}
+
+.menu-filter:hover {
+  border-color: var(--filter-hover-border);
+  background: var(--filter-hover-bg);
+  color: var(--filter-hover-text);
+}
+
+.menu-filter.is-active,
+.menu-filter.is-active:hover {
+  border-color: var(--filter-active-border);
+  background: var(--filter-active-bg);
+  color: var(--filter-active-text);
+}
+
+.mobile-filter-options .menu-filter:hover {
+  border-color: var(--filter-hover-border);
+  background: var(--filter-hover-bg);
+  color: var(--filter-hover-text);
+}
+
+.mobile-filter-options .menu-filter.is-active,
+.mobile-filter-options .menu-filter.is-active:hover {
+  border-color: var(--filter-active-border);
+  background: var(--filter-active-bg);
+  color: var(--filter-active-text);
+}
+
+.product-confirmation-actions .button-primary {
+  border-color: var(--action-border);
+  background: var(--action-bg);
+  color: var(--action-text);
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--action-bg) 62%, black);
+}
+
+.product-confirmation-actions .button-primary:hover:not(:disabled) {
+  border-color: var(--action-hover-border);
+  background: var(--action-hover-bg);
+  color: var(--action-hover-text);
 }
