@@ -3207,3 +3207,8 @@ html[data-theme="dark"] .checkout-modal {
   }
 }
 
+
+/* Accessibility contrast correction: readable AA contrast on the about section. */
+.about-copy > .section-kicker {
+  color: #95422d;
+}
