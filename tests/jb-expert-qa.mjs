@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 import { createServer } from "node:http";
-import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { readFile, mkdir, writeFile, stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -46,7 +46,7 @@ const server = createServer(async (req, res) => {
       return;
     }
     try {
-      const info = await (await import("node:fs/promises")).stat(target);
+      const info = await stat(target);
       if (info.isDirectory()) target = resolve(target, "index.html");
     } catch {}
     const body = await readFile(target);
@@ -90,7 +90,7 @@ async function auditViewport(browser, origin, viewport) {
   const pageErrors = [];
   const localRequestFailures = [];
 
-  page.on("pageerror", (error) => pageErrors.push(error.message));
+  page.on("pageerror", (error) => pageErrors.push({ message: error.message, stack: error.stack || "" }));
   page.on("requestfailed", (request) => {
     if (request.url().startsWith(origin)) {
       localRequestFailures.push({ url: request.url(), error: request.failure()?.errorText || "request failed" });
@@ -311,7 +311,10 @@ async function main() {
   await writeFile(resolve(OUTPUT, "report.md"), lines.join("\n"), "utf8");
 
   console.log(lines.join("\n"));
-  if (FAILURES.length) process.exitCode = 1;
+  if (FAILURES.length) {
+    console.log("\\nDetailed failures:\\n" + JSON.stringify(FAILURES, null, 2));
+    process.exitCode = 1;
+  }
 }
 
 main().catch(async (error) => {
