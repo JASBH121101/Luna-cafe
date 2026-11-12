@@ -20,12 +20,12 @@
   <link rel="stylesheet" href="style.css?v=20261112-expert-qa-desktop1">
 
   <!-- JavaScript -->
-  <script src="script.js?v=20261017-editorial-premium" defer></script>
+  <script src="script.js?v=20261112-expert-qa-runtime2" defer></script>
 </head>
 
 <body>
   <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Luna Café, inicio">
+    <a class="brand" href="#inicio">
       <span class="brand-name">Luna Café</span>
       <span class="brand-tagline" data-i18n="brandTagline">CAFÉ Y ALGO RICO</span>
     </a>
@@ -65,7 +65,7 @@
       </button>
 
       <button id="language-toggle" class="nav-action language-toggle"
-        type="button" aria-label="Cambiar idioma" title="Cambiar idioma">
+        type="button" title="Cambiar idioma">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
           <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
@@ -136,8 +136,7 @@
         <div class="mobile-filter-wrap">
           <button id="mobile-filter-toggle" class="mobile-filter-toggle"
             type="button" aria-controls="mobile-filter-options"
-            aria-expanded="false" aria-label="Filtrar productos del menú"
-            data-i18n-aria-label="filterGroupLabel">
+            aria-expanded="false">
             <svg class="icon filter-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M4 7h16M7 12h10M10 17h4"/>
               <circle cx="8" cy="7" r="1.5"/>
@@ -724,7 +723,7 @@
 
   <!-- CARRITO -->
   <aside id="cart-drawer" class="cart-drawer" role="dialog"
-    aria-modal="true" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1">
+    aria-modal="true" aria-hidden="true" aria-labelledby="cart-title" tabindex="-1" inert>
     <div class="cart-drawer-header">
       <div>
         <p class="section-kicker" data-i18n="orderKicker">TU SELECCIÓN</p>
