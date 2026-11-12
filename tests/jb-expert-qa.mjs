@@ -152,6 +152,53 @@ async function auditViewport(browser, origin, viewport) {
     }
 
     const startTheme = layout.theme;
+    for (const theme of ["light", "dark"]) {
+      await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, theme);
+      const contrastChecks = await page.evaluate(() => {
+        const parse = (value) => {
+          const match = value.match(/[\\d.]+/g);
+          if (!match || match.length < 3) return null;
+          return match.slice(0, 3).map(Number);
+        };
+        const luminance = (rgb) => {
+          const channels = rgb.map((channel) => {
+            const value = channel / 255;
+            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+        };
+        const ratio = (foreground, background) => {
+          const fg = parse(foreground), bg = parse(background);
+          if (!fg || !bg) return null;
+          const a = luminance(fg), b = luminance(bg);
+          return Math.round(((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)) * 100) / 100;
+        };
+        const targets = [
+          ["Desktop: Todo el menú", '#menu .menu-filters [data-menu-filter="all"]'],
+          ["Móvil: Todo el menú", '#menu #mobile-filter-options [data-menu-filter="all"]'],
+          ["Encontrá tu favorito", ".about-button"],
+          ["Empezar a elegir", ".steps-button"],
+          ["Acción de confirmar pedido", ".product-confirmation-actions .button-primary"],
+        ];
+        return targets.map(([label, selector]) => {
+          const element = document.querySelector(selector);
+          if (!element) return { label, selector, missing: true };
+          const style = getComputedStyle(element);
+          return {
+            label, selector, foreground: style.color, background: style.backgroundColor,
+            ratio: ratio(style.color, style.backgroundColor),
+          };
+        });
+      });
+      for (const item of contrastChecks) {
+        if (item.missing || item.ratio === null || item.ratio < 4.5) {
+          addFailure("BUTTON_COLOR_CONTRAST", `Button contrast failed in ${theme} theme: ${item.label}.`, {
+            viewport: viewport.name, theme, check: item,
+          });
+        }
+      }
+    }
+    await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, startTheme);
     await page.locator("#theme-toggle").click();
     const switchedTheme = await page.locator("html").getAttribute("data-theme");
     if (switchedTheme === startTheme || !["dark", "light"].includes(switchedTheme)) {
@@ -209,23 +256,27 @@ async function auditViewport(browser, origin, viewport) {
     }
 
     if (viewport.name === "desktop-1600" || viewport.name === "mobile-390") {
-      const axe = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-        .analyze();
-      const serious = axe.violations.filter((violation) => ["critical", "serious"].includes(violation.impact));
-      if (serious.length) {
-        addFailure("ACCESSIBILITY_CRITICAL", `Axe reported ${serious.length} serious/critical accessibility issue groups at ${viewport.name}.`, {
-          viewport: viewport.name,
-          violations: serious.map((item) => ({ id: item.id, impact: item.impact, description: item.description, nodes: item.nodes.slice(0, 4).map(node => ({ target: node.target, summary: node.failureSummary })) })),
-        });
+      for (const theme of ["light", "dark"]) {
+        await page.evaluate((value) => { document.documentElement.dataset.theme = value; }, theme);
+        const axe = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+          .analyze();
+        const serious = axe.violations.filter((violation) => ["critical", "serious"].includes(violation.impact));
+        if (serious.length) {
+          addFailure("ACCESSIBILITY_CRITICAL", `Axe reported ${serious.length} serious/critical accessibility issue groups at ${viewport.name} (${theme}).`, {
+            viewport: viewport.name, theme,
+            violations: serious.map((item) => ({ id: item.id, impact: item.impact, description: item.description, nodes: item.nodes.slice(0, 4).map(node => ({ target: node.target, summary: node.failureSummary })) })),
+          });
+        }
+        const moderate = axe.violations.filter((violation) => ["moderate", "minor"].includes(violation.impact));
+        if (moderate.length) {
+          addWarning("ACCESSIBILITY_REVIEW", `Axe reported ${moderate.length} moderate/minor issue groups at ${viewport.name} (${theme}).`, {
+            viewport: viewport.name, theme,
+            violations: moderate.map((item) => ({ id: item.id, impact: item.impact, description: item.description, nodes: item.nodes.slice(0, 3).map(node => ({ target: node.target, summary: node.failureSummary })) })),
+          });
+        }
       }
-      const moderate = axe.violations.filter((violation) => ["moderate", "minor"].includes(violation.impact));
-      if (moderate.length) {
-        addWarning("ACCESSIBILITY_REVIEW", `Axe reported ${moderate.length} moderate/minor issue groups at ${viewport.name}.`, {
-          viewport: viewport.name,
-          violations: moderate.map((item) => ({ id: item.id, impact: item.impact, description: item.description, nodes: item.nodes.slice(0, 3).map(node => ({ target: node.target, summary: node.failureSummary })) })),
-        });
-      }
+      await page.evaluate(() => { document.documentElement.dataset.theme = "light"; });
     }
 
     await mkdir(OUTPUT, { recursive: true });
