@@ -298,7 +298,7 @@ async function main() {
   }
 
   const index = await readFile(resolve(ROOT, "index.html"), "utf8");
-  if (!index.includes("style.css?v=20261112-theme-contrast2")) {
+  if (!index.includes("style.css?v=20261112-theme-contrast3")) {
     addFailure("STALE_STYLESHEET_CACHE", "index.html does not reference the current Luna Café stylesheet revision.");
   }
 
