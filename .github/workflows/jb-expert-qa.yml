@@ -1,0 +1,53 @@
+name: JB Expert QA — Luna Café
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    name: Responsive, interaction and accessibility QA
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-jb-expert-qa-chromium-1.64.1
+          restore-keys: |
+            ${{ runner.os }}-jb-expert-qa-chromium-
+
+      - name: Install free QA dependencies
+        run: npm install --no-save --no-package-lock playwright@1.64.1 @axe-core/playwright@4.14.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check JavaScript syntax
+        run: node --check script.js && node --check tests/jb-expert-qa.mjs
+
+      - name: Run JB Expert QA
+        run: node tests/jb-expert-qa.mjs
+
+      - name: Upload QA screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jb-expert-qa-luna-cafe
+          path: artifacts/jb-expert-qa/
+          if-no-files-found: warn
+          retention-days: 14
