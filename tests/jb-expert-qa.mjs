@@ -100,6 +100,7 @@ async function auditViewport(browser, origin, viewport) {
   try {
     await page.goto(origin, { waitUntil: "domcontentloaded", timeout: 30000 });
     await page.locator("#menu .product-card").first().waitFor({ state: "attached", timeout: 10000 });
+    await page.addStyleTag({ content: "*,*::before,*::after{transition:none!important;animation:none!important}" });
     await page.waitForTimeout(180);
 
     const layout = await page.evaluate(() => {
