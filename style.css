@@ -3295,3 +3295,9 @@ html[data-theme="dark"] .checkout-modal {
   background: var(--action-hover-bg);
   color: var(--action-hover-text);
 }
+
+
+/* Dark theme: keep the About section eyebrow readable on its dark surface. */
+html[data-theme="dark"] .about-copy > .section-kicker {
+  color: #e7bd7e;
+}
