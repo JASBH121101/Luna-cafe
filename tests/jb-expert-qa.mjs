@@ -178,6 +178,7 @@ async function auditViewport(browser, origin, viewport) {
           ["Móvil: Todo el menú", '#menu #mobile-filter-options [data-menu-filter="all"]'],
           ["Encontrá tu favorito", ".about-button"],
           ["Empezar a elegir", ".steps-button"],
+          ["Descubrir el menú", ".hero-button"],
           ["Acción de confirmar pedido", ".product-confirmation-actions .button-primary"],
         ];
         return targets.map(([label, selector]) => {
